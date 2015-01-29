@@ -1,2 +1,6 @@
 /nbproject
 build.xml
+ProjectManagement-ejb/nbproject
+ProjectManagement-ejb/build.xml
+ProjectManagement-war/nbproject
+ProjectManagement-war/build.xml
