@@ -4,3 +4,7 @@ ProjectManagement-ejb/nbproject
 ProjectManagement-ejb/build.xml
 ProjectManagement-war/nbproject
 ProjectManagement-war/build.xml
+/build/
+/dist/
+/ProjectManagement-war/build/
+/ProjectManagement-war/dist/
