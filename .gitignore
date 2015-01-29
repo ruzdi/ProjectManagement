@@ -1,4 +1,12 @@
 /nbproject
+*/nbproject
+*nbproject*
+/dist
+*/dist
+*dist*
+/build
+*/build
+*build*
 build.xml
 ProjectManagement-ejb/nbproject
 ProjectManagement-ejb/build.xml

@@ -10,39 +10,58 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 /**
  *
  * @author SyedAliAhmed
  */
 @Entity
-public class Resource implements Serializable {
+public class Project implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String name;
+    private String detail;
     
-    private String actAs;
-    private double costPerHour;
+    private String startDate;
+    private String endDate;
 
-    public String getActAs() {
-        return actAs;
+    public String getName() {
+        return name;
     }
 
-    public void setActAs(String actAs) {
-        this.actAs = actAs;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public double getCostPerHour() {
-        return costPerHour;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setCostPerHour(double costPerHour) {
-        this.costPerHour = costPerHour;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
     
     
-
     public Long getId() {
         return id;
     }
@@ -61,10 +80,10 @@ public class Resource implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Resource)) {
+        if (!(object instanceof Project)) {
             return false;
         }
-        Resource other = (Resource) object;
+        Project other = (Project) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -73,7 +92,7 @@ public class Resource implements Serializable {
 
     @Override
     public String toString() {
-        return "java.edu.mum.ea.entity.Resource[ id=" + id + " ]";
+        return "java.edu.mum.ea.entity.Project[ id=" + id + " ]";
     }
     
 }
