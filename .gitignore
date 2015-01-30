@@ -9,8 +9,10 @@
 *build*
 build.xml
 ProjectManagement-ejb/nbproject
+ProjectManagement-ejb/dist
 ProjectManagement-ejb/build.xml
 ProjectManagement-war/nbproject
+ProjectManagement-war/dist
 ProjectManagement-war/build.xml
 /build/
 /dist/
