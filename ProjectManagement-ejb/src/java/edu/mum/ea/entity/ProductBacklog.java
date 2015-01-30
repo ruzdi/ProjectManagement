@@ -39,6 +39,9 @@ public class ProductBacklog implements Serializable {
     private List<Task> tasks;
     
     
+    @ManyToOne
+    private ReleaseBacklog releaseBacklog;
+    
     public Long getId() {
         return id;
     }
@@ -97,8 +100,14 @@ public class ProductBacklog implements Serializable {
         }
     }
     
-    
+    public ReleaseBacklog getReleaseBacklog() {
+        return releaseBacklog;
+    }
 
+    public void setReleaseBacklog(ReleaseBacklog releaseBacklog) {
+        this.releaseBacklog = releaseBacklog;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

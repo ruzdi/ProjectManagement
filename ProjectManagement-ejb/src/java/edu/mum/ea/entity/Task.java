@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -46,6 +47,8 @@ public class Task implements Serializable {
     private ProductBacklog productBacklog;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "task")
     private List<TaskComment> taskComments;
+    @OneToOne
+    private Resource resource;
     
     public Long getId() {
         return id;

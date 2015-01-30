@@ -5,16 +5,11 @@
  */
 package edu.mum.ea.entity;
 
-import edu.mum.ea.entity.Project;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,67 +19,59 @@ import javax.persistence.TemporalType;
  * @author MdRuzdi
  */
 @Entity
-public class Sprint implements Serializable {
+public class ReleaseBacklog implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @Temporal(TemporalType.DATE)
-    private Date startDate;
-    
+    private String startDate;
     @Temporal(TemporalType.DATE)
-    private Date endDate;
+    private String endDate;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "task")
-    private List<Task> tasks;
+    @OneToMany(mappedBy = "releaseBacklog")
+    private ProductBacklog productBacklog;
     
-    @ManyToOne
-    private ReleaseBacklog releaseBacklog;
+    @OneToMany(mappedBy = "releaseBacklog")
+    private Sprint sprint;
     
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTask(Task task) {
-        if(!this.tasks.contains(task)){
-            this.tasks.add(task);
-        }
-        
-    }
-
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
-    public ReleaseBacklog getReleaseBacklog() {
-        return releaseBacklog;
+    public ProductBacklog getProductBacklog() {
+        return productBacklog;
     }
 
-    public void setReleaseBacklog(ReleaseBacklog releaseBacklog) {
-        this.releaseBacklog = releaseBacklog;
+    public void setProductBacklog(ProductBacklog productBacklog) {
+        this.productBacklog = productBacklog;
     }
 
+    public Sprint getSprint() {
+        return sprint;
+    }
+
+    public void setSprint(Sprint sprint) {
+        this.sprint = sprint;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -95,10 +82,10 @@ public class Sprint implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Sprint)) {
+        if (!(object instanceof ReleaseBacklog)) {
             return false;
         }
-        Sprint other = (Sprint) object;
+        ReleaseBacklog other = (ReleaseBacklog) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -107,7 +94,7 @@ public class Sprint implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.mum.ea.entity.Sprint[ id=" + id + " ]";
+        return "edu.mum.ea.entity.ProductBacklog[ id=" + id + " ]";
     }
     
 }
