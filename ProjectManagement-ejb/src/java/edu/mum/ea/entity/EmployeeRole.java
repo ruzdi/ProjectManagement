@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package java.edu.mum.ea.entity;
+package edu.mum.ea.entity;
 
+import edu.mum.ea.entity.Employee;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -19,25 +21,24 @@ import javax.persistence.Id;
 public class EmployeeRole implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String roleName;
-
+    
+    @ManyToOne
+    private Employee employee;
+    
     public String getRoleName() {
         return roleName;
     }
-
+    
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
-
-    
     
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
-    
-    
     
     public Long getId() {
         return id;
@@ -47,6 +48,14 @@ public class EmployeeRole implements Serializable {
         this.id = id;
     }
 
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

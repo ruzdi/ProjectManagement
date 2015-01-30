@@ -5,12 +5,19 @@
  */
 package edu.mum.ea.entity;
 
+import edu.mum.ea.entity.Project;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -22,22 +29,52 @@ public class Sprint implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    @Temporal(TemporalType.DATE)
     private Date startDate;
     
+    @ManyToOne
     private Project project;
     
-    private Task task;
-    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "task")
+    private List<Task> tasks;
     
     public Long getId() {
         return id;
     }
 
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTask(Task task) {
+        if(!this.tasks.contains(task)){
+            this.tasks.add(task);
+        }
+        
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
-
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

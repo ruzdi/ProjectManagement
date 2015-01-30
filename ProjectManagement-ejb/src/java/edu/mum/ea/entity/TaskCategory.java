@@ -7,10 +7,13 @@ package edu.mum.ea.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -20,18 +23,15 @@ import javax.persistence.Id;
 public class TaskCategory implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     private String name;
     private String detail;
-    private Date startDate;
-    private Date endDate;
     
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Task> tasks;
     
-    private Task task;
-    
-
     public Long getId() {
         return id;
     }
@@ -56,22 +56,15 @@ public class TaskCategory implements Serializable {
         this.detail = detail;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public List<Task> getTasks() {
+        return tasks;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setTasks(Task task) {
+        if(!this.tasks.contains(tasks)){
+            this.tasks.add(task);
+        }
     }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-    
     
 
     @Override

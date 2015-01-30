@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package java.edu.mum.ea.entity;
+package edu.mum.ea.entity;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -19,11 +22,17 @@ import javax.persistence.Id;
 public class Employee implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     private String name;
+    
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee")
+    private Resource resource;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
+    private EmployeeRole employeeRole;
+    
     public String getName() {
         return name;
     }
@@ -41,6 +50,22 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
+    public Resource getResource() {
+        return resource;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
+    }
+
+    public EmployeeRole getEmployeeRole() {
+        return employeeRole;
+    }
+
+    public void setEmployeeRole(EmployeeRole employeeRole) {
+        this.employeeRole = employeeRole;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -3,14 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package java.edu.mum.ea.entity;
+package edu.mum.ea.entity;
 
+import edu.mum.ea.entity.ProductBacklog;
+import edu.mum.ea.entity.Sprint;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -25,9 +31,28 @@ public class Project implements Serializable {
     private String name;
     private String detail;
     
+    @Temporal(TemporalType.DATE)
     private String startDate;
+    @Temporal(TemporalType.DATE)
     private String endDate;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
+    private List<Sprint> sprints;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
+    private ProductBacklog productBacklog;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
+    private Resource resource;
+    
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public String getName() {
         return name;
     }
@@ -60,14 +85,30 @@ public class Project implements Serializable {
         this.endDate = endDate;
     }
 
-    
-    
-    public Long getId() {
-        return id;
+    public List<Sprint> getSprints() {
+        return sprints;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setSprint(Sprint sprint) {
+        if(!this.sprints.contains(sprint)){
+            this.sprints.add(sprint);
+        }
+    }
+
+    public ProductBacklog getProductBacklog() {
+        return productBacklog;
+    }
+
+    public void setProductBacklog(ProductBacklog productBacklog) {
+        this.productBacklog = productBacklog;
+    }
+
+    public Resource getResource() {
+        return resource;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
     }
 
     @Override

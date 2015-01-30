@@ -7,10 +7,16 @@ package edu.mum.ea.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -25,12 +31,21 @@ public class Task implements Serializable {
     
     private String title;
     private String detail;
+    @Temporal(TemporalType.DATE)
     private Date startDate;
+    @Temporal(TemporalType.DATE)
     private Date endDate;
     private Integer duration;
     private Integer priority;
     private Integer status;
-    
+    @ManyToOne
+    private Sprint sprint;
+    @ManyToOne
+    private TaskCategory taskCategory;
+    @ManyToOne
+    private ProductBacklog productBacklog;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "task")
+    private List<TaskComment> taskComments;
     
     public Long getId() {
         return id;
@@ -94,6 +109,40 @@ public class Task implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Sprint getSprint() {
+        return sprint;
+    }
+
+    public void setSprint(Sprint sprint) {
+        this.sprint = sprint;
+    }
+
+    public TaskCategory getTaskCategory() {
+        return taskCategory;
+    }
+
+    public void setTaskCategory(TaskCategory taskCategory) {
+        this.taskCategory = taskCategory;
+    }
+
+    public ProductBacklog getProductBacklog() {
+        return productBacklog;
+    }
+
+    public void setProductBacklog(ProductBacklog productBacklog) {
+        this.productBacklog = productBacklog;
+    }
+
+    public List<TaskComment> getTaskComment() {
+        return taskComments;
+    }
+
+    public void setTaskComment(TaskComment taskComment) {
+        if(!this.taskComments.contains(taskComment)){
+            this.taskComments.add(taskComment);
+        }
     }
     
     @Override

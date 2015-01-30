@@ -5,11 +5,16 @@
  */
 package edu.mum.ea.entity;
 
+import edu.mum.ea.entity.Project;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -19,17 +24,19 @@ import javax.persistence.Id;
 public class ProductBacklog implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     private String title;
     private String details;
     private Boolean releaseBacklogStatus;
+    private Integer priority;
     
-    
+    @ManyToOne
     private Project project;
     
-    private Task task;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productBacklog")
+    private List<Task> tasks;
     
     
     public Long getId() {
@@ -63,6 +70,34 @@ public class ProductBacklog implements Serializable {
     public void setReleaseBacklogStatus(Boolean releaseBacklogStatus) {
         this.releaseBacklogStatus = releaseBacklogStatus;
     }
+
+    public Integer getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTask(Task task) {
+        if(!this.tasks.contains(task)){
+            this.tasks.add(task);
+        }
+    }
+    
+    
 
     @Override
     public int hashCode() {
