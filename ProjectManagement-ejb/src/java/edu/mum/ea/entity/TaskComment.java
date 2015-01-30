@@ -5,7 +5,7 @@
  */
 package edu.mum.ea.entity;
 
-import java.edu.mum.ea.entity.Resource;
+import edu.mum.ea.entity.Resource;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
