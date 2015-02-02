@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,23 +33,25 @@ public class Task implements Serializable {
     
     private String title;
     private String detail;
+    @Column(nullable=true)
     @Temporal(TemporalType.DATE)
     private Date startDate;
+    @Column(nullable=true)
     @Temporal(TemporalType.DATE)
     private Date endDate;
     private Integer duration;
     private Integer priority;
     private Integer status;
-    @ManyToOne
-    private Sprint sprint;
-    @ManyToOne
-    private TaskCategory taskCategory;
-    @ManyToOne
-    private ProductBacklog productBacklog;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "task")
-    private List<TaskComment> taskComments;
-    @OneToOne
-    private Resource resource;
+//    @ManyToOne
+//    private Sprint sprint;
+//    @ManyToOne
+//    private TaskCategory taskCategory;
+//    @ManyToOne
+//    private ProductBacklog productBacklog;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "task")
+//    private List<TaskComment> taskComments;
+//    @OneToOne
+//    private Resource resource;
     
     public Long getId() {
         return id;
@@ -114,39 +117,39 @@ public class Task implements Serializable {
         this.status = status;
     }
 
-    public Sprint getSprint() {
-        return sprint;
-    }
-
-    public void setSprint(Sprint sprint) {
-        this.sprint = sprint;
-    }
-
-    public TaskCategory getTaskCategory() {
-        return taskCategory;
-    }
-
-    public void setTaskCategory(TaskCategory taskCategory) {
-        this.taskCategory = taskCategory;
-    }
-
-    public ProductBacklog getProductBacklog() {
-        return productBacklog;
-    }
-
-    public void setProductBacklog(ProductBacklog productBacklog) {
-        this.productBacklog = productBacklog;
-    }
-
-    public List<TaskComment> getTaskComment() {
-        return taskComments;
-    }
-
-    public void setTaskComment(TaskComment taskComment) {
-        if(!this.taskComments.contains(taskComment)){
-            this.taskComments.add(taskComment);
-        }
-    }
+//    public Sprint getSprint() {
+//        return sprint;
+//    }
+//
+//    public void setSprint(Sprint sprint) {
+//        this.sprint = sprint;
+//    }
+//
+//    public TaskCategory getTaskCategory() {
+//        return taskCategory;
+//    }
+//
+//    public void setTaskCategory(TaskCategory taskCategory) {
+//        this.taskCategory = taskCategory;
+//    }
+//
+//    public ProductBacklog getProductBacklog() {
+//        return productBacklog;
+//    }
+//
+//    public void setProductBacklog(ProductBacklog productBacklog) {
+//        this.productBacklog = productBacklog;
+//    }
+//
+//    public List<TaskComment> getTaskComment() {
+//        return taskComments;
+//    }
+//
+//    public void setTaskComment(TaskComment taskComment) {
+//        if(!this.taskComments.contains(taskComment)){
+//            this.taskComments.add(taskComment);
+//        }
+//    }
     
     @Override
     public int hashCode() {

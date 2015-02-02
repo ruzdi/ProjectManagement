@@ -5,7 +5,7 @@
  */
 package edu.mum.ea.ejb;
 
-import edu.mum.ea.entity.TaskCategory;
+import edu.mum.ea.entity.Task;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
@@ -17,31 +17,31 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 @LocalBean
-public class TaskCategoryEJB {
+public class TaskEJB {
 
     @PersistenceContext
     EntityManager em;
 
-    public void create(TaskCategory taskCategory) {
-        em.persist(taskCategory);
+    public void create(Task task) {
+        em.persist(task);
     }
 
     public void update(int id) {
-        TaskCategory taskCategory = find(id);
-        em.merge(taskCategory);
+        Task task = find(id);
+        em.merge(task);
     }
     
     public void delete(int id) {
-        TaskCategory taskCategory = find(id);
-        em.remove(taskCategory);
+        Task task = find(id);
+        em.remove(task);
     }
     
-    public TaskCategory find(int id) {
-        return em.find(TaskCategory.class, id);
+    public Task find(int id) {
+        return em.find(Task.class, id);
     }
     
-    public TaskCategory findAll(int id) {
-        return em.find(TaskCategory.class, id);
+    public Task findAll(int id) {
+        return em.find(Task.class, id);
     }
    
     

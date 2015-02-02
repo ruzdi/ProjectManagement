@@ -27,11 +27,11 @@ public class Employee implements Serializable {
     
     private String name;
     
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee")
-    private Resource resource;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
-    private EmployeeRole employeeRole;
+//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee")
+//    private Resource resource;
+//
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
+//    private EmployeeRole employeeRole;
     
     public String getName() {
         return name;
@@ -50,21 +50,21 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
-    public Resource getResource() {
-        return resource;
-    }
-
-    public void setResource(Resource resource) {
-        this.resource = resource;
-    }
-
-    public EmployeeRole getEmployeeRole() {
-        return employeeRole;
-    }
-
-    public void setEmployeeRole(EmployeeRole employeeRole) {
-        this.employeeRole = employeeRole;
-    }
+//    public Resource getResource() {
+//        return resource;
+//    }
+//
+//    public void setResource(Resource resource) {
+//        this.resource = resource;
+//    }
+//
+//    public EmployeeRole getEmployeeRole() {
+//        return employeeRole;
+//    }
+//
+//    public void setEmployeeRole(EmployeeRole employeeRole) {
+//        this.employeeRole = employeeRole;
+//    }
     
     @Override
     public int hashCode() {

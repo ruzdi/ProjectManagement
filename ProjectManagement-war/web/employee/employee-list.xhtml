@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Projects</title>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="/layout/layout.xhtml">
+            <ui:define name="content">
+                
+                <h2>Employee (List)</h2>
+                
+                <table class="table table-hover table-striped table-bordered">
+                    <thead>
+                        <td class="">Employee Id</td>
+                        <td class="">Name</td>
+                        <td class="">Email</td>
+                        <td class="">Designation</td>
+                        <td class="">Street</td>
+                        <td class="">City</td>
+                        <td class="">State</td>
+                        <td class="">ZIP</td>
+                        <td class="">Action</td>
+                    </thead>
+                    <tbody>
+                        <h:form>
+                            <tr>
+                                <td class="">0</td>
+                                <td class="">TestName</td>
+                                <td class="">TestEmail</td>
+                                <td class="">TestDesignation</td>
+                                <td class="">TestStreet</td>
+                                <td class="">City</td>
+                                <td class="">State</td>
+                                <td class="">ZIP</td>
+                                <td class="">
+                                    <h:commandButton class="btn btn-primary" action="#{employeeMB.fillTables()}" value="Edit" /> &nbsp;
+                                    <h:commandButton class="btn btn-danger" action="#{employeeMB.fillTables()}" value="Delete" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">1</td>
+                                <td class="">TestName1</td>
+                                <td class="">TestEmail1</td>
+                                <td class="">TestDesignation1</td>
+                                <td class="">TestStreet1</td>
+                                <td class="">City1</td>
+                                <td class="">State1</td>
+                                <td class="">ZIP1</td>
+                                <td class="">
+
+                                    <h:commandButton class="btn btn-primary" action="#{employeeMB.fillTables()}" value="Edit" /> &nbsp;
+                                    <h:commandButton class="btn btn-danger" action="#{employeeMB.fillTables()}" value="Delete" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">2</td>
+                                <td class="">TestName2</td>
+                                <td class="">TestEmail2</td>
+                                <td class="">TestDesignation2</td>
+                                <td class="">TestStreet2</td>
+                                <td class="">City2</td>
+                                <td class="">State2</td>
+                                <td class="">ZIP2</td>
+                                <td class="">
+
+                                    <h:commandButton class="btn btn-primary" action="#{employeeMB.fillTables()}" value="Edit" /> &nbsp;
+                                    <h:commandButton class="btn btn-danger" action="#{employeeMB.fillTables()}" value="Delete" />
+                                </td>
+                            </tr>
+                        </h:form>
+                    </tbody>
+                </table>
+            </ui:define>
+        </ui:composition>
+
+
+    </h:body>
+</html>
+

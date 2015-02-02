@@ -8,6 +8,7 @@ package edu.mum.ea.entity;
 import edu.mum.ea.entity.ProductBacklog;
 import edu.mum.ea.entity.Sprint;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -32,18 +33,18 @@ public class Project implements Serializable {
     private String detail;
     
     @Temporal(TemporalType.DATE)
-    private String startDate;
+    private Date startDate;
     @Temporal(TemporalType.DATE)
-    private String endDate;
+    private Date endDate;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private List<Sprint> sprints;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private ProductBacklog productBacklog;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private Resource resource;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
+//    private List<Sprint> sprints;
+//    
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
+//    private ProductBacklog productBacklog;
+//    
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
+//    private Resource resource;
     
     public Long getId() {
         return id;
@@ -69,47 +70,47 @@ public class Project implements Serializable {
         this.detail = detail;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
-    public List<Sprint> getSprints() {
-        return sprints;
-    }
-
-    public void setSprint(Sprint sprint) {
-        if(!this.sprints.contains(sprint)){
-            this.sprints.add(sprint);
-        }
-    }
-
-    public ProductBacklog getProductBacklog() {
-        return productBacklog;
-    }
-
-    public void setProductBacklog(ProductBacklog productBacklog) {
-        this.productBacklog = productBacklog;
-    }
-
-    public Resource getResource() {
-        return resource;
-    }
-
-    public void setResource(Resource resource) {
-        this.resource = resource;
-    }
+//    public List<Sprint> getSprints() {
+//        return sprints;
+//    }
+//
+//    public void setSprint(Sprint sprint) {
+//        if(!this.sprints.contains(sprint)){
+//            this.sprints.add(sprint);
+//        }
+//    }
+//
+//    public ProductBacklog getProductBacklog() {
+//        return productBacklog;
+//    }
+//
+//    public void setProductBacklog(ProductBacklog productBacklog) {
+//        this.productBacklog = productBacklog;
+//    }
+//
+//    public Resource getResource() {
+//        return resource;
+//    }
+//
+//    public void setResource(Resource resource) {
+//        this.resource = resource;
+//    }
 
     @Override
     public int hashCode() {

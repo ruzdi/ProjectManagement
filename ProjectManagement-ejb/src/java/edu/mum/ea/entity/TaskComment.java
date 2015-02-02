@@ -27,11 +27,10 @@ public class TaskComment implements Serializable {
     private Integer thumbsUp;
     private Integer thumbsDown;
     
-    private Resource resource;
-    @ManyToOne
-    private Task task;
-    @ManyToOne
-    private Resource resourse;
+//    @ManyToOne
+//    private Task task;
+//    @ManyToOne
+//    private Resource resource;
     
     public Long getId() {
         return id;
@@ -65,30 +64,22 @@ public class TaskComment implements Serializable {
         this.thumbsDown = thumbsDown;
     }
 
-    public Resource getResource() {
-        return resource;
-    }
-
-    public void setResource(Resource resource) {
-        this.resource = resource;
-    }
-
-    public Task getTask() {
-        return task;
-    }
-
-    public void setTask(Task task) {
-        this.task = task;
-    }
-
-    public Resource getResourse() {
-        return resourse;
-    }
-
-    public void setResourse(Resource resourse) {
-        this.resourse = resourse;
-    }
-    
+//    public Resource getResource() {
+//        return resource;
+//    }
+//
+//    public void setResource(Resource resource) {
+//        this.resource = resource;
+//    }
+//
+//    public Task getTask() {
+//        return task;
+//    }
+//
+//    public void setTask(Task task) {
+//        this.task = task;
+//    }
+//    
     @Override
     public int hashCode() {
         int hash = 0;

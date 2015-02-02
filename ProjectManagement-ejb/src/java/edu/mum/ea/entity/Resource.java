@@ -29,11 +29,12 @@ public class Resource implements Serializable {
     private String actAs;
     private double costPerHour;
     
-    @ManyToMany
-    private List<Project> projects;
-    
-    @OneToOne
-    private Employee employee;
+//    @ManyToMany
+//    private List<Project> projects;
+//    
+//    @OneToOne
+//    private Employee employee;
+//    
     
     public Long getId() {
         return id;
@@ -59,23 +60,23 @@ public class Resource implements Serializable {
         this.costPerHour = costPerHour;
     }
 
-    public List<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProject(Project project) {
-        if(!this.projects.contains(project)){
-            this.projects.add(project);
-        }
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
+//    public List<Project> getProjects() {
+//        return projects;
+//    }
+//
+//    public void setProject(Project project) {
+//        if(!this.projects.contains(project)){
+//            this.projects.add(project);
+//        }
+//    }
+//
+//    public Employee getEmployee() {
+//        return employee;
+//    }
+//
+//    public void setEmployee(Employee employee) {
+//        this.employee = employee;
+//    }
     
     @Override
     public int hashCode() {

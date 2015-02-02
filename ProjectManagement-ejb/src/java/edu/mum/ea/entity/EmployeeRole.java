@@ -25,8 +25,8 @@ public class EmployeeRole implements Serializable {
     private Long id;
     private String roleName;
     
-    @ManyToOne
-    private Employee employee;
+//    @ManyToOne
+//    private Employee employee;
     
     public String getRoleName() {
         return roleName;
@@ -48,13 +48,13 @@ public class EmployeeRole implements Serializable {
         this.id = id;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
+//    public Employee getEmployee() {
+//        return employee;
+//    }
+//
+//    public void setEmployee(Employee employee) {
+//        this.employee = employee;
+//    }
     
     @Override
     public int hashCode() {

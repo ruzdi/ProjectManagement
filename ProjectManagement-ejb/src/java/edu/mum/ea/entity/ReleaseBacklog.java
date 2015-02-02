@@ -6,6 +6,7 @@
 package edu.mum.ea.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,51 +27,51 @@ public class ReleaseBacklog implements Serializable {
     private Long id;
     
     @Temporal(TemporalType.DATE)
-    private String startDate;
+    private Date startDate;
     @Temporal(TemporalType.DATE)
-    private String endDate;
+    private Date endDate;
     
-    @OneToMany(mappedBy = "releaseBacklog")
-    private ProductBacklog productBacklog;
-    
-    @OneToMany(mappedBy = "releaseBacklog")
-    private Sprint sprint;
+//    @OneToMany(mappedBy = "releaseBacklog")
+//    private ProductBacklog productBacklog;
+//    
+//    @OneToMany(mappedBy = "releaseBacklog")
+//    private Sprint sprint;
     
     public Long getId() {
         return id;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
-    public ProductBacklog getProductBacklog() {
-        return productBacklog;
-    }
-
-    public void setProductBacklog(ProductBacklog productBacklog) {
-        this.productBacklog = productBacklog;
-    }
-
-    public Sprint getSprint() {
-        return sprint;
-    }
-
-    public void setSprint(Sprint sprint) {
-        this.sprint = sprint;
-    }
+//    public ProductBacklog getProductBacklog() {
+//        return productBacklog;
+//    }
+//
+//    public void setProductBacklog(ProductBacklog productBacklog) {
+//        this.productBacklog = productBacklog;
+//    }
+//
+//    public Sprint getSprint() {
+//        return sprint;
+//    }
+//
+//    public void setSprint(Sprint sprint) {
+//        this.sprint = sprint;
+//    }
     
     @Override
     public int hashCode() {

@@ -31,17 +31,17 @@ public class ProductBacklog implements Serializable {
     private String details;
     private Boolean releaseBacklogStatus;
     private Integer priority;
-    
-    @ManyToOne
-    private Project project;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productBacklog")
-    private List<Task> tasks;
-    
-    
-    @ManyToOne
-    private ReleaseBacklog releaseBacklog;
-    
+//    
+//    @ManyToOne
+//    private Project project;
+//    
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productBacklog")
+//    private List<Task> tasks;
+//    
+//    
+//    @ManyToOne
+//    private ReleaseBacklog releaseBacklog;
+//    
     public Long getId() {
         return id;
     }
@@ -81,33 +81,33 @@ public class ProductBacklog implements Serializable {
     public void setPriority(Integer priority) {
         this.priority = priority;
     }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTask(Task task) {
-        if(!this.tasks.contains(task)){
-            this.tasks.add(task);
-        }
-    }
-    
-    public ReleaseBacklog getReleaseBacklog() {
-        return releaseBacklog;
-    }
-
-    public void setReleaseBacklog(ReleaseBacklog releaseBacklog) {
-        this.releaseBacklog = releaseBacklog;
-    }
-    
+//
+//    public Project getProject() {
+//        return project;
+//    }
+//
+//    public void setProject(Project project) {
+//        this.project = project;
+//    }
+//
+//    public List<Task> getTasks() {
+//        return tasks;
+//    }
+//
+//    public void setTask(Task task) {
+//        if(!this.tasks.contains(task)){
+//            this.tasks.add(task);
+//        }
+//    }
+//    
+//    public ReleaseBacklog getReleaseBacklog() {
+//        return releaseBacklog;
+//    }
+//
+//    public void setReleaseBacklog(ReleaseBacklog releaseBacklog) {
+//        this.releaseBacklog = releaseBacklog;
+//    }
+//    
     @Override
     public int hashCode() {
         int hash = 0;

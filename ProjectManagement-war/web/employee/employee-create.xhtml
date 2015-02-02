@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+
+    </h:head>
+    <h:body>
+
+        <ui:composition template="/layout/layout.xhtml">
+            <ui:define name="content">
+
+                <div class="row">
+                    <div class="col-md-6">
+
+                        
+                        <h2>Employee (Create)</h2>
+                
+                        
+                        <h:form>
+                            <div class="form-group">
+                                <label for="addEmployeeName">Name</label>
+                                <h:inputText class="form-control" id="addEmployeeName"  value="#{employeeMB.employee.name}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="addEmployeeUsername">Username</label>
+                                <h:inputText class="form-control" id="addEmployeeUsername"  value="#{employeeMB.employee.name}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="addEmployeePassword">Password</label>
+                                <h:inputText class="form-control" id="addEmployeePassword"  value="#{employeeMB.employee.name}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="addEmployeeEmail">Email</label>
+                                <h:inputText class="form-control" id="addEmployeeEmail"  value="#{employeeMB.employee.name}" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Designation</label>
+                                <h:inputText class="form-control" id="addEmployeeDesignation"  value="#{employeeMB.employee.designation}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Street</label>
+                                <h:inputText class="form-control" id="addEmployeeStreet"  value="#{employeeMB.employee.address.street}" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">City</label>
+                                <h:inputText class="form-control" id="addEmployeeCity"  value="#{employeeMB.employee.address.city}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">State</label>
+                                <h:inputText class="form-control" id="addEmployeeState"  value="#{employeeMB.employee.address.state}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">ZIP</label>
+                                <h:inputText class="form-control" id="addEmployeeZip"  value="#{employeeMB.employee.address.zip}" />
+                            </div>
+
+                            <h:commandButton action="#{employeeMB.fillTables()}" value="Save" class="btn btn-info"/>
+                        </h:form>
+                    </div>
+
+                </div>
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>

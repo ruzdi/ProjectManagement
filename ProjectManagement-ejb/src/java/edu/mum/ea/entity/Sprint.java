@@ -35,13 +35,13 @@ public class Sprint implements Serializable {
     
     @Temporal(TemporalType.DATE)
     private Date endDate;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "task")
-    private List<Task> tasks;
-    
-    @ManyToOne
-    private ReleaseBacklog releaseBacklog;
-    
+//    
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "task")
+//    private List<Task> tasks;
+//    
+//    @ManyToOne
+//    private ReleaseBacklog releaseBacklog;
+//    
     public Long getId() {
         return id;
     }
@@ -57,17 +57,17 @@ public class Sprint implements Serializable {
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTask(Task task) {
-        if(!this.tasks.contains(task)){
-            this.tasks.add(task);
-        }
-        
-    }
+//
+//    public List<Task> getTasks() {
+//        return tasks;
+//    }
+//
+//    public void setTask(Task task) {
+//        if(!this.tasks.contains(task)){
+//            this.tasks.add(task);
+//        }
+//        
+//    }
 
     public Date getEndDate() {
         return endDate;
@@ -76,15 +76,15 @@ public class Sprint implements Serializable {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-
-    public ReleaseBacklog getReleaseBacklog() {
-        return releaseBacklog;
-    }
-
-    public void setReleaseBacklog(ReleaseBacklog releaseBacklog) {
-        this.releaseBacklog = releaseBacklog;
-    }
-
+//
+//    public ReleaseBacklog getReleaseBacklog() {
+//        return releaseBacklog;
+//    }
+//
+//    public void setReleaseBacklog(ReleaseBacklog releaseBacklog) {
+//        this.releaseBacklog = releaseBacklog;
+//    }
+//
     @Override
     public int hashCode() {
         int hash = 0;

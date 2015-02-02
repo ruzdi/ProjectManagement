@@ -5,9 +5,8 @@
  */
 package edu.mum.ea.mb;
 
-import edu.mum.ea.ejb.TaskCategoryEJB;
+import edu.mum.ea.ejb.TaskEJB;
 import edu.mum.ea.entity.Task;
-import edu.mum.ea.entity.TaskCategory;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -19,23 +18,21 @@ import javax.faces.bean.RequestScoped;
  *
  * @author MdRuzdi
  */
-@ManagedBean(name="taskCategoryMB")
+@ManagedBean(name="taskMB")
 @RequestScoped
-public class TaskCategoryMB {
+public class TaskMB {
 
     /**
-     * Creates a new instance of TaskCategoryMB
+     * Creates a new instance of TaskMB
      */
     
     @EJB
-    private TaskCategoryEJB taskCategoryEJB;
+    private TaskEJB taskEJB;
     
-    private TaskCategory taskCategory;
-    private List<Task> tasks;
+    private Task task;
     
-    public TaskCategoryMB() {
-        taskCategory = new TaskCategory();
-        tasks = new ArrayList<Task>();
+    public TaskMB() {
+        task = new Task();
     }
     
     @PostConstruct
@@ -43,26 +40,21 @@ public class TaskCategoryMB {
         
     }
 
-    public TaskCategory getTaskCategory() {
-        return taskCategory;
+    public Task getTask() {
+        return task;
     }
 
-    public void setTaskCategory(TaskCategory taskCategory) {
-        this.taskCategory = taskCategory;
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
+    public void setTask(Task task) {
+        this.task = task;
     }
     
     public String create(){
         
-        taskCategoryEJB.create(taskCategory);
-        return "success";
+        System.out.print("this is befor calling EJB for task create");
+        task.setId(new Long("5"));
+        taskEJB.create(task);
+        System.out.print("this is after calling EJB for task create");
+        return "index";
     }
     
     
@@ -73,15 +65,12 @@ public class TaskCategoryMB {
     
     
     public String delete(){
-    
         return "";
     }
     
     public String find(){
-    
         return "";
     }
-    
     
     public String findAll(){
     
