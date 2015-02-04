@@ -5,8 +5,6 @@
  */
 package edu.mum.ea.entity;
 
-import edu.mum.ea.entity.ProductBacklog;
-import edu.mum.ea.entity.Sprint;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +25,7 @@ import javax.persistence.TemporalType;
 public class Project implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String detail;
@@ -40,8 +38,8 @@ public class Project implements Serializable {
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
 //    private List<Sprint> sprints;
 //    
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-//    private ProductBacklog productBacklog;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
+    private List<ProductBacklog> productBacklog;
 //    
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
 //    private Resource resource;
@@ -85,6 +83,10 @@ public class Project implements Serializable {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+    
+     public List<ProductBacklog> getProductBacklog(){
+        return productBacklog;
+    }
 
 //    public List<Sprint> getSprints() {
 //        return sprints;
@@ -96,13 +98,10 @@ public class Project implements Serializable {
 //        }
 //    }
 //
-//    public ProductBacklog getProductBacklog() {
-//        return productBacklog;
-//    }
-//
-//    public void setProductBacklog(ProductBacklog productBacklog) {
-//        this.productBacklog = productBacklog;
-//    }
+    public void setProductBacklog(List<ProductBacklog> productBacklog) {    
+        this.productBacklog = productBacklog;
+    }
+
 //
 //    public Resource getResource() {
 //        return resource;
@@ -111,6 +110,12 @@ public class Project implements Serializable {
 //    public void setResource(Resource resource) {
 //        this.resource = resource;
 //    }
+    public void addBacklog(ProductBacklog productBacklog) {
+        if(!this.productBacklog.contains(productBacklog)){
+            this.productBacklog.add(productBacklog);
+            productBacklog.setProject(this);
+        }
+    }
 
     @Override
     public int hashCode() {
