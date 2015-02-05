@@ -32,8 +32,14 @@ public class ProjectEJB {
         em.merge(project);
     }
     
-    public Project find(long id) {
+    public Project find(Long id) {
         return em.find(Project.class, id);
+    }
+    
+    public void delete(Long projectId){
+        Project project = find(projectId);
+        
+        em.remove(em.merge(project));        
     }
     
     public List<Project> findAll() {

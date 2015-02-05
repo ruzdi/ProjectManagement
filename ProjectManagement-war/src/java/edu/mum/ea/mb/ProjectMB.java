@@ -51,12 +51,23 @@ public class ProjectMB {
         this.projectList = projectList;
     }
     
-    public void createProject() {
+    public String createProject() {
        projectEJB.save(project);
-       //return "project/project-list";
+       return "project-list";
     }
     
-     public String projectItem() {
+    public String updateProject(){
+    
+        return "project-create";
+    }
+    
+    public String deleteProject(Long projectId){
+        projectEJB.delete(projectId);
+  
+        return "project-list";
+    }
+    
+    public String projectItem() {
        return "success";
     }
 }
