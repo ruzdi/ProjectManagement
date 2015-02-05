@@ -63,28 +63,25 @@ public class EmployeeMB {
     }
 
     public String delete(int employeeId) {
-        Employee employee = ejb.find(employeeId);
-        System.out.println("TEST");
+        employee = ejb.find(employeeId);
         ejb.delete(employee);
         
         return "employee-list";
     }
 
-    public String update() {
-//        ejb.edit(employee);
+    public String gotoUpdatePage(int id) {
+        employee =  ejb.find(id);
+//        System.out.println("ID>>>>>>>>>>>>>>>>>>" + employee.getId());
+        return "employee-update";
+    }
+    
+    public String update(){
+//        System.out.println("ID::::::::::::" + employee.getId());
+        ejb.edit(employee);
         
-        return "employee-create";
+        return "employee-list";
     }
 
-    public String find() {
-
-        return "";
-    }
-
-    public String findAll() {
-
-        return "";
-    }  
     
       public List<Employee> getEmployeeList() {
         employeeList = ejb.findAll();

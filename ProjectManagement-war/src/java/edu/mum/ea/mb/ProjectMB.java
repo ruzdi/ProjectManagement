@@ -56,9 +56,18 @@ public class ProjectMB {
        return "project-list";
     }
     
-    public String updateProject(){
+    public String gotoUpdatePage(Long id){
+        
+        project = projectEJB.find(id);
+           
+        return "project-update";
+    }
     
-        return "project-create";
+    public String updateProject(){
+        
+        projectEJB.edit(project);
+    
+        return "project-list";
     }
     
     public String deleteProject(Long projectId){

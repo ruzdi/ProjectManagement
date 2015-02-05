@@ -14,7 +14,6 @@
 
                 <h2>Employee (List)</h2>
 
-                <h2>Project (List)</h2>
 
                 <h:dataTable value="#{employeeMB.employeeList}" var="employee"
                              styleClass="table table-hover table-striped table-bordered"
@@ -59,8 +58,8 @@
                     <h:column>
                         <f:facet name="header">Action</f:facet>
                         <h:form>
-                        <h:commandButton class="btn btn-primary" action="#{employeeMB.update()}" value="Edit" />
-                        <h:commandButton class="btn btn-danger" action="#{employeeMB.delete(employee.id)}" value="Delete" />
+                            <h:commandButton class="btn btn-primary" action="#{employeeMB.gotoUpdatePage(employee.id)}" value="Edit" />
+                            <h:commandButton class="btn btn-danger" action="#{employeeMB.delete(employee.id)}" value="Delete" />
                         </h:form>
                     </h:column>
                 </h:dataTable>
