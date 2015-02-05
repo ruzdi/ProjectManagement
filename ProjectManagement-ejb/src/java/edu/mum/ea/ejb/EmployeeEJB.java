@@ -35,8 +35,13 @@ public class EmployeeEJB {
     public void edit(Employee employee) {
         em.merge(employee);
     }
+    
+    public void delete(Employee employee){
+//        em.merge(employee);
+        em.remove(em.merge(employee));
+    }
 
-    public Employee find(long id) {
+    public Employee find(int id) {
         return em.find(Employee.class, id);
     }
 

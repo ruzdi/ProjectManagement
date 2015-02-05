@@ -59,17 +59,21 @@ public class EmployeeMB {
     public String create() {
         ejb.save(employee);
 
-        return "success";
+        return "employee-list";
     }
 
-    public String delete() {
-
-        return "success";
+    public String delete(int employeeId) {
+        Employee employee = ejb.find(employeeId);
+        System.out.println("TEST");
+        ejb.delete(employee);
+        
+        return "employee-list";
     }
 
     public String update() {
-
-        return "success";
+//        ejb.edit(employee);
+        
+        return "employee-create";
     }
 
     public String find() {
