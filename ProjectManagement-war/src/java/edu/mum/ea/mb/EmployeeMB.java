@@ -6,6 +6,7 @@
 package edu.mum.ea.mb;
 
 import edu.mum.ea.ejb.EmployeeEJB;
+import edu.mum.ea.ejb.UserEJB;
 import edu.mum.ea.entity.Address;
 import edu.mum.ea.entity.Employee;
 import edu.mum.ea.entity.Username;
@@ -28,9 +29,14 @@ public class EmployeeMB {
      */
     @EJB
     EmployeeEJB ejb;
+    @EJB
+    UserEJB userejb;
+
     Employee employee;
     Address address;
     Username user;
+    private String username;
+//    private String username;
     
     List<Employee> employeeList;
     
@@ -48,6 +54,16 @@ public class EmployeeMB {
 //        
     }
 
+//    public String getUsername() {
+//        return username;
+//    }
+//
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
+    
+    
+
     public Employee getEmployee() {
         return employee;
     }
@@ -62,6 +78,8 @@ public class EmployeeMB {
         return "employee-list";
     }
 
+    
+    
     public String delete(int employeeId) {
         employee = ejb.find(employeeId);
         ejb.delete(employee);
@@ -74,6 +92,10 @@ public class EmployeeMB {
 //        System.out.println("ID>>>>>>>>>>>>>>>>>>" + employee.getId());
         return "employee-update";
     }
+    
+    
+    
+//   
     
     public String update(){
 //        System.out.println("ID::::::::::::" + employee.getId());
@@ -88,5 +110,35 @@ public class EmployeeMB {
         return employeeList;
     }
 
+      
+      
+//    public Username getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(Username user) {
+//        this.user = user;
+//    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    public void handleUsernameValidation(){
+      
+        if(ejb.findByUName(employee.getUser().getUsername())!=null)
+        {
+            setUsername("this name already exists");
+        }
+        else{
+        
+          setUsername("");
+        }
+//         user = ejb.findByName(username)
+    }
 }
 
