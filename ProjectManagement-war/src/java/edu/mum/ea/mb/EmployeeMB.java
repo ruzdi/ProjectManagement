@@ -6,7 +6,6 @@
 package edu.mum.ea.mb;
 
 import edu.mum.ea.ejb.EmployeeEJB;
-import edu.mum.ea.ejb.UserEJB;
 import edu.mum.ea.entity.Address;
 import edu.mum.ea.entity.Employee;
 import edu.mum.ea.entity.Username;
@@ -29,8 +28,6 @@ public class EmployeeMB {
      */
     @EJB
     EmployeeEJB ejb;
-    @EJB
-    UserEJB userejb;
 
     Employee employee;
     Address address;
@@ -40,11 +37,6 @@ public class EmployeeMB {
     
     List<Employee> employeeList;
     
-//    @PostConstruct
-//    public void init(){
-//        address = new Address();
-//    }
-    
     public EmployeeMB() {
         user = new Username();
         address = new Address();
@@ -53,16 +45,6 @@ public class EmployeeMB {
         employee.setAddress(address);
 //        
     }
-
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
-    
-    
 
     public Employee getEmployee() {
         return employee;
@@ -110,16 +92,7 @@ public class EmployeeMB {
         return employeeList;
     }
 
-      
-      
-//    public Username getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(Username user) {
-//        this.user = user;
-//    }
-
+          
     public String getUsername() {
         return username;
     }
@@ -138,7 +111,6 @@ public class EmployeeMB {
         
           setUsername("");
         }
-//         user = ejb.findByName(username)
     }
 }
 
