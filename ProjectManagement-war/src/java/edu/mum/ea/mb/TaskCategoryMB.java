@@ -31,11 +31,12 @@ public class TaskCategoryMB {
     private TaskCategoryEJB taskCategoryEJB;
     
     private TaskCategory taskCategory;
-    private List<Task> tasks;
+    private List<TaskCategory> taskCategoryList;
+    
     
     public TaskCategoryMB() {
         taskCategory = new TaskCategory();
-        tasks = new ArrayList<Task>();
+        taskCategoryList = new ArrayList<TaskCategory>();
     }
     
     @PostConstruct
@@ -52,28 +53,35 @@ public class TaskCategoryMB {
     }
 
     public List<TaskCategory> getTaskCategories() {
-        return taskCategoryEJB.findAll();
+        taskCategoryList = taskCategoryEJB.findAll();
+        return taskCategoryList;
     }
 
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
+    public void setTaskCatories(List<TaskCategory> taskCategoryList) {
+        this.taskCategoryList = taskCategoryList;
     }
     
     public String create(){
         taskCategoryEJB.create(taskCategory);
-        return "task-category/task-category-list";
+        return "task-category-list";
+    }
+    
+    
+    public String edit(int id){
+        this.taskCategory = taskCategoryEJB.find(new Long(id));
+        return "task-category-update";
     }
     
     
     public String update(){
-    
-        return "";
+        taskCategoryEJB.update(this.taskCategory);
+        return "task-category-list";
     }
     
     
-    public String delete(){
-    
-        return "";
+    public String delete(int id){
+        taskCategoryEJB.delete(new Long(id));
+        return "task-category-list";
     }
     
     public String find(){

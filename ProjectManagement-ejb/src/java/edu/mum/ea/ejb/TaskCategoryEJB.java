@@ -31,17 +31,19 @@ public class TaskCategoryEJB {
         em.persist(taskCategory);
     }
 
-    public void update(int id) {
-        TaskCategory taskCategory = find(id);
+    public void update(TaskCategory taskCategory) {
+        //TaskCategory updatedTaskCategory = find(taskCategory.getId());
         em.merge(taskCategory);
     }
     
-    public void delete(int id) {
+    public void delete(Long id) {
+        System.out.println("================ Delete ID ======== : "+id);
         TaskCategory taskCategory = find(id);
+        System.out.println("================ Delete TC ======== : "+taskCategory.toString());
         em.remove(taskCategory);
     }
     
-    public TaskCategory find(int id) {
+    public TaskCategory find(Long id) {
         return em.find(TaskCategory.class, id);
     }
     

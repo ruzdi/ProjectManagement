@@ -12,50 +12,29 @@
             <ui:define name="content">
 
                 <h2>Task Category (List)</h2>
-
-
-                <!--                <table class="table table-hover table-striped table-bordered">
-                                    <thead>
-                                        <th>
-                                            <td class="">#</td>
-                                            <td class="">Name</td>
-                                            <td class="">Action</td>
-                                        </th>
-                                    </thead>
-                                    <tbody>
-                                        <h:form>
-                                            <tr>
-                                                <td class="">Test</td>
-                                                <td class="">TestName</td>
-                                                <td class="">
-                                                    <h:commandButton class="btn btn-primary" action="#{employeeMB.fillTables()}" value="Edit" />
-                                                    <h:commandButton class="btn btn-danger" action="#{employeeMB.fillTables()}" value="Delete" />
-                                                </td>
-                                            </tr>
-                                        </h:form>
-                                    </tbody>
-                                </table>-->
-
-
-                <p:dataTable var="car" value="#{dtBasicView.cars}">
-                    <p:column headerText="Id">
-                        <h:outputText value="#{car.id}" />
-                    </p:column>
-
-                    <p:column headerText="Year">
-                        <h:outputText value="#{car.year}" />
-                    </p:column>
-
-                    <p:column headerText="Brand">
-                        <h:outputText value="#{car.brand}" />
-                    </p:column>
-
-                    <p:column headerText="Color">
-                        <h:outputText value="#{car.color}" />
-                    </p:column>
-                </p:dataTable>
                 
-                
+                <h:form>
+                    <p:dataTable var="taskCategory" value="#{taskCategoryMB.getTaskCategories()}">
+                        <p:column headerText="#">
+                            <h:outputText value="#{taskCategory.id}" />
+                        </p:column>
+
+                        <p:column headerText="Year">
+                            <h:outputText value="#{taskCategory.name}" />
+                        </p:column>
+
+                        <p:column headerText="Detail">
+                            <h:outputText value="#{taskCategory.detail}" />
+                        </p:column>
+
+                        <p:column headerText="Action">
+
+                            <h:commandButton class="btn btn-primary" action="#{taskCategoryMB.edit(taskCategory.id)}" value="Edit" /> &nbsp;
+                            <h:commandButton class="btn btn-danger" action="#{taskCategoryMB.delete(taskCategory.id)}" value="Delete" />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+
             </ui:define>
         </ui:composition>
     </h:body>
