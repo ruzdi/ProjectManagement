@@ -6,10 +6,15 @@
 package edu.mum.ea.ejb;
 
 import edu.mum.ea.entity.TaskCategory;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -40,8 +45,14 @@ public class TaskCategoryEJB {
         return em.find(TaskCategory.class, id);
     }
     
-    public TaskCategory findAll(int id) {
-        return em.find(TaskCategory.class, id);
+    public List<TaskCategory> findAll() {
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<TaskCategory> criteriaQuery = builder.createQuery(TaskCategory.class);
+        
+        Root book = criteriaQuery.from(TaskCategory.class);
+        criteriaQuery.select(book);
+        TypedQuery<TaskCategory> query = em.createQuery(criteriaQuery);
+        return query.getResultList();
     }
    
     

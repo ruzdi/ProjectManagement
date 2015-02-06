@@ -51,8 +51,8 @@ public class TaskCategoryMB {
         this.taskCategory = taskCategory;
     }
 
-    public List<Task> getTasks() {
-        return tasks;
+    public List<TaskCategory> getTaskCategories() {
+        return taskCategoryEJB.findAll();
     }
 
     public void setTasks(List<Task> tasks) {
@@ -60,9 +60,8 @@ public class TaskCategoryMB {
     }
     
     public String create(){
-        
         taskCategoryEJB.create(taskCategory);
-        return "success";
+        return "task-category/task-category-list";
     }
     
     
