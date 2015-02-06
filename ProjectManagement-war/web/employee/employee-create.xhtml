@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Create Employee</title>
 
@@ -22,41 +23,66 @@
                         <h:form>
                             <div class="form-group">
                                 <label for="addEmployeeName">Name</label>
-                                <h:inputText class="form-control" id="addEmployeeName"  value="#{employeeMB.employee.name}" />
+                                <h:inputText class="form-control" id="addEmployeeName"  value="#{employeeMB.employee.name}" 
+                                             required="true" requiredMessage="The field is empty" validatorMessage=
+                                             "String is not valid (only characters a-z A-Z)">
+                                    <f:validateRegex pattern="[a-zA-Z]+"/>
+                                </h:inputText>
+                                <h:message for="addEmployeeName" errorStyle="color:red; display:block"/>
                             </div>
                             <div class="form-group">
                                 <label for="addEmployeeUsername">Username</label>
-                                <h:inputText class="form-control" id="addEmployeeUsername"  value="#{employeeMB.employee.user.username}" />
+                                <h:inputText class="form-control" id="addEmployeeUsername"  value="#{employeeMB.employee.user.username}" 
+                                             required="true" requiredMessage="Filled can not be empty"/>
+                                <h:message for="addEmployeeUsername" errorStyle="color:red; display:block"/>
                             </div>
                             <div class="form-group">
                                 <label for="addEmployeePassword">Password</label>
-                                <h:inputText class="form-control" id="addEmployeePassword"  value="#{employeeMB.employee.user.password}" />
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="addEmployeeEmail">Email</label>
-                                <h:inputText class="form-control" id="addEmployeeEmail"  value="#{employeeMB.employee.email}" />
+                                <h:inputSecret class="form-control" id="addEmployeePassword"  value="#{employeeMB.employee.user.password}" 
+                                             required="true" requiredMessage="Filled can not be empty"/>
+                                <h:message for="addEmployeePassword" errorStyle="color:red; display:block"/>
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Designation</label>
-                                <h:inputText class="form-control" id="addEmployeeDesignation"  value="#{employeeMB.employee.designation}" />
+                                <label for="addEmployeeEmail">Email</label>
+                                <h:inputText class="form-control" id="addEmployeeEmail" value="#{employeeMB.employee.email}" required="true" 
+                                             requiredMessage="Filled can not be empty" validatorMessage=
+                                             "Email is Invalid">
+
+                                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                </h:inputText>
+                                <h:message for="addEmployeeEmail" errorStyle="color:red; display:block"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="addEmployeeDesignation">Designation</label>
+                                <h:inputText class="form-control" id="addEmployeeDesignation"  value="#{employeeMB.employee.designation}" 
+                                             required="true" requiredMessage="Filled can not be empty"/>
+                                <h:message for="addEmployeeDesignation" errorStyle="color:red; display:block"/>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Street</label>
-                                <h:inputText class="form-control" id="addEmployeeStreet"  value="#{employeeMB.employee.address.street}" />
+                                <label for="addEmployeeStreet">Street</label>
+                                <h:inputText class="form-control" id="addEmployeeStreet"  value="#{employeeMB.employee.address.street}" 
+                                             required="true" requiredMessage="Filled can not be empty"/>
+                                <h:message for="addEmployeeStreet" errorStyle="color:red; display:block"/>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">City</label>
-                                <h:inputText class="form-control" id="addEmployeeCity"  value="#{employeeMB.employee.address.city}" />
+                                <label for="addEmployeeCity">City</label>
+                                <h:inputText class="form-control" id="addEmployeeCity"  value="#{employeeMB.employee.address.city}" 
+                                             required="true" requiredMessage="Filled can not be empty"/>
+                                <h:message for="addEmployeeCity" errorStyle="color:red; display:block"/>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">State</label>
-                                <h:inputText class="form-control" id="addEmployeeState"  value="#{employeeMB.employee.address.stateName}" />
+                                <label for="addEmployeeState">State</label>
+                                <h:inputText class="form-control" id="addEmployeeState"  value="#{employeeMB.employee.address.stateName}" 
+                                             required="true" requiredMessage="Filled can not be empty"/>
+                                <h:message for="addEmployeeState" errorStyle="color:red; display:block"/>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">ZIP</label>
-                                <h:inputText class="form-control" id="addEmployeeZip"  value="#{employeeMB.employee.address.zip}" />
+                                <label for="addEmployeeZip">ZIP</label>
+                                <h:inputText class="form-control" id="addEmployeeZip"  value="#{employeeMB.employee.address.zip}" 
+                                             required="true" requiredMessage="Filled can not be empty"/>
+                                <h:message for="addEmployeeZip" errorStyle="color:red; display:block"/>
                             </div>
 
                             <h:commandButton action="#{employeeMB.create()}" value="Save" class="btn btn-info"/>
