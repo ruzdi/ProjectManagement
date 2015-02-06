@@ -32,8 +32,8 @@ public class ProductBacklog implements Serializable {
     private Boolean releaseBacklogStatus;
     private Integer priority;
 //    
-//    @ManyToOne
-//    private Project project;
+    @ManyToOne
+    private Project project;
 //    
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productBacklog")
 //    private List<Task> tasks;
@@ -82,13 +82,13 @@ public class ProductBacklog implements Serializable {
         this.priority = priority;
     }
 //
-//    public Project getProject() {
-//        return project;
-//    }
-//
-//    public void setProject(Project project) {
-//        this.project = project;
-//    }
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
 //
 //    public List<Task> getTasks() {
 //        return tasks;

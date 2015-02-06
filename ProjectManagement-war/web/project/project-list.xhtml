@@ -2,57 +2,49 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Projects</title>
     </h:head>
     <h:body>
 
         <ui:composition template="/layout/layout.xhtml">
-            <ui:define name="content">
-                
-                
+            <ui:define name="content">   
                 <h2>Project (List)</h2>
-                
-                
-                <table class="table table-hover table-striped table-bordered">
-                    <thead>
-                        <td class="">Project Id</td>
-                        <td class="">Name</td>
-                        <td class="">Detail</td>
-                        <td class="">Start Date</td>
-                        <td class="">End Date</td>
-                        <td class="">Action</td>
-                    </thead>
-                    <tbody>
+
+                <h:dataTable value="#{projectMB.projectList}" var="project"
+                             styleClass="table table-hover table-striped table-bordered"
+                             headerClass=""
+                             rowClasses="">
+                    <h:column>    				
+                        <f:facet name="header">Name</f:facet>    				
+                            #{project.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Detail</f:facet>
+                            #{project.detail}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Start Date</f:facet>
+                        <h:outputText value="#{project.startDate}" >
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">End Date</f:facet>
+                        <h:outputText value="#{project.endDate}" >
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Action</f:facet>
                         <h:form>
-                            <tr>
-                                <td class="">1</td>
-                                <td class="">Project Name 1</td>
-                                <td class="">Project Detail</td>
-                                <td class="">12/02/2015</td>
-                                <td class="">12/02/2015</td>
-                                <td class="">
-
-                                    <h:commandButton class="btn btn-primary" action="#{employeeMB.fillTables()}" value="Edit" />
-                                    <h:commandButton class="btn btn-danger" action="#{employeeMB.fillTables()}" value="Delete" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="">2</td>
-                                <td class="">Project Name 2</td>
-                                <td class="">Project Detail</td>
-                                <td class="">12/02/2015</td>
-                                <td class="">12/02/2015</td>
-                                <td class="">
-
-                                    <h:commandButton class="btn btn-primary" action="#{employeeMB.fillTables()}" value="Edit" />
-                                    <h:commandButton class="btn btn-danger" action="#{employeeMB.fillTables()}" value="Delete" />
-                                </td>
-                            </tr>
+                            <h:commandButton class="btn btn-primary" action="#{projectMB.gotoUpdatePage(project.id)}" value="Edit" />
+                            <h:commandButton class="btn btn-danger" action="#{projectMB.deleteProject(project.id)}" value="Delete" />
                         </h:form>
-                    </tbody>
-                </table>
+                    </h:column>
+                </h:dataTable>
 
             </ui:define>
         </ui:composition>
