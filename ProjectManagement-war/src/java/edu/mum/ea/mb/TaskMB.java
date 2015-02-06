@@ -7,7 +7,6 @@ package edu.mum.ea.mb;
 
 import edu.mum.ea.ejb.TaskEJB;
 import edu.mum.ea.entity.Task;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -30,6 +29,7 @@ public class TaskMB {
     private TaskEJB taskEJB;
     
     private Task task;
+    private List<Task> taskList;
     
     public TaskMB() {
         task = new Task();
@@ -47,36 +47,46 @@ public class TaskMB {
     public void setTask(Task task) {
         this.task = task;
     }
+
+    public List<Task> getTaskList() {
+        taskList = taskEJB.findAll();
+        return taskList;
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
     
     public String create(){
-        
-        System.out.print("this is befor calling EJB for task create");
-        task.setId(new Long("5"));
         taskEJB.create(task);
         System.out.print("this is after calling EJB for task create");
-        return "index";
-    }
+        return "task-list";
+    }    
     
+    public String edit(int id){
+        this.task = taskEJB.find(new Long(id));
+        return "task-update";
+    }
     
     public String update(){
-    
-        return "";
+        taskEJB.update(this.task);
+        return "task-list";
     }
     
-    
-    public String delete(){
-        return "";
+    public String delete(int id){
+        taskEJB.delete(new Long(id));
+        return "task-list";
     }
     
-    public String find(){
-        return "";
+    public String find(int id){
+        this.task = taskEJB.find(new Long(id));
+        return "task-list";
     }
     
     public String findAll(){
-    
-        return "";
+        taskList = taskEJB.findAll();
+        return "task-list";
     }
-    
     
 }
 

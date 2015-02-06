@@ -32,14 +32,11 @@ public class TaskCategoryEJB {
     }
 
     public void update(TaskCategory taskCategory) {
-        //TaskCategory updatedTaskCategory = find(taskCategory.getId());
         em.merge(taskCategory);
     }
     
     public void delete(Long id) {
-        System.out.println("================ Delete ID ======== : "+id);
         TaskCategory taskCategory = find(id);
-        System.out.println("================ Delete TC ======== : "+taskCategory.toString());
         em.remove(taskCategory);
     }
     
@@ -50,9 +47,8 @@ public class TaskCategoryEJB {
     public List<TaskCategory> findAll() {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<TaskCategory> criteriaQuery = builder.createQuery(TaskCategory.class);
-        
-        Root book = criteriaQuery.from(TaskCategory.class);
-        criteriaQuery.select(book);
+        Root taskCategory = criteriaQuery.from(TaskCategory.class);
+        criteriaQuery.select(taskCategory);
         TypedQuery<TaskCategory> query = em.createQuery(criteriaQuery);
         return query.getResultList();
     }
