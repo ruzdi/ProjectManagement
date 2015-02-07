@@ -2,69 +2,43 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Task Catagories</title>
     </h:head>
     <h:body>
         <ui:composition template="/layout/layout.xhtml">
             <ui:define name="content">
-                
+
                 <h2>Task Category (List)</h2>
                 
-                        
-                <table class="table table-hover table-striped table-bordered">
-                    <thead>
-                        <th>
-                            <td class="">Project Id</td>
-                            <td class="">Name</td>
-                            <td class="">Detail</td>
-                            <td class="">Start Date</td>
-                            <td class="">End Date</td>
-                            <td class="">Action</td>
-                        </th>
-                    </thead>
-                    <tbody>
-                        <h:form>
-                            <tr>
-                                <td class="">Test</td>
-                                <td class="">TestName</td>
-                                <td class="">TestDetail</td>
-                                <td class="">TestStartDate</td>
-                                <td class="">TestEndDate</td>
-                                <td class="">
+                <h:form>
+                    
+                    <h:commandLink class="btn btn-primary" action="/task-category/task-category-create" value="Create Task Category" /><br /><br />
+                    
+                    <p:dataTable var="taskCategory" value="#{taskCategoryMB.getTaskCategories()}">
+                        <p:column headerText="#">
+                            <h:outputText value="#{taskCategory.id}" />
+                        </p:column>
 
-                                    <h:commandButton class="btn btn-primary" action="#{employeeMB.fillTables()}" value="Edit" />
-                                    <h:commandButton class="btn btn-danger" action="#{employeeMB.fillTables()}" value="Delete" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="">Test1</td>
-                                <td class="">TestName1</td>
-                                <td class="">TestDetail1</td>
-                                <td class="">TestStartDate1</td>
-                                <td class="">TestEndDate1</td>
-                                <td class="">
+                        <p:column headerText="Year">
+                            <h:outputText value="#{taskCategory.name}" />
+                        </p:column>
 
-                                    <h:commandButton class="btn btn-primary" action="#{employeeMB.fillTables()}" value="Edit" />
-                                    <h:commandButton class="btn btn-danger" action="#{employeeMB.fillTables()}" value="Delete" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="">Test2</td>
-                                <td class="">TestName2</td>
-                                <td class="">TestDetail2</td>
-                                <td class="">TestStartDate2</td>
-                                <td class="">TestEndDate2</td>
-                                <td class="">
+                        <p:column headerText="Detail">
+                            <h:outputText value="#{taskCategory.detail}" />
+                        </p:column>
 
-                                    <h:commandButton class="btn btn-primary" action="#{employeeMB.fillTables()}" value="Edit" />
-                                    <h:commandButton class="btn btn-danger" action="#{employeeMB.fillTables()}" value="Delete" />
-                                </td>
-                            </tr>
-                        </h:form>
-                    </tbody>
-                </table>
+                        <p:column headerText="Action">
+
+                            <h:commandButton class="btn btn-primary" action="#{taskCategoryMB.edit(taskCategory.id)}" value="Edit" /> &nbsp;
+                            <h:commandButton class="btn btn-danger" action="#{taskCategoryMB.delete(taskCategory.id)}" value="Delete" />
+                        </p:column>
+                    </p:dataTable>
+                    
+                </h:form>
+
             </ui:define>
         </ui:composition>
     </h:body>

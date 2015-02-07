@@ -19,23 +19,15 @@
                 
                         <h:form>
                             <div class="form-group">
-                                <label for="addTaskCatagoryName">Name</label>
-                                <h:inputText class="form-control" id="addTaskCatagoryName"  value="#{employeeMB.employee.name}" />
+                                <label for="addTaskCatagoryName">Title</label>
+                                <h:inputText class="form-control" value="#{taskCategoryMB.taskCategory.name}" />
                             </div>
                             <div class="form-group">
                                 <label for="addTaskCatagoryDetail">Detail</label>
-                                <h:inputTextarea class="form-control" id="addTaskCatagoryDetail"  value="#{employeeMB.employee.name}" />
-                            </div>
-                            <div class="form-group">
-                                <label for="addTaskCatagoryStartDate">Start Date</label>
-                                <h:inputText class="form-control" id="addTaskCatagoryStartDate"  value="#{employeeMB.employee.name}" />
-                            </div>
-                            <div class="form-group">
-                                <label for="addTaskCatagoryEndDate">End Date</label>
-                                <h:inputText class="form-control" id="addTaskCatagoryEndDate"  value="#{employeeMB.employee.name}" />
+                                <h:inputTextarea class="form-control" value="#{taskCategoryMB.taskCategory.detail}" />
                             </div>
 
-                            <h:commandButton action="#{employeeMB.fillTables()}" value="Save" class="btn btn-info"/>
+                            <h:commandButton class="btn btn-info" value="Save Task Category" action="#{taskCategoryMB.create()}"  rendered="true" />
                         </h:form>
 
 

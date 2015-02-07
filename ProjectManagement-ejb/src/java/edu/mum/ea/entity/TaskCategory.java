@@ -28,9 +28,12 @@ public class TaskCategory implements Serializable {
     
     private String name;
     private String detail;
-//    
-//    @OneToMany(cascade = CascadeType.ALL)
-//    private List<Task> tasks;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskCategory")
+    private List<Task> tasks;
+
+    public TaskCategory() {
+    }   
     
     public Long getId() {
         return id;
@@ -56,15 +59,25 @@ public class TaskCategory implements Serializable {
         this.detail = detail;
     }
 
-//    public List<Task> getTasks() {
-//        return tasks;
-//    }
-//
-//    public void setTasks(Task task) {
-//        if(!this.tasks.contains(tasks)){
-//            this.tasks.add(task);
-//        }
-//    }
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Task task) {
+        if(!this.tasks.contains(tasks)){
+            this.tasks.add(task);
+        }
+    }
+    
+    public void addTask(Task task){
+        if(!this.tasks.contains(task)){
+            this.tasks.add(task);
+        }
+    }
+    
+    public void removeTask(Task task){
+        this.tasks.remove(task);
+    }
     
 
     @Override

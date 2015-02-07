@@ -5,13 +5,15 @@
  */
 package edu.mum.ea.mb;
 
+import edu.mum.ea.ejb.TaskCategoryEJB;
 import edu.mum.ea.ejb.TaskEJB;
 import edu.mum.ea.entity.Task;
-import java.util.ArrayList;
+import edu.mum.ea.entity.TaskCategory;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 /**
@@ -29,7 +31,16 @@ public class TaskMB {
     @EJB
     private TaskEJB taskEJB;
     
+    @EJB
+    private TaskCategoryEJB taskCategoryEJB;
+        
     private Task task;
+    private List<Task> taskList;
+    private List<TaskCategory> taskCategoryList;
+    private int taskCategoryId;
+    
+    @ManagedProperty(value = "#{taskCategory}")
+    private TaskCategoryMB taskCategoryMB;
     
     public TaskMB() {
         task = new Task();
@@ -40,6 +51,14 @@ public class TaskMB {
         
     }
 
+    public TaskCategoryMB getTaskCategoryMB() {
+        return taskCategoryMB;
+    }
+
+    public void setTaskCategoryMB(TaskCategoryMB taskCategoryMB) {
+        this.taskCategoryMB = taskCategoryMB;
+    }
+    
     public Task getTask() {
         return task;
     }
@@ -47,36 +66,66 @@ public class TaskMB {
     public void setTask(Task task) {
         this.task = task;
     }
+
+    public List<Task> getTaskList() {
+        taskList = taskEJB.findAll();
+        return taskList;
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
+
+    public List<TaskCategory> getTaskCategoryList() {
+        taskCategoryList = taskCategoryEJB.findAll();
+        //System.out.println("==========Task Categories "+taskCategoryList.toString());
+        return taskCategoryList;
+    }
+
+    public void setTaskCategoryList(List<TaskCategory> taskCategoryList) {
+        this.taskCategoryList = taskCategoryList;
+    }
+
+    public int getTaskCategoryId() {
+        return taskCategoryId;
+    }
+
+    public void setTaskCategoryId(int taskCategoryId) {
+        this.taskCategoryId = taskCategoryId;
+    }
     
     public String create(){
-        
-        System.out.print("this is befor calling EJB for task create");
-        task.setId(new Long("5"));
+        this.task.setTaskCategory(taskCategoryEJB.find(new Long(this.taskCategoryId)));
         taskEJB.create(task);
-        System.out.print("this is after calling EJB for task create");
-        return "index";
-    }
+        return "/task/task-list";
+    }    
     
+    public String edit(int id){
+        this.task = taskEJB.find(new Long(id));
+        this.setTaskCategoryId(Integer.parseInt(this.task.getTaskCategory().getId()+""));
+        return "/task/task-update";
+    }
     
     public String update(){
-    
-        return "";
+        this.task.setTaskCategory(taskCategoryEJB.find(new Long(this.taskCategoryId)));
+        taskEJB.update(this.task);
+        return "/task/task-list";
     }
     
-    
-    public String delete(){
-        return "";
+    public String delete(int id){
+        taskEJB.delete(new Long(id));
+        return "/task/task-list";
     }
     
-    public String find(){
-        return "";
+    public String find(int id){
+        this.task = taskEJB.find(new Long(id));
+        return "/task/task-list";
     }
     
     public String findAll(){
-    
-        return "";
+        taskList = taskEJB.findAll();
+        return "/task/task-list";
     }
-    
     
 }
 
