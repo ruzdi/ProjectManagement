@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>PM - Task Edit</title>
     </h:head>
@@ -21,6 +22,16 @@
                         <h:form>
                             
                             <h:inputHidden value="#{taskMB.task.id}" />
+                            
+                            <div class="form-group">
+                                <label for="addTaskCategory">Task Category</label>
+
+                                <h:selectOneMenu class="form-control" value="#{taskMB.taskCategoryId}">
+                                    <f:selectItem itemLabel="Select One" itemValue="" />
+                                    <f:selectItems value="#{taskMB.taskCategoryList}" var="taskCategory" itemLabel="#{taskCategory.name}" itemValue="#{taskCategory.id}" />
+                                </h:selectOneMenu>
+
+                            </div>
                             
                             <div class="form-group">
                                 <label for="addTaskTitle">Title</label>

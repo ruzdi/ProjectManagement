@@ -14,6 +14,9 @@
                 <h2>Task Category (List)</h2>
                 
                 <h:form>
+                    
+                    <h:commandLink class="btn btn-primary" action="/task-category/task-category-create" value="Create Task Category" /><br /><br />
+                    
                     <p:dataTable var="taskCategory" value="#{taskCategoryMB.getTaskCategories()}">
                         <p:column headerText="#">
                             <h:outputText value="#{taskCategory.id}" />
@@ -33,6 +36,7 @@
                             <h:commandButton class="btn btn-danger" action="#{taskCategoryMB.delete(taskCategory.id)}" value="Delete" />
                         </p:column>
                     </p:dataTable>
+                    
                 </h:form>
 
             </ui:define>
