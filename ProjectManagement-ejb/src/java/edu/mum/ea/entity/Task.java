@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -44,14 +45,25 @@ public class Task implements Serializable {
     private Integer status;
 //    @ManyToOne
 //    private Sprint sprint;
-//    @ManyToOne
-//    private TaskCategory taskCategory;
+    @JoinColumn(nullable = true)
+    @ManyToOne(optional = true)
+    private TaskCategory taskCategory;
 //    @ManyToOne
 //    private ProductBacklog productBacklog;
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "task")
 //    private List<TaskComment> taskComments;
 //    @OneToOne
 //    private Resource resource;
+
+    public Task() {
+    }
+    
+    public Task(String title, TaskCategory taskCategory) {
+        this.title = title;
+        this.taskCategory = taskCategory;
+        this.taskCategory.addTask(this);
+    }
+    
     
     public Long getId() {
         return id;
@@ -124,14 +136,14 @@ public class Task implements Serializable {
 //    public void setSprint(Sprint sprint) {
 //        this.sprint = sprint;
 //    }
-//
-//    public TaskCategory getTaskCategory() {
-//        return taskCategory;
-//    }
-//
-//    public void setTaskCategory(TaskCategory taskCategory) {
-//        this.taskCategory = taskCategory;
-//    }
+
+    public TaskCategory getTaskCategory() {
+        return taskCategory;
+    }
+
+    public void setTaskCategory(TaskCategory taskCategory) {
+        this.taskCategory = taskCategory;
+    }
 //
 //    public ProductBacklog getProductBacklog() {
 //        return productBacklog;

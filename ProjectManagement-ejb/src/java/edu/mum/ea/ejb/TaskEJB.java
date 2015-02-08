@@ -6,10 +6,16 @@
 package edu.mum.ea.ejb;
 
 import edu.mum.ea.entity.Task;
+import edu.mum.ea.entity.TaskCategory;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -26,22 +32,26 @@ public class TaskEJB {
         em.persist(task);
     }
 
-    public void update(int id) {
-        Task task = find(id);
+    public void update(Task task) {
         em.merge(task);
     }
     
-    public void delete(int id) {
+    public void delete(Long id) {
         Task task = find(id);
         em.remove(task);
     }
     
-    public Task find(int id) {
+    public Task find(Long id) {
         return em.find(Task.class, id);
     }
     
-    public Task findAll(int id) {
-        return em.find(Task.class, id);
+    public List<Task> findAll() {
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Task> criteriaQuery = builder.createQuery(Task.class);
+        Root task = criteriaQuery.from(Task.class);
+        criteriaQuery.select(task);
+        TypedQuery<Task> query = em.createQuery(criteriaQuery);
+        return query.getResultList();
     }
    
     

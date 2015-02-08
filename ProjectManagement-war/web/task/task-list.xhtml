@@ -2,66 +2,62 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Projects</title>
     </h:head>
     <h:body>
         <ui:composition template="/layout/layout.xhtml">
+            
             <ui:define name="content">
                 
                 <h2>Task (List)</h2>
                 
-                <table class="table table-hover table-striped table-bordered">
-                    <thead>
-                        <th>
-                            <td class="">Task Id</td>
-                            <td class="">Task Title</td>
-                            <td class="">Detail</td>
-                            <td class="">Start Date</td>
-                            <td class="">End Date</td>
-                            <td class="">Duration</td>
-                            <td class="">Priority</td>
-                            <td class="">Status</td>
-                            <td class=""></td>
-                        </th>
-                    </thead>
-                    <tbody>
-                        <h:form>
-                            <tr>
-                                <td class="">1</td>
-                                <td class="">Task Title 1</td>
-                                <td class="">Task Detail</td>
-                                <td class="">12/02/2015</td>
-                                <td class="">12/02/2015</td>
-                                <td class="">8 Hours</td>
-                                <td class="">High</td>
-                                <td class="">On Going</td>
-                                <td class="">
+                <h:form>
+                    
+                    <h:commandLink class="btn btn-primary" action="/task/task-create" value="Create Task" /><br /><br />
+                    
+                    
+                    <p:dataTable var="task" value="#{taskMB.getTaskList()}">
+                        <p:column headerText="#">
+                            <h:outputText value="#{task.id}" />
+                        </p:column>
 
-                                    <h:commandButton class="btn btn-primary" action="#{employeeMB.fillTables()}" value="Edit" />
-                                    <h:commandButton class="btn btn-danger" action="#{employeeMB.fillTables()}" value="Delete" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="">2</td>
-                                <td class="">Task Title 2</td>
-                                <td class="">Task Detail</td>
-                                <td class="">12/02/2015</td>
-                                <td class="">12/02/2015</td>
-                                <td class="">8 Hours</td>
-                                <td class="">High</td>
-                                <td class="">On Going</td>
-                                <td class="">
+                        <p:column headerText="Title">
+                            <h:outputText value="#{task.title}" />
+                        </p:column>
 
-                                    <h:commandButton class="btn btn-primary" action="#{employeeMB.fillTables()}" value="Edit" />
-                                    <h:commandButton class="btn btn-danger" action="#{employeeMB.fillTables()}" value="Delete" />
-                                </td>
-                            </tr>
-                        </h:form>
-                    </tbody>
-                </table>
+                        <p:column headerText="Start Date">
+                            <h:outputText value="#{task.startDate}" />
+                        </p:column>
+                        
+                        <p:column headerText="End Date">
+                            <h:outputText value="#{task.endDate}" />
+                        </p:column>
+                        
+                        <p:column headerText="Duration">
+                            <h:outputText value="#{task.duration}" />
+                        </p:column>
+                        
+                        <p:column headerText="Priority">
+                            <h:outputText value="#{task.priority}" />
+                        </p:column>
+                        
+                        <p:column headerText="Status">
+                            <h:outputText value="#{task.status}" />
+                        </p:column>
+                        
+                        <p:column headerText="Action">
+                            <h:commandButton class="btn btn-primary" action="#{taskMB.edit(task.id)}" value="Edit" /> &nbsp;
+                            <h:commandButton class="btn btn-danger" action="#{taskMB.delete(task.id)}" value="Delete" />
+                        </p:column>
+                        
+                    </p:dataTable>
+                </h:form>
+                
             </ui:define>
+            
         </ui:composition>
     </h:body>
 </html>

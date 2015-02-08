@@ -3,9 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      >
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Projects</title>
     </h:head>
@@ -13,49 +11,31 @@
 
         <ui:composition template="/layout/layout.xhtml">
             <ui:define name="content">   
-                <h2>Project (List)</h2>
+                 <h2>Product Backlog List for (#{projectBacklogMB.project.name})</h2>
 
-                <h:dataTable value="#{projectMB.projectList}" var="project"
+                <h:dataTable value="#{projectBacklogMB.project.productBacklog}" var="project"
                              styleClass="table table-hover table-striped table-bordered"
                              headerClass=""
                              rowClasses="">
                     <h:column>    				
                         <f:facet name="header">Name</f:facet>    				
-                            #{project.name}
+                            #{project.title}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Detail</f:facet>
-                            #{project.detail}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Start Date</f:facet>
-                        <h:outputText value="#{project.startDate}" >
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">End Date</f:facet>
-                        <h:outputText value="#{project.endDate}" >
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
+                            #{project.details}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Action</f:facet>
                         <h:form>
                             <h:commandButton class="btn btn-primary" action="#{projectMB.gotoUpdatePage(project.id)}" value="Edit" />
                             <h:commandButton class="btn btn-danger" action="#{projectMB.deleteProject(project.id)}" value="Delete" />
-                            <h:commandButton class="btn btn-primary" action="#{projectBacklogMB.getBacklogList(project.id)}" value="BacklogList" />
-
                         </h:form>
                     </h:column>
                 </h:dataTable>
-                
-<!--                <h:form>
-                    <p:growl id="growl" showDetail="true" />
-                    <p:commandButton value="Select Car" class="btn btn-default" actionListener="#{dfView.chooseCar}" >
-                                <p:ajax event="dialogReturn" listener="#{dfView.onCarChosen}" update="growl" />
-                            </p:commandButton>
-                </h:form>-->
+                <h:form>
+                    <h:commandButton action="/product-backlog/product-backlog-create" value="Create" class="btn btn-info"/>
+                </h:form>
             </ui:define>
         </ui:composition>
 
