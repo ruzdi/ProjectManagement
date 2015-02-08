@@ -49,6 +49,7 @@
                         </p:column>
                         
                         <p:column headerText="Action">
+                            <h:commandButton class="btn btn-primary" action="#{taskMB.view(task.id)}" value="Edit" /> &nbsp;
                             <h:commandButton class="btn btn-primary" action="#{taskMB.edit(task.id)}" value="Edit" /> &nbsp;
                             <h:commandButton class="btn btn-danger" action="#{taskMB.delete(task.id)}" value="Delete" />
                         </p:column>

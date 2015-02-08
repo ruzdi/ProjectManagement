@@ -1,12 +1,73 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>PM - Task Detail</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <ui:composition template="/layout/layout.xhtml">
+            <ui:define name="content">
+
+                <h2>Task Detail</h2>
+
+                <h:form>
+
+                    <dl>
+                        <dt>Title</dt>
+                        <dd>#{taskMB.task.title}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Category</dt>
+                        <dd>#{taskMB.task.taskCategory.name}</dd>
+                    </dl>
+
+                    <dl>
+                        <dt>Priority</dt>
+                        <dd>#{taskMB.task.priority}</dd>
+                    </dl>
+
+                    <dl>
+                        <dt>Duration</dt>
+                        <dd>#{taskMB.task.duration}</dd>
+                    </dl>
+
+                    <dl>
+                        <dt>Start Date</dt>
+                        <dd>#{taskMB.task.startDate}</dd>
+                    </dl>
+
+                    <dl>
+                        <dt>End Date</dt>
+                        <dd>#{taskMB.task.startDate}</dd>
+                    </dl>
+
+                    <dl>
+                        <dt>Status</dt>
+                        <dd>#{taskMB.task.status}</dd>
+                    </dl>
+
+                </h:form>
+
+
+                <h2>Task Comments</h2>
+                
+                <h:form>
+                    
+                    <div class="form-group">
+                        <label for="addTaskDetail">Comment</label>
+                        <h:inputTextarea class="form-control" id="addTaskDetail"  value="#{taskMB.task.detail}" />
+                        
+                        <h:commandButton action="#{taskMB.createComment()}" value="Save Comment" class="btn btn-info"/>
+                        
+                    </div>
+                    
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

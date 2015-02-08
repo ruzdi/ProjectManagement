@@ -100,6 +100,11 @@ public class TaskMB {
         return "/task/task-list";
     }    
     
+    public String view(int id){
+        this.task = taskEJB.find(new Long(id));
+        return "/task/task-view";
+    }
+    
     public String edit(int id){
         this.task = taskEJB.find(new Long(id));
         this.setTaskCategoryId(Integer.parseInt(this.task.getTaskCategory().getId()+""));

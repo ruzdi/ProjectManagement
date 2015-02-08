@@ -29,7 +29,7 @@ public class TaskCategory implements Serializable {
     private String name;
     private String detail;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskCategory")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true,  mappedBy = "taskCategory")
     private List<Task> tasks;
 
     public TaskCategory() {
