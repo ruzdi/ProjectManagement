@@ -66,16 +66,15 @@ public class ProjectMB {
     public String updateProject(){
         
         projectEJB.edit(project);
-    
         return "project-list";
     }
     
     public String deleteProject(Long projectId){
         projectEJB.delete(projectId);
-  
         return "project-list";
     }
     
+   
     public String projectItem() {
        return "success";
     }
