@@ -8,7 +8,7 @@ package edu.mum.ea.ejb;
 import edu.mum.ea.entity.Address;
 import edu.mum.ea.entity.Employee;
 import edu.mum.ea.entity.Project;
-import edu.mum.ea.entity.Username;
+import edu.mum.ea.entity.Users;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
@@ -39,24 +39,20 @@ public class EmployeeEJB {
     }
     
     public void delete(Employee employee){
-//        em.merge(employee);
         em.remove(em.merge(employee));
     }
     
-    public Username findByUName(String username){
-//        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-//        cq.select(cq.from(Username.class)).where();
-        TypedQuery<Username> query = null;
-        Username usernameOb = null;
-        System.out.println("Username>>>>>>>>>>>>>>>>>>>>>>>" + username);
+    public Users findByUName(String username){
+        TypedQuery<Users> query = null;
+        Users usernameOb = null;
+
         try {
-            query = em.createQuery("Select u from Username u where u.username=:userName", Username.class);
+            query = em.createQuery("Select u from Username u where u.username=:userName", Users.class);
             query.setParameter("userName", username);
             usernameOb = query.getSingleResult();
         } catch (Exception e) {
         
-        }
-        
+        }        
         
         return usernameOb;
     }

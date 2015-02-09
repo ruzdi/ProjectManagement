@@ -8,7 +8,8 @@ package edu.mum.ea.mb;
 import edu.mum.ea.ejb.EmployeeEJB;
 import edu.mum.ea.entity.Address;
 import edu.mum.ea.entity.Employee;
-import edu.mum.ea.entity.Username;
+import edu.mum.ea.entity.EmployeeRole;
+import edu.mum.ea.entity.Users;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -31,19 +32,23 @@ public class EmployeeMB {
 
     Employee employee;
     Address address;
-    Username user;
+    Users user;
+    EmployeeRole employeeRole;
     private String username;
 //    private String username;
     
     List<Employee> employeeList;
     
     public EmployeeMB() {
-        user = new Username();
+        user = new Users();
         address = new Address();
         employee = new Employee();
+        employeeRole = new EmployeeRole();
+        
+        
         employee.setUser(user);
         employee.setAddress(address);
-//        
+        user.setEmployeeRole(employeeRole);
     }
 
     public Employee getEmployee() {
@@ -55,6 +60,7 @@ public class EmployeeMB {
     }
 
     public String create() {
+        user.addRole(employeeRole);
         ejb.save(employee);
 
         return "employee-list";
