@@ -60,6 +60,7 @@ public class EmployeeMB {
     }
 
     public String create() {
+//        user.setPassword(username);
         user.addRole(employeeRole);
         ejb.save(employee);
 
