@@ -88,9 +88,7 @@ public class ProjectBacklogMB {
     }
      
     public String gotoUpdateBacklogPage(Long id){
-        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<" + id);
         productBacklog = productBacklogEJB.find(id);
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>" + productBacklog.getTitle());
         return "/product-backlog/product-backlog-update";
     }
     
