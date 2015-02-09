@@ -6,9 +6,11 @@
 package edu.mum.ea.mb;
 
 import edu.mum.ea.ejb.TaskCategoryEJB;
+import edu.mum.ea.ejb.TaskCommentEJB;
 import edu.mum.ea.ejb.TaskEJB;
 import edu.mum.ea.entity.Task;
 import edu.mum.ea.entity.TaskCategory;
+import edu.mum.ea.entity.TaskComment;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -34,13 +36,23 @@ public class TaskMB {
     @EJB
     private TaskCategoryEJB taskCategoryEJB;
         
+    @EJB
+    private TaskCommentEJB taskCommentEJB;
+    
     private Task task;
     private List<Task> taskList;
     private List<TaskCategory> taskCategoryList;
     private int taskCategoryId;
     
+    private TaskComment taskComment;
+    
+    private String comment;
+    
     @ManagedProperty(value = "#{taskCategory}")
     private TaskCategoryMB taskCategoryMB;
+        
+    @ManagedProperty(value = "#{taskCategory}")
+    private TaskCommentMB taskCommentMB;
     
     public TaskMB() {
         task = new Task();
@@ -57,6 +69,14 @@ public class TaskMB {
 
     public void setTaskCategoryMB(TaskCategoryMB taskCategoryMB) {
         this.taskCategoryMB = taskCategoryMB;
+    }
+
+    public TaskCommentMB getTaskCommentMB() {
+        return taskCommentMB;
+    }
+
+    public void setTaskCommentMB(TaskCommentMB taskCommentMB) {
+        this.taskCommentMB = taskCommentMB;
     }
     
     public Task getTask() {
@@ -85,7 +105,15 @@ public class TaskMB {
     public void setTaskCategoryList(List<TaskCategory> taskCategoryList) {
         this.taskCategoryList = taskCategoryList;
     }
-
+    
+    public TaskComment getTaskComment() {
+        return taskComment;
+    }
+    
+    public void setTaskComment(TaskComment TaskComment) {
+        this.taskComment = taskComment;
+    }
+    
     public int getTaskCategoryId() {
         return taskCategoryId;
     }
@@ -93,6 +121,16 @@ public class TaskMB {
     public void setTaskCategoryId(int taskCategoryId) {
         this.taskCategoryId = taskCategoryId;
     }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+    
+    
     
     public String create(){
         this.task.setTaskCategory(taskCategoryEJB.find(new Long(this.taskCategoryId)));
@@ -132,8 +170,33 @@ public class TaskMB {
         return "/task/task-list";
     }
     
-}
+    public String createComment(){
+        Task myTask = taskEJB.find(task.getId());     
+        System.out.println("===================== Task "+ task+ "   ============  New Task " +myTask+ "  ==============  Comment "+this.comment);
+        
+        TaskComment myTaskComment = new TaskComment();
+        myTaskComment.setComment(this.comment);
+        myTaskComment.setTask(myTask);
+        taskEJB.createComment(myTaskComment);
 
+        this.task = myTask;
+        return "/task/task-view";
+    }  
+    
+//    public String createComment(long id, String comment){
+//        Task myTask = taskEJB.find(id);        
+//        System.out.println("===================== Task "+ myTask+ "  ==============  Comment "+comment);
+//        taskComment.setComment(comment);
+//        taskComment.setTask(myTask);
+//        taskEJB.createComment(taskComment);
+//        //this.taskCommentMB.createComment(myTask, comment);
+//        //this.task.setTaskCategory(taskCategoryEJB.find(new Long(this.taskCategoryId)));
+//        //taskEJB.create(task);
+//        this.task = myTask;
+//        return "/task/task-view";
+//    }  
+    
+}
 
 
 /*

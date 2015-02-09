@@ -49,9 +49,11 @@
                         </p:column>
                         
                         <p:column headerText="Action">
-                            <h:commandButton class="btn btn-primary" action="#{taskMB.view(task.id)}" value="Edit" /> &nbsp;
-                            <h:commandButton class="btn btn-primary" action="#{taskMB.edit(task.id)}" value="Edit" /> &nbsp;
-                            <h:commandButton class="btn btn-danger" action="#{taskMB.delete(task.id)}" value="Delete" />
+                            <div class="btn-group btn-group-xs">
+                                <h:commandButton class="btn btn-info" action="#{taskMB.view(task.id)}" value="View" /> &nbsp;
+                                <h:commandButton class="btn btn-warning" action="#{taskMB.edit(task.id)}" value="Edit" /> &nbsp;
+                                <h:commandButton class="btn btn-danger" action="#{taskMB.delete(task.id)}" value="Delete" />
+                            </div>
                         </p:column>
                         
                     </p:dataTable>

@@ -53,17 +53,30 @@
 
 
                 <h2>Task Comments</h2>
-                
+
                 <h:form>
-                    
+
+                    <ui:repeat value="#{taskMB.task.taskComments}" var="taskComment">
+                        <blockquote>
+                            <p>#{taskComment.comment}</p>
+                        </blockquote>
+                    </ui:repeat>   
+
+                </h:form>
+
+
+                <h:form>
+
+                    <h:inputHidden value="#{taskMB.task.id}" />   
                     <div class="form-group">
                         <label for="addTaskDetail">Comment</label>
-                        <h:inputTextarea class="form-control" id="addTaskDetail"  value="#{taskMB.task.detail}" />
-                        
-                        <h:commandButton action="#{taskMB.createComment()}" value="Save Comment" class="btn btn-info"/>
-                        
+                        <h:inputTextarea class="form-control" id="addTaskDetail"  value="#{taskMB.comment}" />                        
                     </div>
-                    
+
+                    <div class="form-group">
+                        <h:commandButton action="#{taskMB.createComment()}" value="Save Comment" class="btn btn-info"/>
+                    </div>
+
                 </h:form>
 
             </ui:define>
