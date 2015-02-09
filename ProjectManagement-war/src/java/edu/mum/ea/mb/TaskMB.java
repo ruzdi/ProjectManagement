@@ -46,6 +46,8 @@ public class TaskMB {
     
     private TaskComment taskComment;
     
+    private String comment;
+    
     @ManagedProperty(value = "#{taskCategory}")
     private TaskCategoryMB taskCategoryMB;
         
@@ -119,6 +121,16 @@ public class TaskMB {
     public void setTaskCategoryId(int taskCategoryId) {
         this.taskCategoryId = taskCategoryId;
     }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+    
+    
     
     public String create(){
         this.task.setTaskCategory(taskCategoryEJB.find(new Long(this.taskCategoryId)));
@@ -159,10 +171,30 @@ public class TaskMB {
     }
     
     public String createComment(){
-        this.task.setTaskCategory(taskCategoryEJB.find(new Long(this.taskCategoryId)));
-        taskEJB.create(task);
-        return "/task/task-list";
+        Task myTask = taskEJB.find(task.getId());     
+        System.out.println("===================== Task "+ task+ "   ============  New Task " +myTask+ "  ==============  Comment "+this.comment);
+        
+        TaskComment myTaskComment = new TaskComment();
+        myTaskComment.setComment(this.comment);
+        myTaskComment.setTask(myTask);
+        taskEJB.createComment(myTaskComment);
+
+        this.task = myTask;
+        return "/task/task-view";
     }  
+    
+//    public String createComment(long id, String comment){
+//        Task myTask = taskEJB.find(id);        
+//        System.out.println("===================== Task "+ myTask+ "  ==============  Comment "+comment);
+//        taskComment.setComment(comment);
+//        taskComment.setTask(myTask);
+//        taskEJB.createComment(taskComment);
+//        //this.taskCommentMB.createComment(myTask, comment);
+//        //this.task.setTaskCategory(taskCategoryEJB.find(new Long(this.taskCategoryId)));
+//        //taskEJB.create(task);
+//        this.task = myTask;
+//        return "/task/task-view";
+//    }  
     
 }
 

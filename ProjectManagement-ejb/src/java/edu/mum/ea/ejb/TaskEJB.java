@@ -7,6 +7,7 @@ package edu.mum.ea.ejb;
 
 import edu.mum.ea.entity.Task;
 import edu.mum.ea.entity.TaskCategory;
+import edu.mum.ea.entity.TaskComment;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
@@ -52,6 +53,11 @@ public class TaskEJB {
         criteriaQuery.select(task);
         TypedQuery<Task> query = em.createQuery(criteriaQuery);
         return query.getResultList();
+    }
+    
+    
+    public void createComment(TaskComment taskComment) {
+        em.persist(taskComment);
     }
    
     

@@ -35,6 +35,10 @@ public class TaskCommentEJB {
         em.persist(taskComment);
     }
     
+    public void createTaskComment(TaskComment taskComment) {
+        em.persist(taskComment);
+    }
+    
     public void update(TaskComment taskComment) {
         em.merge(taskComment);
     }
