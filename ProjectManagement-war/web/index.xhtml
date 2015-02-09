@@ -9,15 +9,26 @@
     </h:head>
     <h:body>
         
+        Select where you want to go:
+            <br />
+            <h:link outcome="admin/index" value="To the admin section" /><br />
+            <h:link outcome="users/index" value="To the user section" />
+
         <ui:composition template="/layout/layout.xhtml">
             <ui:define name="content">
                 <h2>DashBoard</h2><br /><br />
                 <h:form>
                     <p>Dashboard Content</p>
                 </h:form>
+                Select where you want to go:
+            <br />
+            <h:link outcome="admin/index" value="To the admin section" /><br />
+            <h:link outcome="users/index" value="To the user section" />
+
             </ui:define>
+            
         </ui:composition>
-        
+
         <br />
         <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
     </h:body>

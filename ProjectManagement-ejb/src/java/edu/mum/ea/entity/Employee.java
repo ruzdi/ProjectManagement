@@ -33,7 +33,7 @@ public class Employee implements Serializable {
     private String email;
     
     @OneToOne(cascade = CascadeType.ALL)
-    private Username user;
+    private Users user;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
@@ -42,11 +42,11 @@ public class Employee implements Serializable {
 //        address = new Address();
     }
 
-    public Username getUser() {
+    public Users getUser() {
         return user;
     }
 
-    public void setUser(Username user) {
+    public void setUser(Users user) {
         this.user = user;
     }
     

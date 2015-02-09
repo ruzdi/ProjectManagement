@@ -8,7 +8,8 @@ package edu.mum.ea.mb;
 import edu.mum.ea.ejb.EmployeeEJB;
 import edu.mum.ea.entity.Address;
 import edu.mum.ea.entity.Employee;
-import edu.mum.ea.entity.Username;
+import edu.mum.ea.entity.EmployeeRole;
+import edu.mum.ea.entity.Users;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -28,24 +29,26 @@ public class EmployeeMB {
      */
     @EJB
     EmployeeEJB ejb;
+
     Employee employee;
     Address address;
-    Username user;
+    Users user;
+    EmployeeRole employeeRole;
+    private String username;
+//    private String username;
     
     List<Employee> employeeList;
     
-//    @PostConstruct
-//    public void init(){
-//        address = new Address();
-//    }
-    
     public EmployeeMB() {
-        user = new Username();
+        user = new Users();
         address = new Address();
         employee = new Employee();
+        employeeRole = new EmployeeRole();
+        
+        
         employee.setUser(user);
         employee.setAddress(address);
-//        
+        user.setEmployeeRole(employeeRole);
     }
 
     public Employee getEmployee() {
@@ -57,11 +60,15 @@ public class EmployeeMB {
     }
 
     public String create() {
+//        user.setPassword(username);
+        user.addRole(employeeRole);
         ejb.save(employee);
 
         return "employee-list";
     }
 
+    
+    
     public String delete(int employeeId) {
         employee = ejb.find(employeeId);
         ejb.delete(employee);
@@ -74,6 +81,10 @@ public class EmployeeMB {
 //        System.out.println("ID>>>>>>>>>>>>>>>>>>" + employee.getId());
         return "employee-update";
     }
+    
+    
+    
+//   
     
     public String update(){
 //        System.out.println("ID::::::::::::" + employee.getId());
@@ -88,5 +99,25 @@ public class EmployeeMB {
         return employeeList;
     }
 
+          
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    public void handleUsernameValidation(){
+      
+        if(ejb.findByUName(employee.getUser().getUsername())!=null)
+        {
+            setUsername("this name already exists");
+        }
+        else{
+        
+          setUsername("");
+        }
+    }
 }
 

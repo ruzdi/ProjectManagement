@@ -5,6 +5,7 @@
  */
 package edu.mum.ea.mb;
 
+import edu.mum.ea.ejb.ProductBacklogEJB;
 import edu.mum.ea.ejb.ProjectEJB;
 import edu.mum.ea.entity.ProductBacklog;
 import edu.mum.ea.entity.Project;
@@ -30,6 +31,8 @@ public class ProjectBacklogMB {
     
     @EJB
     private ProjectEJB projectEJB;
+    @EJB
+    private ProductBacklogEJB productBacklogEJB;
     //private ProjectBac
     /**
      * Creates a new instance of ProjectBacklogMB
@@ -76,6 +79,21 @@ public class ProjectBacklogMB {
         Map<String, Object> sessionMap =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
         sessionMap.put("pid", projectId);
         project = projectEJB.find(projectId);
+        return "/product-backlog/product-backlog-list";
+    }
+    
+     public String updatePrductBacklog(){ 
+        productBacklogEJB.edit(productBacklog);
+        return "/product-backlog/product-backlog-list";
+    }
+     
+    public String gotoUpdateBacklogPage(Long id){
+        productBacklog = productBacklogEJB.find(id);
+        return "/product-backlog/product-backlog-update";
+    }
+    
+     public String deletePrductBacklog(Long prductBacklogId){
+        productBacklogEJB.delete(prductBacklogId);
         return "/product-backlog/product-backlog-list";
     }
     
