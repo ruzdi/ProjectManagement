@@ -7,11 +7,13 @@ package edu.mum.ea.entity;
 
 import edu.mum.ea.entity.Employee;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -22,12 +24,27 @@ public class EmployeeRole implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String roleName;
-    
+        
 //    @ManyToOne
 //    private Employee employee;
+
     
+    @OneToOne
+    private Users user;
+
+    public EmployeeRole(){
+//        user = new Users();
+    }
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+       
     public String getRoleName() {
         return roleName;
     }
@@ -40,42 +57,36 @@ public class EmployeeRole implements Serializable {
         return serialVersionUID;
     }
     
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-//    public Employee getEmployee() {
-//        return employee;
-//    }
-//
-//    public void setEmployee(Employee employee) {
-//        this.employee = employee;
-//    }
-    
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 3;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof EmployeeRole)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        EmployeeRole other = (EmployeeRole) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final EmployeeRole other = (EmployeeRole) obj;
+        if (this.id != other.id) {
             return false;
         }
         return true;
     }
-
+    
+  
     @Override
     public String toString() {
         return "java.edu.mum.ea.entity.EmployeeRole[ id=" + id + " ]";

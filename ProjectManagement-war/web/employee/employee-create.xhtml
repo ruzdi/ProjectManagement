@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Create Employee</title>
 
@@ -27,19 +28,28 @@
                                              required="true" requiredMessage="The field is empty" validatorMessage=
                                              "String is not valid (only characters a-z A-Z)">
                                     <f:validateRegex pattern="[a-zA-Z]+"/>
+
+
+
                                 </h:inputText>
+
                                 <h:message for="addEmployeeName" errorStyle="color:red; display:block"/>
                             </div>
                             <div class="form-group">
                                 <label for="addEmployeeUsername">Username</label>
                                 <h:inputText class="form-control" id="addEmployeeUsername"  value="#{employeeMB.employee.user.username}" 
-                                             required="true" requiredMessage="Filled can not be empty"/>
+                                             required="true" requiredMessage="Filled can not be empty">
+
+                                    <p:ajax event="keyup" update="out" listener="#{employeeMB.handleUsernameValidation()}" />
+                                </h:inputText>
+
+                                <h:outputText id="out" value="#{employeeMB.username}" style="color:red; display:block"/>
                                 <h:message for="addEmployeeUsername" errorStyle="color:red; display:block"/>
                             </div>
                             <div class="form-group">
                                 <label for="addEmployeePassword">Password</label>
                                 <h:inputSecret class="form-control" id="addEmployeePassword"  value="#{employeeMB.employee.user.password}" 
-                                             required="true" requiredMessage="Filled can not be empty"/>
+                                               required="true" requiredMessage="Filled can not be empty"/>
                                 <h:message for="addEmployeePassword" errorStyle="color:red; display:block"/>
                             </div>
 
@@ -83,6 +93,18 @@
                                 <h:inputText class="form-control" id="addEmployeeZip"  value="#{employeeMB.employee.address.zip}" 
                                              required="true" requiredMessage="Filled can not be empty"/>
                                 <h:message for="addEmployeeZip" errorStyle="color:red; display:block"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="addEmployeeRole">Employee Role</label>
+
+                                <p:selectOneMenu id="addEmployeeRole" value="#{employeeMB.employee.user.employeeRole.roleName}" style="width:125px">
+                                    <f:selectItem itemLabel="Developer" itemValue="developer" />
+                                    <f:selectItem itemLabel="Admin" itemValue="admin"/>
+                                </p:selectOneMenu>
+<!--                                <h:inputText class="form-control" id="addEmployeeRole"  value="#{employeeMB.employee.user.employeeRole.roleName}" 
+                                             required="true" requiredMessage="Filled can not be empty"/>-->
+                                <h:message for="addEmployeeRole" errorStyle="color:red; display:block"/>
                             </div>
 
                             <h:commandButton action="#{employeeMB.create()}" value="Save" class="btn btn-info"/>

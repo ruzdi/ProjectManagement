@@ -10,7 +10,7 @@
     </h:head>
     <body>
         <ui:composition>
-            <!--<ui:define name="topMenu">-->
+<!--            <ui:define name="topMenu">-->
                 <nav class="navbar navbar-inverse navbar-fixed-top">
                     <div class="container-fluid">
                         <div class="navbar-header">
@@ -28,6 +28,9 @@
                                 <li><a href="#">Settings</a></li>
                                 <li><a href="#">Profile</a></li>
                                 <li><a href="#">Help</a></li>
+                                <li><h:outputLink value="/ProjectManagement-war/authentication/login.xhtml">Login</h:outputLink></li>
+                                <li><h:outputLink value="">Logout</h:outputLink></li>          
+                                            
                             </ul>
                             <form class="navbar-form navbar-right">
                                 <input type="text" class="form-control" placeholder="Search..." />

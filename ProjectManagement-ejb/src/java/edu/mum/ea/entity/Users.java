@@ -6,6 +6,8 @@
 package edu.mum.ea.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,26 +19,42 @@ import javax.persistence.OneToOne;
  * @author SyedAliAhmed
  */
 @Entity
-public class Username implements Serializable {
+public class Users implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private int id;
     private String username;
     private String password;
 
     @OneToOne(mappedBy = "user")
     private Employee employee;
-    
-    public Username(){}
-    
-    public int getId() {
-        return id;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private EmployeeRole employeeRole;
+
+    public EmployeeRole getEmployeeRole() {
+        return employeeRole;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setEmployeeRole(EmployeeRole employeeRole) {
+        this.employeeRole = employeeRole;
     }
+    
+    public void addRole(EmployeeRole employeeRole) {
+        this.employeeRole = employeeRole;
+        employeeRole.setUser(this);
+    }
+    
+    public Users(){}
+    
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     public String getUsername() {
         return username;
@@ -62,10 +80,6 @@ public class Username implements Serializable {
         this.employee = employee;
     }
 
-    
-    
-    
-    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -80,18 +94,21 @@ public class Username implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Username other = (Username) obj;
-        if (this.id != other.id) {
+        final Users other = (Users) obj;
+        if (!Objects.equals(this.username, other.username)) {
             return false;
         }
         return true;
     }
 
-   
-
     @Override
     public String toString() {
-        return "edu.mum.ea.entity.user[ id=" + id + " ]";
+        return "Users{" + "username=" + username +  ", employee=" + employee + ", employeeRole=" + employeeRole + '}';
     }
+
+    
+    
+    
+    
     
 }
