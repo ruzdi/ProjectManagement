@@ -6,6 +6,7 @@
 package edu.mum.ea.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -50,12 +51,13 @@ public class Task implements Serializable {
     private TaskCategory taskCategory;
 //    @ManyToOne
 //    private ProductBacklog productBacklog;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "task")
-//    private List<TaskComment> taskComments;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "task")
+    private List<TaskComment> taskComments;
 //    @OneToOne
 //    private Resource resource;
 
     public Task() {
+        taskComments = new ArrayList<TaskComment>();
     }
     
     public Task(String title, TaskCategory taskCategory) {
@@ -153,15 +155,20 @@ public class Task implements Serializable {
 //        this.productBacklog = productBacklog;
 //    }
 //
-//    public List<TaskComment> getTaskComment() {
-//        return taskComments;
-//    }
-//
-//    public void setTaskComment(TaskComment taskComment) {
-//        if(!this.taskComments.contains(taskComment)){
-//            this.taskComments.add(taskComment);
-//        }
-//    }
+
+    public List<TaskComment> getTaskComments() {
+        return taskComments;
+    }
+
+    public void setTaskComments(List<TaskComment> taskComments) {
+        this.taskComments = taskComments;
+    }
+    
+    public void addTaskComment(TaskComment taskComment) {
+        if(!this.taskComments.contains(taskComment)){
+            this.taskComments.add(taskComment);
+        }
+    }
     
     @Override
     public int hashCode() {

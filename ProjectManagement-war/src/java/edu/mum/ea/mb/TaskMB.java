@@ -6,9 +6,11 @@
 package edu.mum.ea.mb;
 
 import edu.mum.ea.ejb.TaskCategoryEJB;
+import edu.mum.ea.ejb.TaskCommentEJB;
 import edu.mum.ea.ejb.TaskEJB;
 import edu.mum.ea.entity.Task;
 import edu.mum.ea.entity.TaskCategory;
+import edu.mum.ea.entity.TaskComment;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -34,13 +36,21 @@ public class TaskMB {
     @EJB
     private TaskCategoryEJB taskCategoryEJB;
         
+    @EJB
+    private TaskCommentEJB taskCommentEJB;
+    
     private Task task;
     private List<Task> taskList;
     private List<TaskCategory> taskCategoryList;
     private int taskCategoryId;
     
+    private TaskComment taskComment;
+    
     @ManagedProperty(value = "#{taskCategory}")
     private TaskCategoryMB taskCategoryMB;
+        
+    @ManagedProperty(value = "#{taskCategory}")
+    private TaskCommentMB taskCommentMB;
     
     public TaskMB() {
         task = new Task();
@@ -57,6 +67,14 @@ public class TaskMB {
 
     public void setTaskCategoryMB(TaskCategoryMB taskCategoryMB) {
         this.taskCategoryMB = taskCategoryMB;
+    }
+
+    public TaskCommentMB getTaskCommentMB() {
+        return taskCommentMB;
+    }
+
+    public void setTaskCommentMB(TaskCommentMB taskCommentMB) {
+        this.taskCommentMB = taskCommentMB;
     }
     
     public Task getTask() {
@@ -85,7 +103,15 @@ public class TaskMB {
     public void setTaskCategoryList(List<TaskCategory> taskCategoryList) {
         this.taskCategoryList = taskCategoryList;
     }
-
+    
+    public TaskComment getTaskComment() {
+        return taskComment;
+    }
+    
+    public void setTaskComment(TaskComment TaskComment) {
+        this.taskComment = taskComment;
+    }
+    
     public int getTaskCategoryId() {
         return taskCategoryId;
     }
@@ -132,8 +158,13 @@ public class TaskMB {
         return "/task/task-list";
     }
     
+    public String createComment(){
+        this.task.setTaskCategory(taskCategoryEJB.find(new Long(this.taskCategoryId)));
+        taskEJB.create(task);
+        return "/task/task-list";
+    }  
+    
 }
-
 
 
 /*

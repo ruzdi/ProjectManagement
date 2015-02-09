@@ -22,7 +22,7 @@
                             <h:outputText value="#{taskCategory.id}" />
                         </p:column>
 
-                        <p:column headerText="Year">
+                        <p:column headerText="Name">
                             <h:outputText value="#{taskCategory.name}" />
                         </p:column>
 
@@ -31,9 +31,10 @@
                         </p:column>
 
                         <p:column headerText="Action">
-
-                            <h:commandButton class="btn btn-primary" action="#{taskCategoryMB.edit(taskCategory.id)}" value="Edit" /> &nbsp;
-                            <h:commandButton class="btn btn-danger" action="#{taskCategoryMB.delete(taskCategory.id)}" value="Delete" />
+                            <div class="btn-group btn-group-xs">
+                                <h:commandButton class="btn btn-warning" action="#{taskCategoryMB.edit(taskCategory.id)}" value="Edit" /> &nbsp;
+                                <h:commandButton class="btn btn-danger" action="#{taskCategoryMB.delete(taskCategory.id)}" value="Delete" />
+                            </div>
                         </p:column>
                     </p:dataTable>
                     

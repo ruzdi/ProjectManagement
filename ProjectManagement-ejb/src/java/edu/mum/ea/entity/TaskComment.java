@@ -7,10 +7,12 @@ package edu.mum.ea.entity;
 
 import edu.mum.ea.entity.Resource;
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -27,8 +29,10 @@ public class TaskComment implements Serializable {
     private Integer thumbsUp;
     private Integer thumbsDown;
     
-//    @ManyToOne
-//    private Task task;
+    @JoinColumn(nullable = true)
+    @ManyToOne(optional = true)
+    private Task task;
+    
 //    @ManyToOne
 //    private Resource resource;
     
@@ -71,15 +75,16 @@ public class TaskComment implements Serializable {
 //    public void setResource(Resource resource) {
 //        this.resource = resource;
 //    }
-//
-//    public Task getTask() {
-//        return task;
-//    }
-//
-//    public void setTask(Task task) {
-//        this.task = task;
-//    }
-//    
+//  
+    
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

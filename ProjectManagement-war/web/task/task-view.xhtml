@@ -56,12 +56,14 @@
                 
                 <h:form>
                     
+                   
                     <div class="form-group">
                         <label for="addTaskDetail">Comment</label>
-                        <h:inputTextarea class="form-control" id="addTaskDetail"  value="#{taskMB.task.detail}" />
-                        
-                        <h:commandButton action="#{taskMB.createComment()}" value="Save Comment" class="btn btn-info"/>
-                        
+                        <h:inputTextarea class="form-control" id="addTaskDetail"  value="#{taskCommentMB.taskComment.comment}" />                        
+                    </div>
+                    
+                    <div class="form-group">
+                        <h:commandButton action="#{taskCommentMB.create(taskMB.task.id)}" value="Save Comment" class="btn btn-info"/>
                     </div>
                     
                 </h:form>
