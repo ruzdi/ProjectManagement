@@ -19,30 +19,19 @@
                         
                         <h2>Project (Update)</h2>
                         <h:form>
-                            <h:inputHidden value="#{projectMB.project.id}" />
+                            <h:inputHidden value="#{projectBacklogMB.productBacklog.id}" />
                              
                             <div class="form-group">
                                 <label for="addProjectName">Name</label>
-                                <h:inputText class="form-control" id="addProjectName"  value="#{projectMB.project.name}" />
+                                <h:inputText class="form-control" id="addProjectName"  value="#{projectBacklogMB.productBacklog.title}" />
                             </div>
                             <div class="form-group">
                                 <label for="addProjectDetail">Detail</label>
-                                <h:inputTextarea class="form-control" id="addProjectDetail"  value="#{projectMB.project.detail}" />
+                                <h:inputTextarea class="form-control" id="addProjectDetail"  value="#{projectBacklogMB.productBacklog.details}" />
                             </div>
-                            <div class="form-group">
-                                <label for="addProjectStartDate">Start Date</label>
-                                <br/> 
-                                <p:calendar id="startdate" value="#{projectMB.project.startDate}" />  
-                            </div>
-                            <div class="form-group">
-                                <label for="addProjectEndDate">End Date</label>
-                                 <br/>
-                                 <p:calendar id="enddate" value="#{projectMB.project.endDate}" />
-                                
-                            </div>
-                            <h:commandButton action="#{projectMB.updateProject()}" value="Add" class="btn btn-info"/>
+      
+                            <h:commandButton action="#{projectBacklogMB.updatePrductBacklog()}" value="Update" class="btn btn-info"/>
                         </h:form>
-
 
                     </div>
                 </div>
