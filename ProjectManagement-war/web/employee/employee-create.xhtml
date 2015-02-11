@@ -26,8 +26,8 @@
                                 <label for="addEmployeeName">Name</label>
                                 <h:inputText class="form-control" id="addEmployeeName"  value="#{employeeMB.employee.name}" 
                                              required="true" requiredMessage="The field is empty" validatorMessage=
-                                             "String is not valid (only characters a-z A-Z)">
-                                    <f:validateRegex pattern="[a-zA-Z]+"/>
+                                             "String is not valid (only characters a-z A-Z and 0-9)">
+                                    <f:validateRegex pattern="[a-zA-Z0-9 ]+"/>
 
 
 
