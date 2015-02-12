@@ -5,12 +5,14 @@
  */
 package edu.mum.ea.ejb;
 
+import edu.mum.ea.entity.ProductBacklog;
 import edu.mum.ea.entity.Project;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
 /**
@@ -46,6 +48,13 @@ public class ProjectEJB {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Project.class));
         return (List<Project>)em.createQuery(cq).getResultList();
+    }
+    
+    public List<ProductBacklog> findProductBacklogList(long projectId) {
+        TypedQuery<ProductBacklog> query = em.createQuery("SELECT pb FROM ProductBacklog pb WHERE pb.project.id = :projectId", ProductBacklog.class);
+        query.setParameter("projectId", projectId);
+        return query.getResultList();
+        
     }
     
     
