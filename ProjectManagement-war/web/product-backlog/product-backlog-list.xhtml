@@ -12,8 +12,8 @@
         <ui:composition template="/layout/layout.xhtml">
             <ui:define name="content">   
                 <h2>Product Backlog List for (#{projectBacklogMB.project.name})</h2>
-
-                <h:dataTable value="#{projectBacklogMB.project.productBacklog}" var="productBacklog"
+                 <h:form>
+                    <h:dataTable value="#{projectBacklogMB.pbList}" var="productBacklog"
                              styleClass="table table-hover table-striped table-bordered"
                              headerClass=""
                              rowClasses="">
@@ -27,18 +27,16 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Action</f:facet>
-                        <h:form>
+                       
                             <div class="btn-group btn-group-xs">
                                 <h:commandButton class="btn btn-warning" action="#{projectBacklogMB.gotoUpdateBacklogPage(productBacklog.id)}" value="Edit" />
                                 <h:commandButton class="btn btn-danger" action="#{projectBacklogMB.deletePrductBacklog(productBacklog.id)}" value="Delete" />
                             </div>
-                        </h:form>
+                       
                     </h:column>
-                </h:dataTable>
-                <h:form>
+                    </h:dataTable>
                     <h:commandButton action="/product-backlog/product-backlog-create" value="Create" class="btn btn-info"/>
-
-                </h:form>
+                 </h:form>     
             </ui:define>
         </ui:composition>
 
