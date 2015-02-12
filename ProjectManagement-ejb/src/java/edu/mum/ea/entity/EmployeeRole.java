@@ -31,19 +31,19 @@ public class EmployeeRole implements Serializable {
 //    private Employee employee;
 
     
-    @OneToOne
-    private Users user;
+//    @OneToOne
+//    private Users user;
 
     public EmployeeRole(){
 //        user = new Users();
     }
-    public Users getUser() {
-        return user;
-    }
-
-    public void setUser(Users user) {
-        this.user = user;
-    }
+//    public Users getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(Users user) {
+//        this.user = user;
+//    }
        
     public String getRoleName() {
         return roleName;

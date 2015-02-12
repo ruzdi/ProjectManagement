@@ -47,7 +47,7 @@ public class EmployeeEJB {
         Users usernameOb = null;
 
         try {
-            query = em.createQuery("Select u from Username u where u.username=:userName", Users.class);
+            query = em.createQuery("Select u from Users u where u.username=:userName", Users.class);
             query.setParameter("userName", username);
             usernameOb = query.getSingleResult();
         } catch (Exception e) {

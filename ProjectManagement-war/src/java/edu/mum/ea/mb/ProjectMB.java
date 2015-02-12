@@ -10,6 +10,7 @@ import edu.mum.ea.ejb.ProjectEJB;
 import edu.mum.ea.entity.Project;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -23,6 +24,7 @@ import org.primefaces.event.SelectEvent;
  */
 @ManagedBean
 @RequestScoped
+@RolesAllowed("admin")
 public class ProjectMB {
 
     private Project project;
@@ -55,8 +57,14 @@ public class ProjectMB {
         this.projectList = projectList;
     }
     
+    
     public String createProject() {
-       projectEJB.save(project);
+        try {
+            projectEJB.save(project);     
+        } catch (Exception e) {
+//            return "/login";
+        }
+       
        return "project-list";
     }
     

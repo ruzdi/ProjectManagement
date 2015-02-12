@@ -30,11 +30,17 @@ public class Sprint implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    private String sprintName;
+    
     @Temporal(TemporalType.DATE)
     private Date startDate;
     
     @Temporal(TemporalType.DATE)
     private Date endDate;
+    
+    
+    
+//    private ProductBacklog productBacklog;
 //    
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "task")
 //    private List<Task> tasks;
@@ -49,7 +55,15 @@ public class Sprint implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
+    public String getSprintName() {
+        return sprintName;
+    }
+
+    public void setSprintName(String sprintName) {
+        this.sprintName = sprintName;
+    }
+        
     public Date getStartDate() {
         return startDate;
     }
@@ -57,17 +71,6 @@ public class Sprint implements Serializable {
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
-//
-//    public List<Task> getTasks() {
-//        return tasks;
-//    }
-//
-//    public void setTask(Task task) {
-//        if(!this.tasks.contains(task)){
-//            this.tasks.add(task);
-//        }
-//        
-//    }
 
     public Date getEndDate() {
         return endDate;
@@ -76,15 +79,7 @@ public class Sprint implements Serializable {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-//
-//    public ReleaseBacklog getReleaseBacklog() {
-//        return releaseBacklog;
-//    }
-//
-//    public void setReleaseBacklog(ReleaseBacklog releaseBacklog) {
-//        this.releaseBacklog = releaseBacklog;
-//    }
-//
+
     @Override
     public int hashCode() {
         int hash = 0;

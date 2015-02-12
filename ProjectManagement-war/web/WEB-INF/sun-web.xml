@@ -11,8 +11,15 @@
   
   <security-role-mapping>
         <role-name>admin</role-name>
-        <principal-name>admin</principal-name>
+<!--        <principal-name>admin</principal-name>-->
         <group-name>admin</group-name>
   </security-role-mapping>
+  
+  <security-role-mapping>
+        <role-name>developer</role-name>
+<!--        <principal-name>developer</principal-name>-->
+        <group-name>developer</group-name>
+  </security-role-mapping>
+  
 </sun-web-app>
 
