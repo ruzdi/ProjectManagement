@@ -30,8 +30,9 @@ public class ProductBacklogEJB {
         return em.find(ProductBacklog.class, id);
     }
     
-    public void delete(Long productBacklogId){
-        ProductBacklog productBacklog = find(productBacklogId);
+    public void delete(ProductBacklog productBacklog){
+        //ProductBacklog productBacklog = find(productBacklogId);
+        //System.out.println("============>>>>" + productBacklog.getProject().getName());
         em.remove(em.merge(productBacklog));        
     }
     
