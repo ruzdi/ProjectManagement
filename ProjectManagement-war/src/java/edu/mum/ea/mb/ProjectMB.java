@@ -8,15 +8,12 @@ package edu.mum.ea.mb;
 
 import edu.mum.ea.ejb.ProjectEJB;
 import edu.mum.ea.entity.Project;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
-import org.primefaces.event.SelectEvent;
+
 
 /**
  *
@@ -52,6 +49,10 @@ public class ProjectMB {
         projectList = projectEJB.findAll();
         return projectList;
     }
+    
+     public String showProjectList() {
+        return "/project-backlog/project-list";
+    }
 
     public void setProjectList(List<Project> projectList) {
         this.projectList = projectList;
@@ -59,6 +60,7 @@ public class ProjectMB {
     
     
     public String createProject() {
+
         try {
             projectEJB.save(project);     
         } catch (Exception e) {
@@ -69,21 +71,19 @@ public class ProjectMB {
     }
     
     public String gotoUpdatePage(Long id){
-        
-        project = projectEJB.find(id);
-           
-        return "project-update";
+        project = projectEJB.find(id);           
+        return "/project/project-update";
     }
     
     public String updateProject(){
         
         projectEJB.edit(project);
-        return "project-list";
+        return "/project/project-list";
     }
     
     public String deleteProject(Long projectId){
         projectEJB.delete(projectId);
-        return "project-list";
+        return "/project/project-list";
     }
     
    

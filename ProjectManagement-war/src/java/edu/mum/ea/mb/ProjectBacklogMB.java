@@ -9,9 +9,11 @@ import edu.mum.ea.ejb.ProductBacklogEJB;
 import edu.mum.ea.ejb.ProjectEJB;
 import edu.mum.ea.entity.ProductBacklog;
 import edu.mum.ea.entity.Project;
+import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
@@ -23,20 +25,17 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class ProjectBacklogMB {
     
-    //@ManagedProperty(value = "#{projectMB}")  
-    //private ProjectMB projectMB;
     private ProductBacklog productBacklog;
-    private Long projectId;
     private Project project;
+    private List<ProductBacklog> pbList;
     
+    @ManagedProperty(value="#{projectI}")
+    private ProjectI projectI;
     @EJB
     private ProjectEJB projectEJB;
     @EJB
     private ProductBacklogEJB productBacklogEJB;
-    //private ProjectBac
-    /**
-     * Creates a new instance of ProjectBacklogMB
-     */
+  
     public ProjectBacklogMB() {
         productBacklog = new ProductBacklog();
     }
@@ -56,14 +55,27 @@ public class ProjectBacklogMB {
     public void setProject(Project project) {
         this.project = project;
     }
-    
-    public Long getProjectId() {
-        return projectId;
+
+    public List<ProductBacklog> getPbList() {
+        Map<String, Object> sessionMap =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+        pbList = projectEJB.findProductBacklogList(Long.parseLong(sessionMap.get("pid").toString()));
+        return pbList;
     }
 
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
+    public void setPbList(List<ProductBacklog> pbList) {
+        this.pbList = pbList;
     }
+
+    public ProjectI getProjectI() {
+        return projectI;
+    }
+
+    public void setProjectI(ProjectI projectI) {
+        this.projectI = projectI;
+    }
+
+   
+    
        
     public String create() {
         Map<String, Object> sessionMap =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
@@ -82,7 +94,13 @@ public class ProjectBacklogMB {
         return "/product-backlog/product-backlog-list";
     }
     
-     public String updatePrductBacklog(){ 
+  
+     public String updatePrductBacklog(){
+        Map<String, Object> sessionMap =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+        project = projectEJB.find(Long.parseLong(sessionMap.get("pid").toString())); 
+        productBacklog.setProject(project);
+        productBacklog.setReleaseBacklogStatus(Boolean.FALSE);
+        productBacklog.setPriority(2);
         productBacklogEJB.edit(productBacklog);
         return "/product-backlog/product-backlog-list";
     }
@@ -93,9 +111,10 @@ public class ProjectBacklogMB {
     }
     
      public String deletePrductBacklog(Long prductBacklogId){
-        productBacklogEJB.delete(prductBacklogId);
+        productBacklog =  productBacklogEJB.find(prductBacklogId);
+        project = productBacklog.getProject();
+        productBacklogEJB.delete(productBacklog);
         return "/product-backlog/product-backlog-list";
-    }
-    
+    }   
     
 }
