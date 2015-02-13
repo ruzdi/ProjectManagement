@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 
@@ -31,10 +32,20 @@ public class ReleaseBacklogMB {
 
     private ReleaseBacklog releaseBckLg;
     
+   
+    
     @EJB
     private ReleaseBacklogEJB releaseBckLgEJB;
     
     private List<ReleaseBacklog> releaseBckLgList;
+    
+    @EJB
+    private ProjectEJB projectEJB;
+    
+    @ManagedProperty(value = "#{project}")
+    private List<Project> projectList;
+    private Long projectId;
+    
     /**
      * Creates a new instance of ProjectMB
      */
@@ -43,6 +54,14 @@ public class ReleaseBacklogMB {
        releaseBckLgList = new ArrayList<ReleaseBacklog>();
     }
 
+    public ReleaseBacklog getReleaseBckLg() {
+        return releaseBckLg;
+    }
+
+    public void setReleaseBckLg(ReleaseBacklog releaseBckLg) {
+        this.releaseBckLg = releaseBckLg;
+    }
+    
     public ReleaseBacklog getReleaseBacklog() {
         return releaseBckLg;
     }
@@ -59,8 +78,36 @@ public class ReleaseBacklogMB {
     public void setReleaseBacklogList(List<ReleaseBacklog> releaseBckLgList) {
         this.releaseBckLgList = releaseBckLgList;
     }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public List<ReleaseBacklog> getReleaseBckLgList() {
+        return releaseBckLgList;
+    }
+
+    public void setReleaseBckLgList(List<ReleaseBacklog> releaseBckLgList) {
+        this.releaseBckLgList = releaseBckLgList;
+    }
+
+    public List<Project> getProjectList() {
+        projectList = projectEJB.findAll();
+        return projectList;
+    }
+
+    public void setProjectList(List<Project> projectList) {
+        this.projectList = projectList;
+    }
     
+    
+        
     public String createReleaseBacklog() {
+        this.releaseBckLg.setProject(projectEJB.find(this.projectId));
             releaseBckLgEJB.save(releaseBckLg);     
        return "release-backlog-list";
     }

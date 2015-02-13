@@ -21,7 +21,7 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-@RolesAllowed("admin")
+//@RolesAllowed("admin")
 public class ProjectMB {
 
     private Project project;
@@ -83,7 +83,7 @@ public class ProjectMB {
     
     public String deleteProject(Long projectId){
         projectEJB.delete(projectId);
-        return "/project/project-list";
+        return "/project/project-list"; 
     }
     
    

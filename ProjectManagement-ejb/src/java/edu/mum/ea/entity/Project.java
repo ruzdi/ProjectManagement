@@ -40,6 +40,9 @@ public class Project implements Serializable {
 //    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<ProductBacklog> productBacklog;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true,  mappedBy = "project")
+    private List<ReleaseBacklog> releaseBacklogList;
 //    
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
 //    private Resource resource;
@@ -101,6 +104,16 @@ public class Project implements Serializable {
     public void setProductBacklog(List<ProductBacklog> productBacklog) {    
         this.productBacklog = productBacklog;
     }
+
+    public List<ReleaseBacklog> getReleaseBacklogList() {
+        return releaseBacklogList;
+    }
+
+    public void setReleaseBacklogList(List<ReleaseBacklog> releaseBacklogList) {
+        this.releaseBacklogList = releaseBacklogList;
+    }
+    
+    
 
 //
 //    public Resource getResource() {
