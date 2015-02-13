@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Release Backlog Update</title>
+        <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <ui:composition template="/layout/layout.xhtml">
+            <ui:define name="content">
+
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <h2>Release Backlog (Create)</h2>
+                        <h:form>
+                            <h:inputHidden value="#{releaseBacklogMB.releaseBacklog.id}" />
+
+                            <div class="form-group">
+                                <label for="addReleaseBacklogName">Release BackLog Name</label>
+
+                                <h:inputText class="form-control" id="addReleaseBacklogName"  value="#{releaseBacklogMB.releaseBacklog.releaseName}" 
+                                             required="true" requiredMessage="The field is empty" validatorMessage=
+                                             "String is not valid (only characters a-z A-Z and 0-9)">
+                                    <f:validateRegex pattern="[a-zA-Z0-9 ]+"/>
+                                </h:inputText>
+                                <h:message for="addReleaseBacklogName" errorStyle="color:red; display:block"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="addStartDate">Start Date</label>
+                                <br/>
+                                <p:calendar required="true" requiredMessage="Please fill the start Date first" 
+                                            id="addStartDate" value="#{releaseBacklogMB.releaseBacklog.startDate}"/>
+                                <h:message for="addStartDate" errorStyle="color:red; display:block"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="addEndDate">End Date</label>
+                                <br/>
+                                <p:calendar id="addEndDate" value="#{releaseBacklogMB.releaseBacklog.endDate}" required="true" 
+                                            requiredMessage="You need to fill up the end Date first"/>
+
+                                <h:message for="addEndDate" errorStyle="color:red; display:block"/>
+                            </div>
+                            <h:commandButton action="#{releaseBacklogMB.updateReleaseBacklog()}" value="Update" class="btn btn-info"/>
+                        </h:form>
+
+
+                    </div>
+                </div>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
