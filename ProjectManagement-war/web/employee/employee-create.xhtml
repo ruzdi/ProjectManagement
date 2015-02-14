@@ -98,11 +98,11 @@
                             <div class="form-group">
                                 <label for="addEmployeeRole">Employee Role</label>
 
-                                <p:selectOneMenu id="addEmployeeRole" value="#{employeeMB.employee.user.employeeRole.roleName}" style="width:125px">
+                                <p:selectOneMenu id="addEmployeeRole" value="#{employeeMB.employee.user.roleName}" style="width:125px">
                                     <f:selectItem itemLabel="Developer" itemValue="developer" />
                                     <f:selectItem itemLabel="Admin" itemValue="admin"/>
                                 </p:selectOneMenu>
-<!--                                <h:inputText class="form-control" id="addEmployeeRole"  value="#{employeeMB.employee.user.employeeRole.roleName}" 
+<!--                                <h:inputText class="form-control" id="addEmployeeRole"  value="#{employeeMB.employee.user.roleName}" 
                                              required="true" requiredMessage="Filled can not be empty"/>-->
                                 <h:message for="addEmployeeRole" errorStyle="color:red; display:block"/>
                             </div>

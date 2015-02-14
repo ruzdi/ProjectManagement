@@ -48,6 +48,9 @@ public class Project implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "employee_id"))
     private List<Employee> employeeList = new ArrayList<Employee>();
     
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true,  mappedBy = "project")
+    private List<ReleaseBacklog> releaseBacklogList;
+    
     public Long getId() {
         return id;
     }
@@ -95,6 +98,14 @@ public class Project implements Serializable {
     public void setProductBacklog(List<ProductBacklog> productBacklog) {    
         this.productBacklog = productBacklog;
     }
+    
+    public List<ReleaseBacklog> getReleaseBacklogList() {
+        return releaseBacklogList;
+    }
+
+    public void setReleaseBacklogList(List<ReleaseBacklog> releaseBacklogList) {
+        this.releaseBacklogList = releaseBacklogList;
+    }
 
     public List<Employee> getEmployeeList() {
         return employeeList;
@@ -111,7 +122,8 @@ public class Project implements Serializable {
             productBacklog.setProject(this);
         }
     }
-
+    
+    
 
     @Override
     public int hashCode() {

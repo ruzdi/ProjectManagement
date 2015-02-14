@@ -9,6 +9,7 @@ package edu.mum.ea.mb;
 import edu.mum.ea.ejb.ProjectEJB;
 import edu.mum.ea.entity.Project;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -20,6 +21,7 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
+//@RolesAllowed("admin")
 public class ProjectMB {
 
     private Project project;
@@ -56,9 +58,16 @@ public class ProjectMB {
         this.projectList = projectList;
     }
     
+    
     public String createProject() {
-       projectEJB.save(project);
-       return "/project/project-list";
+
+        try {
+            projectEJB.save(project);     
+        } catch (Exception e) {
+//            return "/login";
+        }
+       
+       return "project-list";
     }
     
     public String gotoUpdatePage(Long id){
@@ -74,7 +83,7 @@ public class ProjectMB {
     
     public String deleteProject(Long projectId){
         projectEJB.delete(projectId);
-        return "/project/project-list";
+        return "/project/project-list"; 
     }
     
    

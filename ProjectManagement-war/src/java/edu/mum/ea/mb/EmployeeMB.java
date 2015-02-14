@@ -33,7 +33,7 @@ public class EmployeeMB {
     Employee employee;
     Address address;
     Users user;
-    EmployeeRole employeeRole;
+//    EmployeeRole employeeRole;
     private String username;
 //    private String username;
     
@@ -43,12 +43,12 @@ public class EmployeeMB {
         user = new Users();
         address = new Address();
         employee = new Employee();
-        employeeRole = new EmployeeRole();
+//        employeeRole = new EmployeeRole();
         
         
         employee.setUser(user);
         employee.setAddress(address);
-        user.setEmployeeRole(employeeRole);
+//        user.setEmployeeRole(employeeRole);
     }
 
     public Employee getEmployee() {
@@ -61,7 +61,7 @@ public class EmployeeMB {
 
     public String create() {
 //        user.setPassword(username);
-        user.addRole(employeeRole);
+//        user.addRole(employeeRole);
         ejb.save(employee);
 
         return "employee-list";
