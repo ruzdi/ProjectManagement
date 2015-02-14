@@ -6,15 +6,15 @@
 package edu.mum.ea.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import javax.annotation.PostConstruct;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -37,6 +37,9 @@ public class Employee implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
+    
+    @ManyToMany(mappedBy = "employeeList")
+    private List<Project> projectList = new ArrayList<Project>();
 
     public void employee(){
 //        address = new Address();
@@ -100,6 +103,15 @@ public class Employee implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Project> getProjectList() {
+        return projectList;
+    }
+
+    public void setProjectList(List<Project> projectList) {
+        this.projectList = projectList;
+    }
+ 
 
     @Override
     public int hashCode() {
