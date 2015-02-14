@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Stateless
 @LocalBean
-//@RolesAllowed({"admin"})
+@RolesAllowed({"admin"})
 public class ProjectEJB {
 
     @PersistenceContext
@@ -57,13 +57,13 @@ public class ProjectEJB {
 //        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 //        System.out.println("" + ctx.isCallerInRole("admin"));
 //        System.out.println("" + ctx.isCallerInRole("developer"));
-//        if (request.isUserInRole("admin")) {
-//            System.out.println("admin");
+//        if (request.isUserInRole("developer")) {
+//            System.out.println("adminbb" );
+//            return null;
 //        } else {
 //            System.out.println("developer");
 //        }
-//        ctx.isCallerInRole("admin");
-//        ctx.isCallerInRole("developer");
+
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Project.class));
         return (List<Project>) em.createQuery(cq).getResultList();

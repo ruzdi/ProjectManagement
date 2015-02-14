@@ -31,6 +31,8 @@
             <web-resource-name>Protected Admin Area</web-resource-name>
             <description></description>
             <url-pattern>/admin/*</url-pattern>
+            <url-pattern>/employee/employee-create.jsf</url-pattern>
+            <url-pattern>/project/project-create.jsf</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
 <!--            <http-method>HEAD</http-method>

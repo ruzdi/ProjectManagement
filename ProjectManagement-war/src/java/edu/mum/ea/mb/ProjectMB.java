@@ -46,7 +46,12 @@ public class ProjectMB {
     }
 
     public List<Project> getProjectList() {
-        projectList = projectEJB.findAll();
+        try {
+             projectList = projectEJB.findAll();
+        } catch (Exception e) {
+            gotoLogin();
+        }
+       
         return projectList;
     }
     
@@ -64,7 +69,8 @@ public class ProjectMB {
         try {
             projectEJB.save(project);     
         } catch (Exception e) {
-//            return "/login";
+            gotoLogin();
+            return null;
         }
        
        return "project-list";
@@ -91,5 +97,10 @@ public class ProjectMB {
        return "success";
     }
     
+    
+    public String gotoLogin(){
+//        System.out.println("Go to Login");
+        return "/login";
+    }
 
 }

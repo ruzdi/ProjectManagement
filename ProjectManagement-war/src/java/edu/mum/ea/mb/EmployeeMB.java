@@ -11,10 +11,17 @@ import edu.mum.ea.entity.Employee;
 import edu.mum.ea.entity.EmployeeRole;
 import edu.mum.ea.entity.Users;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.security.auth.login.LoginContext;
+import javax.security.auth.login.LoginException;
+import javax.servlet.http.HttpSession;
+import org.jboss.weld.servlet.SessionHolder;
 
 /**
  *
@@ -33,22 +40,29 @@ public class EmployeeMB {
     Employee employee;
     Address address;
     Users user;
+//    @
+//    LoginContext lc;
 //    EmployeeRole employeeRole;
     private String username;
 //    private String username;
-    
+
     List<Employee> employeeList;
-    
+
     public EmployeeMB() {
         user = new Users();
         address = new Address();
         employee = new Employee();
 //        employeeRole = new EmployeeRole();
-        
-        
+
         employee.setUser(user);
         employee.setAddress(address);
-//        user.setEmployeeRole(employeeRole);
+//        try {
+//            lc = new LoginContext("asd");
+//            lc.l
+////        user.setEmployeeRole(employeeRole);
+//        } catch (LoginException ex) {
+//            Logger.getLogger(EmployeeMB.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     public Employee getEmployee() {
@@ -67,39 +81,32 @@ public class EmployeeMB {
         return "employee-list";
     }
 
-    
-    
     public String delete(int employeeId) {
         employee = ejb.find(employeeId);
         ejb.delete(employee);
-        
+
         return "employee-list";
     }
 
     public String gotoUpdatePage(int id) {
-        employee =  ejb.find(id);
+        employee = ejb.find(id);
 //        System.out.println("ID>>>>>>>>>>>>>>>>>>" + employee.getId());
         return "employee-update";
     }
-    
-    
-    
+
 //   
-    
-    public String update(){
+    public String update() {
 //        System.out.println("ID::::::::::::" + employee.getId());
         ejb.edit(employee);
-        
+
         return "employee-list";
     }
 
-    
-      public List<Employee> getEmployeeList() {
+    public List<Employee> getEmployeeList() {
         employeeList = ejb.findAll();
         return employeeList;
     }
 
-          
     public String getUsername() {
         return username;
     }
@@ -107,17 +114,14 @@ public class EmployeeMB {
     public void setUsername(String username) {
         this.username = username;
     }
-    
-    public void handleUsernameValidation(){
-      
-        if(ejb.findByUName(employee.getUser().getUsername())!=null)
-        {
+
+    public void handleUsernameValidation() {
+
+        if (ejb.findByUName(employee.getUser().getUsername()) != null) {
             setUsername("this name already exists");
-        }
-        else{
-        
-          setUsername("");
+        } else {
+
+            setUsername("");
         }
     }
 }
-
