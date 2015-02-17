@@ -29,12 +29,7 @@
                                 <li><a href="#">Settings</a></li>
                                 <li><a href="#">Profile</a></li>
                                 <li><a href="#">Help</a></li>
-                                <!--<li><h:outputLink value="/ProjectManagement-war/users/login.xhtml">Login</h:outputLink></li>-->
-                                
-                                <li><h:commandButton class="btn btn-danger" action="#{authorizationMB.login()}" rendered="#{authorizationMB.loggedOut}" value="login" /></li>
-                            
-                                <li><h:commandButton class="btn btn-danger" action="#{authorizationMB.logout()}" rendered="#{authorizationMB.loggedIn}" value="logout" /></li>           
-                            </ul>
+                             </ul>
                             <form class="navbar-form navbar-right">
                                 <input type="text" class="form-control" placeholder="Search..." />
                             </form>

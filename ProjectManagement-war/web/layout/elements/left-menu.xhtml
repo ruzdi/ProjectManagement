@@ -16,16 +16,18 @@
                     </ul>
                     <ul class="nav nav-sidebar">
                         <li class="active1"><a href="/ProjectManagement-war/employee/employee-list.jsf">Employee</a></li>
-                        <li><a href="/ProjectManagement-war/employee/employee-create.jsf">Create Employee</a></li>
+                        <li class="active1"><a href="/ProjectManagement-war/employee/employee-create.jsf">Create Employee</a></li>
+<!--                        <li><h:link value="Create Employee" outcome="/employee/employee-create" rendered="#{authorizationMB.loginAsAdmin}"></h:link></li>-->
                     </ul>
                     <ul class="nav nav-sidebar">
                         <li><a href="/ProjectManagement-war/project/project-list.jsf">Project</a></li>
-                        <li><a href="/ProjectManagement-war/project/project-create.jsf">Create Project</a></li>
+                        <li><h:link value="Create Project" outcome="/project/project-create" rendered="#{authorizationMB.loginAsAdmin}"></h:link></li>
                         <li><a href="/ProjectManagement-war/project/project-employee.jsf">Project Employee List</a></li>
                     </ul>
                     <ul class="nav nav-sidebar">
                         <li><a href="/ProjectManagement-war/release-backlog/release-backlog-list.jsf">Release Backlog</a></li>
-                        <li><a href="/ProjectManagement-war/release-backlog/release-backlog-create.jsf">Create Release Backlog</a></li>
+                        <li><h:link value="Create Release Backlog" outcome="/release-backlog/release-backlog-create" rendered="#{authorizationMB.loginAsAdmin}"></h:link></li>
+                      
                     </ul>
                     <ul class="nav nav-sidebar">
                         <li><a href="/ProjectManagement-war/sprint/sprint-list.jsf">Sprint</a></li>
@@ -33,9 +35,9 @@
                     </ul>
                     <ul class="nav nav-sidebar">
                         <li><a href="/ProjectManagement-war/task/task-list.jsf">Task</a></li>
-                        <li><a href="/ProjectManagement-war/task/task-create.jsf">Create Task</a></li>
+                        <li><h:link value="Create Task" outcome="/task/task-create" rendered="#{authorizationMB.loginAsAdmin}"></h:link></li>
                         <li><a href="/ProjectManagement-war/task-category/task-category-list.jsf">Task Category</a></li>
-                        <li><a href="/ProjectManagement-war/task-category/task-category-create.jsf">Create Task Category</a></li>
+                        <li><h:link value="Create Task Category" outcome="/task-category/task-category-create" rendered="#{authorizationMB.loginAsAdmin}"></h:link></li>
                         <!--<li><a href="/ProjectManagement-war/task/manage-comments.jsf">Manage Comments</a></li>-->
                     </ul>
                 </h:form>

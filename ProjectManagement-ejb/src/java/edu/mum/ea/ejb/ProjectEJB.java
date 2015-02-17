@@ -9,6 +9,7 @@ import edu.mum.ea.entity.ProductBacklog;
 import edu.mum.ea.entity.Project;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
@@ -38,11 +39,11 @@ public class ProjectEJB {
     public void save(Project project) {
         em.persist(project);
     }
-
+    @PermitAll
     public void edit(Project project) {
         em.merge(project);
     }
-
+    @PermitAll
     public Project find(Long id) {
         return em.find(Project.class, id);
     }
@@ -52,7 +53,7 @@ public class ProjectEJB {
 
         em.remove(em.merge(project));
     }
-
+    @PermitAll
     public List<Project> findAll() {
 //        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 //        System.out.println("" + ctx.isCallerInRole("admin"));

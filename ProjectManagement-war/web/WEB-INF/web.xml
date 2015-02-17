@@ -31,8 +31,15 @@
             <web-resource-name>Protected Admin Area</web-resource-name>
             <description></description>
             <url-pattern>/admin/*</url-pattern>
-            <url-pattern>/employee/employee-create.jsf</url-pattern>
+            <!--<url-pattern>/employee/employee-create.jsf</url-pattern>-->
             <url-pattern>/project/project-create.jsf</url-pattern>
+            <url-pattern>/sprint/sprint-create.jsf</url-pattern>
+            <url-pattern>/project/project-list.jsf</url-pattern>
+            <url-pattern>/employee/employee-list.jsf</url-pattern>
+            <url-pattern>/release-backlog/release-backlog-list.jsf</url-pattern>
+            <url-pattern>/sprint/sprint-list.jsf</url-pattern>
+            <url-pattern>/task/task-list.jsf</url-pattern>
+            <url-pattern>/task-category/task-category-list.jsf</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
 <!--            <http-method>HEAD</http-method>
@@ -56,6 +63,14 @@
             <web-resource-name>None Protected User Area</web-resource-name>
             <description/>
             <url-pattern>/users/*</url-pattern>
+            <url-pattern>/project/project-list.jsf</url-pattern>
+            <url-pattern>/sprint/sprint-create.jsf</url-pattern>
+            <url-pattern>/project/project-list.jsf</url-pattern>
+            <url-pattern>/employee/employee-list.jsf</url-pattern>
+            <url-pattern>/release-backlog/release-backlog-list.jsf</url-pattern>
+            <url-pattern>/sprint/sprint-list.jsf</url-pattern>
+            <url-pattern>/task/task-list.jsf</url-pattern>
+            <url-pattern>/task-category/task-category-list.jsf</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
 <!--            <http-method>HEAD</http-method>
