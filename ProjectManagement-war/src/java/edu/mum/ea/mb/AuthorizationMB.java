@@ -33,7 +33,6 @@ public class AuthorizationMB {
         if (session != null) {
             session.invalidate();
         }
-//        System.out.println("logout");
 
         return "index";
     }
@@ -47,19 +46,32 @@ public class AuthorizationMB {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         return !request.isUserInRole("developer") && !request.isUserInRole("admin");
     }
+
     public boolean isLoginAsAdmin() {
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        return request.isUserInRole("admin");
+        try {
+            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            return request.isUserInRole("admin");
+        } catch (Exception e) {
+            System.out.println("testAdmin");
+
+        }
+        return false;
     }
 
     public boolean isLoginAsDeveloper() {
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        return request.isUserInRole("developer");
+        try {
+            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            return request.isUserInRole("developer");
+
+        } catch (Exception e) {
+            System.out.println("testDeveloper");
+        }
+        return false;
     }
 
     public String login() {
 //        System.out.println("test");
-        
+
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
         if (session != null) {
