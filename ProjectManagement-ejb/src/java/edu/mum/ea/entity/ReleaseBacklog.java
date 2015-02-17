@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,10 +27,15 @@ public class ReleaseBacklog implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    private String releaseName;
+    
     @Temporal(TemporalType.DATE)
     private Date startDate;
     @Temporal(TemporalType.DATE)
     private Date endDate;
+    
+    @ManyToOne(optional = true)
+    private Project project;
     
 //    @OneToMany(mappedBy = "releaseBacklog")
 //    private ProductBacklog productBacklog;
@@ -41,6 +47,18 @@ public class ReleaseBacklog implements Serializable {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getReleaseName() {
+        return releaseName;
+    }
+
+    public void setReleaseName(String releaseName) {
+        this.releaseName = releaseName;
+    }
+    
     public Date getStartDate() {
         return startDate;
     }
@@ -56,6 +74,16 @@ public class ReleaseBacklog implements Serializable {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+    
+    
 
 //    public ProductBacklog getProductBacklog() {
 //        return productBacklog;

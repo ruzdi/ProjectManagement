@@ -5,31 +5,31 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Sprint Title</title>
+        <title>Release BackLog Title</title>
         <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
          <ui:composition template="/layout/layout.xhtml">
             <ui:define name="content">   
-                <h2>Sprint (List)</h2>
+                <h2>Release BackLog (List)</h2>
 
-                <h:dataTable value="#{sprintMB.sprintList}" var="sprint"
+                <h:dataTable value="#{releaseBacklogMB.releaseBacklogList}" var="releaseBckLg"
                              styleClass="table table-hover table-striped table-bordered"
                              headerClass=""
                              rowClasses="">
                     <h:column>    				
-                        <f:facet name="header">Sprint Name</f:facet>    				
-                            #{sprint.sprintName}
+                        <f:facet name="header">Release BackLog Name</f:facet>    				
+                            #{releaseBckLg.releaseName}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Start Date</f:facet>
-                        <h:outputText value="#{sprint.startDate}" >
+                        <h:outputText value="#{releaseBckLg.startDate}" >
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">End Date</f:facet>
-                        <h:outputText value="#{sprint.endDate}" >
+                        <h:outputText value="#{releaseBckLg.endDate}" >
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
                     </h:column>
@@ -37,8 +37,8 @@
                         <f:facet name="header">Action</f:facet>
                         <h:form>
                             <div class="btn-group btn-group-xs">
-                                <h:commandButton class="btn btn-warning" action="#{sprintMB.gotoUpdatePage(sprint.id)}" value="Edit" />
-                                <h:commandButton class="btn btn-danger" action="#{sprintMB.deleteProject(sprint.id)}" value="Delete" />
+                                <h:commandButton class="btn btn-warning" action="#{releaseBacklogMB.gotoUpdatePage(releaseBckLg.id)}" value="Edit" />
+                                <h:commandButton class="btn btn-danger" action="#{releaseBacklogMB.deleteReleaseBacklog(releaseBckLg.id)}" value="Delete" />
                               
                             </div>
                         </h:form>

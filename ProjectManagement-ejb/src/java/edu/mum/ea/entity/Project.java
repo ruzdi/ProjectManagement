@@ -6,6 +6,7 @@
 package edu.mum.ea.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -13,6 +14,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,14 +39,17 @@ public class Project implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date endDate;
     
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-//    private List<Sprint> sprints;
-//    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<ProductBacklog> productBacklog;
-//    
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-//    private Resource resource;
+
+    @ManyToMany
+    @JoinTable(name = "project_employee", joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id"))
+    private List<Employee> employeeList = new ArrayList<Employee>();
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true,  mappedBy = "project")
+    private List<ReleaseBacklog> releaseBacklogList;
     
     public Long getId() {
         return id;
@@ -88,34 +95,35 @@ public class Project implements Serializable {
         return productBacklog;
     }
 
-//    public List<Sprint> getSprints() {
-//        return sprints;
-//    }
-//
-//    public void setSprint(Sprint sprint) {
-//        if(!this.sprints.contains(sprint)){
-//            this.sprints.add(sprint);
-//        }
-//    }
-//
     public void setProductBacklog(List<ProductBacklog> productBacklog) {    
         this.productBacklog = productBacklog;
     }
+    
+    public List<ReleaseBacklog> getReleaseBacklogList() {
+        return releaseBacklogList;
+    }
 
-//
-//    public Resource getResource() {
-//        return resource;
-//    }
-//
-//    public void setResource(Resource resource) {
-//        this.resource = resource;
-//    }
+    public void setReleaseBacklogList(List<ReleaseBacklog> releaseBacklogList) {
+        this.releaseBacklogList = releaseBacklogList;
+    }
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
+    
+
     public void addBacklog(ProductBacklog productBacklog) {
         if(!this.productBacklog.contains(productBacklog)){
             this.productBacklog.add(productBacklog);
             productBacklog.setProject(this);
         }
     }
+    
+    
 
     @Override
     public int hashCode() {

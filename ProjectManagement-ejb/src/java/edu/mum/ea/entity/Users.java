@@ -26,35 +26,36 @@ public class Users implements Serializable {
 //    private int id;
     private String username;
     private String password;
+    private String roleName;
 
     @OneToOne(mappedBy = "user")
     private Employee employee;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private EmployeeRole employeeRole;
-
-    public EmployeeRole getEmployeeRole() {
-        return employeeRole;
-    }
-
-    public void setEmployeeRole(EmployeeRole employeeRole) {
-        this.employeeRole = employeeRole;
-    }
-    
-    public void addRole(EmployeeRole employeeRole) {
-        this.employeeRole = employeeRole;
-        employeeRole.setUser(this);
-    }
-    
-    public Users(){}
-    
-//    public int getId() {
-//        return id;
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+//    private EmployeeRole employeeRole;
+//
+//    public EmployeeRole getEmployeeRole() {
+//        return employeeRole;
 //    }
 //
-//    public void setId(int id) {
-//        this.id = id;
+//    public void setEmployeeRole(EmployeeRole employeeRole) {
+//        this.employeeRole = employeeRole;
 //    }
+    
+//    public void addRole(EmployeeRole employeeRole) {
+//        this.employeeRole = employeeRole;
+//        employeeRole.setUser(this);
+//    }
+    
+    public Users(){}
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
     public String getUsername() {
         return username;
@@ -103,7 +104,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "Users{" + "username=" + username +  ", employee=" + employee + ", employeeRole=" + employeeRole + '}';
+        return "Users{" + "username=" + username +  ", employee=" + employee +  '}';
     }
 
     
