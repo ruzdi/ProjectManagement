@@ -25,8 +25,8 @@
             <h:link outcome="admin/index" value="To the admin section" /><br />
             <h:link outcome="users/index" value="To the user section" />
             <h:form>
-                
-                <!--<h:commandButton action="e"-->
+                <h:link outcome="login" value="Login" rendered="#{authorizationMB.loggedOut}"/>
+                <h:commandButton class="btn btn-danger" action="#{authorizationMB.logout()}" rendered="#{authorizationMB.loggedIn}" value="logout" />
             </h:form>
                 
 
