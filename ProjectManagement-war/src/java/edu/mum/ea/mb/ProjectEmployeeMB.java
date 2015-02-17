@@ -84,13 +84,20 @@ public class ProjectEmployeeMB {
     public void addEmployeeToProject() {
         Project prj = projectEJB.find(getProjectId());
         List<Employee> eList = prj.getEmployeeList();
-
-        for (Employee e : eList) {
-            eList.remove(e);
+        int size  = eList.size();
+        for (int i = 0; i < size; i++) {
+            eList.remove(eList.get(i));
+            size--;
+            --i;
         }
+//        for (Employee e : eList) {
+//            eList.remove(e);
+//        }
         
         for (String emplpyeeId : selectedEmp) {
-           prj.getEmployeeList().add(employeeEJB.find(Integer.parseInt(emplpyeeId)));
+           if (!eList.contains(employeeEJB.find(Integer.parseInt(emplpyeeId)))) {
+                prj.getEmployeeList().add(employeeEJB.find(Integer.parseInt(emplpyeeId)));
+           }
         }
         
         projectEJB.edit(prj);
