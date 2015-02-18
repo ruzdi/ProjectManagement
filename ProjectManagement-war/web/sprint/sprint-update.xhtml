@@ -21,6 +21,13 @@
                             <h:inputHidden value="#{sprintMB.sprint.id}" />
                             
                             <div class="form-group">
+                                <h:selectOneMenu value="#{sprintMB.relBacklogId}">
+                                    <f:selectItem itemLabel="Select One" itemValue="" />
+                                    <f:selectItems value="#{sprintMB.releaseBacklogList}" var="release" itemLabel="#{release.releaseName}" 
+                                                   itemValue="#{release.id}" />
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="form-group">
                                 <label for="addSprintName">Sprint Name</label>
                                 
                                 <h:inputText class="form-control" id="addSprintName"  value="#{sprintMB.sprint.sprintName}" 
