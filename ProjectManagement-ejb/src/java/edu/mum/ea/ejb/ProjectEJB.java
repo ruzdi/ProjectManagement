@@ -15,6 +15,7 @@ import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.ejb.SessionContext;
 import javax.faces.context.FacesContext;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -28,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 @Stateless
 @LocalBean
 @RolesAllowed({"admin"})
+@Interceptors(LoggingInterceptor.class)
 public class ProjectEJB {
 
     @PersistenceContext
