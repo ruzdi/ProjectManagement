@@ -39,12 +39,14 @@
                                              required="true" requiredMessage="Filled can not be empty"/>
                                 <h:message for="addEmployeeUsername" errorStyle="color:red; display:block"/>
                             </div>
-                            <div class="form-group">
+                            <h:inputHidden value="#{employeeMB.employee.user.password}" />
+                            <h:inputHidden value="#{employeeMB.employee.gender}" />
+<!--                            <div class="form-group">
                                 <label for="addEmployeePassword">Password</label>
                                 <h:inputSecret class="form-control" id="addEmployeePassword"  value="#{employeeMB.employee.user.password}" 
                                              required="true" requiredMessage="Filled can not be empty"/>
                                 <h:message for="addEmployeePassword" errorStyle="color:red; display:block"/>
-                            </div>
+                            </div>-->
 
                             <div class="form-group">
                                 <label for="addEmployeeEmail">Email</label>
@@ -87,6 +89,8 @@
                                              required="true" requiredMessage="Filled can not be empty"/>
                                 <h:message for="addEmployeeZip" errorStyle="color:red; display:block"/>
                             </div>
+                            
+                            <h:inputHidden value="#{employeeMB.employee.user.roleName}" />
 
                             <h:commandButton action="#{employeeMB.update()}" value="Update" class="btn btn-info"/>
                         </h:form>

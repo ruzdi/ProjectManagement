@@ -21,6 +21,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 /**
  *
@@ -41,8 +43,11 @@ public class Task implements Serializable {
     @Column(nullable=true)
     @Temporal(TemporalType.DATE)
     private Date endDate;
+    @Max(value = 3, message = "Maximum can be 3")
     private Integer duration;
+    @Max(value = 3, message = "Maximum can be 3")
     private Integer priority;
+    @Max(value = 3, message = "Maximum can be 3")
     private Integer status;
 //    @ManyToOne
 //    private Sprint sprint;

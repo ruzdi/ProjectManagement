@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -47,8 +48,8 @@ public class Project implements Serializable {
     @JoinTable(name = "project_employee", joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "employee_id"))
     private List<Employee> employeeList = new ArrayList<Employee>();
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true,  mappedBy = "project")
+    //Fetch Type eager will be changed it is for temporary work
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true,  mappedBy = "project", fetch = FetchType.EAGER)
     private List<ReleaseBacklog> releaseBacklogList;
     
     public Long getId() {
