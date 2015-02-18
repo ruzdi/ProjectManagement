@@ -52,6 +52,14 @@
                                                required="true" requiredMessage="Filled can not be empty"/>
                                 <h:message for="addEmployeePassword" errorStyle="color:red; display:block"/>
                             </div>
+                            
+                            <div class="form-group">
+                                <label for="addEmployeeGender">Gender</label>&nbsp;
+                                <p:selectOneMenu id="addEmployeeGender" value="#{employeeMB.employee.gender}" required="true" requiredMessage="field is empty">
+                                    <f:selectItems value="#{utilityMB.genders}" />
+                                </p:selectOneMenu>
+                                <h:message for="addEmployeeGender" errorStyle="color:red; display:block"/>
+                            </div>
 
                             <div class="form-group">
                                 <label for="addEmployeeEmail">Email</label>
@@ -96,11 +104,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="addEmployeeRole">Employee Role</label>
+                                <label for="addEmployeeRole">Employee Role</label>&nbsp;
 
-                                <p:selectOneMenu id="addEmployeeRole" value="#{employeeMB.employee.user.roleName}" style="width:125px">
-                                    <f:selectItem itemLabel="Developer" itemValue="developer" />
-                                    <f:selectItem itemLabel="Admin" itemValue="admin"/>
+                                <p:selectOneMenu id="addEmployeeRole" value="#{employeeMB.employee.user.roleName}">
+                                    <!--                                    <f:selectItem itemLabel="Developer" itemValue="developer" />
+                                                                        <f:selectItem itemLabel="Admin" itemValue="admin"/>-->
+
+                                    <f:selectItems value="#{utilityMB.userRoles}"/>
                                 </p:selectOneMenu>
 <!--                                <h:inputText class="form-control" id="addEmployeeRole"  value="#{employeeMB.employee.user.roleName}" 
                                              required="true" requiredMessage="Filled can not be empty"/>-->

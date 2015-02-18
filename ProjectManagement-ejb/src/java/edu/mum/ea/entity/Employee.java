@@ -29,8 +29,9 @@ public class Employee implements Serializable {
     private int id;
     
     private String name;
-    private String designation;
+    private String designation; 
     private String email;
+    private String gender;
     
     @OneToOne(cascade = CascadeType.ALL)
     private Users user;
@@ -61,10 +62,15 @@ public class Employee implements Serializable {
     public int getId() {
         return id;
     }
-    
-    
-   
-    
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+       
     public Address getAddress() {
         return address;
     }
