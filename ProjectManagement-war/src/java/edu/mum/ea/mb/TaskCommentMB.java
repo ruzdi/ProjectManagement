@@ -72,14 +72,12 @@ public class TaskCommentMB {
     
     public String create(){
         Long taskId = 1l;//getTaskMB().getTask().getId();
-        System.out.println("========= Current Task Id ::: "+taskId);
+
         taskCommentEJB.create(taskId, taskComment);
-        return "success";
-        //return "/task/task-view";
+        return "success?faces-redirect=true";
     }
     
     void createComment(Task myTask, String comment) {
-        System.out.println("========= Current Task Id ::: "+myTask+ "  =======    Comment: "+comment );
         taskComment.setComment(comment);
         taskComment.setTask(myTask);
         taskCommentEJB.createTaskComment(taskComment);

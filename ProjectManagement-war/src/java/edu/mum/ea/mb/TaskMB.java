@@ -147,45 +147,45 @@ public class TaskMB {
     public String create(){
         this.task.setTaskCategory(taskCategoryEJB.find(new Long(this.taskCategoryId)));
         taskEJB.create(task);
-        return "/task/task-list";
+        return "/task/task-list?faces-redirect=true";
     }    
     
     public String view(int id){
         this.task = taskEJB.find(new Long(id));
         this.getSessionMB().setUserSelectedTask(task);
-        return "/task/task-view";
+        return "/task/task-view?faces-redirect=true";
     }
     
     public String edit(int id){
         this.task = taskEJB.find(new Long(id));
         this.setTaskCategoryId(Integer.parseInt(this.task.getTaskCategory().getId()+""));
-        return "/task/task-update";
+        return "/task/task-update?faces-redirect=true";
     }
     
     public String update(){
         this.task.setTaskCategory(taskCategoryEJB.find(new Long(this.taskCategoryId)));
         taskEJB.update(this.task);
-        return "/task/task-list";
+        return "/task/task-list?faces-redirect=true";
     }
     
     public String delete(int id){
         taskEJB.delete(new Long(id));
-        return "/task/task-list";
+        return "/task/task-list?faces-redirect=true";
     }
     
     public String find(int id){
         this.task = taskEJB.find(new Long(id));
-        return "/task/task-list";
+        return "/task/task-list?faces-redirect=true";
     }
     
     public String findAll(){
         taskList = taskEJB.findAll();
-        return "/task/task-list";
+        return "/task/task-list?faces-redirect=true";
     }
     
     public String createComment(){
         Task myTask = taskEJB.find(task.getId());     
-        System.out.println("===================== Task "+ task+ "   ============  New Task " +myTask+ "  ==============  Comment "+this.comment);
+//        System.out.println("===================== Task "+ task+ "   ============  New Task " +myTask+ "  ==============  Comment "+this.comment);
         
         TaskComment myTaskComment = new TaskComment();
         myTaskComment.setComment(this.comment);
@@ -193,7 +193,7 @@ public class TaskMB {
         taskEJB.createComment(myTaskComment);
 
         this.task = myTask;
-        return "/task/task-view";
+        return "/task/task-view?faces-redirect=true";
     }  
     
 //    public String createComment(long id, String comment){
