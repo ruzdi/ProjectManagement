@@ -20,9 +20,9 @@ public class LoggingInterceptor {
     
     @AroundInvoke
     private Object logMethod(InvocationContext ic) throws Exception {
-        logger.entering("Intercepting ------>"+ic.getTarget().toString(), ic.getMethod().getName());
+        logger.entering(ic.getTarget().toString(), ic.getMethod().getName());
         try {
-            System.out.println(ic.getMethod().getName());
+            System.out.println("Intercepting ------>"+ic.getMethod().getName());
             return ic.proceed();
         } finally {
             logger.exiting(ic.getTarget().toString(), ic.getMethod().getName());
