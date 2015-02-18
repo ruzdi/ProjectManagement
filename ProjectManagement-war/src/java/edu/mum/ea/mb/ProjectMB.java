@@ -12,6 +12,7 @@ import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 
@@ -29,6 +30,9 @@ public class ProjectMB {
     @EJB
     private ProjectEJB projectEJB;
     
+    @ManagedProperty(value="#{sessionMB}")
+    private SessionMB sessionMB;
+    
     private List<Project> projectList;
     /**
      * Creates a new instance of ProjectMB
@@ -36,6 +40,16 @@ public class ProjectMB {
     public ProjectMB() {
         project = new Project();
     }
+
+    public SessionMB getSessionMB() {
+        return sessionMB;
+    }
+
+    public void setSessionMB(SessionMB sessionMB) { 
+        this.sessionMB = sessionMB;
+    }
+    
+    
 
     public Project getProject() {
         return project;
@@ -68,6 +82,7 @@ public class ProjectMB {
 
         try {
             projectEJB.save(project);     
+            sessionMB.populateUserProjectList();
         } catch (Exception e) {
             gotoLogin();
             return null;
@@ -84,11 +99,13 @@ public class ProjectMB {
     public String updateProject(){
         
         projectEJB.edit(project);
+        sessionMB.populateUserProjectList();
         return "/project/project-list";
     }
     
     public String deleteProject(Long projectId){
         projectEJB.delete(projectId);
+        sessionMB.populateUserProjectList();
         return "/project/project-list"; 
     }
     

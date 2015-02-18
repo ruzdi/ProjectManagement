@@ -3,7 +3,9 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <title>Project Management</title>
@@ -11,8 +13,8 @@
     <body>
         <ui:composition>
             <h:form>
-<!--            <ui:define name="topMenu">-->
-                <nav class="navbar navbar-inverse navbar-fixed-top">
+                <!--            <ui:define name="topMenu">-->
+                <nav class="navbar navbar-default navbar-fixed-top">
                     <div class="container-fluid">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -21,7 +23,18 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="#">Project name <i>#{sessionMB.userSelectedTask.title}</i></a>
+                            <a class="navbar-brand" href="#">
+                                <h:form>
+                                    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                                        <p:selectOneMenu id="userSelectedProject" value="#{sessionMB.userSelectedProjectId}" valueChangeListener="#{sessionMB.setUserSelectedProjectOnChange}" onchange="submit()" >
+                                            <f:selectItem itemLabel="Select Project" itemValue="" />
+                                            <f:selectItems value="#{sessionMB.userProjectList}" var="project" itemLabel="#{project.name}" itemValue="#{project.id}"  />
+                                        </p:selectOneMenu>
+                                        <h:message for="userSelectedProject" errorStyle="color:red; display:block"/>
+                                    </h:panelGrid>
+                                </h:form>
+
+                            </a>
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav navbar-right">
@@ -29,14 +42,14 @@
                                 <li><a href="#">Settings</a></li>
                                 <li><a href="#">Profile</a></li>
                                 <li><a href="#">Help</a></li>
-                             </ul>
+                            </ul>
                             <form class="navbar-form navbar-right">
                                 <input type="text" class="form-control" placeholder="Search..." />
                             </form>
                         </div>
                     </div>
                 </nav>    
-            <!--</ui:define>-->
+                <!--</ui:define>-->
             </h:form>
         </ui:composition>
     </body>

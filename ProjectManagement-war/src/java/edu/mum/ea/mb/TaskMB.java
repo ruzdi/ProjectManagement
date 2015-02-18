@@ -22,49 +22,50 @@ import javax.faces.bean.RequestScoped;
  *
  * @author MdRuzdi
  */
-@ManagedBean(name="taskMB")
+@ManagedBean(name = "taskMB")
 @RequestScoped
 public class TaskMB {
 
     /**
      * Creates a new instance of TaskMB
      */
-    
     @EJB
     private TaskEJB taskEJB;
-    
+
     @EJB
     private TaskCategoryEJB taskCategoryEJB;
-        
+
     @EJB
     private TaskCommentEJB taskCommentEJB;
-    
+
     private Task task;
     private List<Task> taskList;
     private List<TaskCategory> taskCategoryList;
     private int taskCategoryId;
-    
+
     private TaskComment taskComment;
-    
+
     private String comment;
-    
-    @ManagedProperty(value = "#{taskCategory}")
+
+    @ManagedProperty(value = "#{taskCategoryMB}")
     private TaskCategoryMB taskCategoryMB;
-        
-    @ManagedProperty(value = "#{taskCategory}")
+
+    @ManagedProperty(value = "#{taskCcommentMB}")
     private TaskCommentMB taskCommentMB;
-    
-        
+
     @ManagedProperty(value = "#{sessionMB}")
     private SessionMB sessionMB;
-    
+
+    @ManagedProperty(value = "#{emailMB}")
+    private EmailMB emailMB;
+
     public TaskMB() {
         task = new Task();
     }
-    
+
     @PostConstruct
     private void init() {
-        
+
     }
 
     public TaskCategoryMB getTaskCategoryMB() {
@@ -90,7 +91,7 @@ public class TaskMB {
     public void setSessionMB(SessionMB sessionMB) {
         this.sessionMB = sessionMB;
     }
-    
+
     public Task getTask() {
         return task;
     }
@@ -117,15 +118,15 @@ public class TaskMB {
     public void setTaskCategoryList(List<TaskCategory> taskCategoryList) {
         this.taskCategoryList = taskCategoryList;
     }
-    
+
     public TaskComment getTaskComment() {
         return taskComment;
     }
-    
+
     public void setTaskComment(TaskComment TaskComment) {
         this.taskComment = taskComment;
     }
-    
+
     public int getTaskCategoryId() {
         return taskCategoryId;
     }
@@ -141,52 +142,62 @@ public class TaskMB {
     public void setComment(String comment) {
         this.comment = comment;
     }
-    
-    
-    
-    public String create(){
+
+    public EmailMB getEmailMB() {
+        return emailMB;
+    }
+
+    public void setEmailMB(EmailMB emailMB) {
+        this.emailMB = emailMB;
+    }
+
+    public String create() {
         this.task.setTaskCategory(taskCategoryEJB.find(new Long(this.taskCategoryId)));
         taskEJB.create(task);
+        this.sendTaskEmail("Task Created", "A new task is <b>created</b>.");
         return "/task/task-list";
-    }    
-    
-    public String view(int id){
+    }
+
+    public String view(int id) {
         this.task = taskEJB.find(new Long(id));
         this.getSessionMB().setUserSelectedTask(task);
         return "/task/task-view";
     }
-    
-    public String edit(int id){
+
+    public String edit(int id) {
         this.task = taskEJB.find(new Long(id));
-        this.setTaskCategoryId(Integer.parseInt(this.task.getTaskCategory().getId()+""));
+        this.setTaskCategoryId(Integer.parseInt(this.task.getTaskCategory().getId() + ""));
         return "/task/task-update";
     }
-    
-    public String update(){
+
+    public String update() {
         this.task.setTaskCategory(taskCategoryEJB.find(new Long(this.taskCategoryId)));
         taskEJB.update(this.task);
+        this.sendTaskEmail("Task Updated", "A task information is <b>updated</b>.");
         return "/task/task-list";
     }
-    
-    public String delete(int id){
+
+    public String delete(int id) {
+        this.task = taskEJB.find(new Long(id));
+        this.sendTaskEmail("Task Deleted", "A task has been <b>deleted</b>.");
         taskEJB.delete(new Long(id));
         return "/task/task-list";
     }
-    
-    public String find(int id){
+
+    public String find(int id) {
         this.task = taskEJB.find(new Long(id));
         return "/task/task-list";
     }
-    
-    public String findAll(){
+
+    public String findAll() {
         taskList = taskEJB.findAll();
         return "/task/task-list";
     }
-    
-    public String createComment(){
-        Task myTask = taskEJB.find(task.getId());     
-        System.out.println("===================== Task "+ task+ "   ============  New Task " +myTask+ "  ==============  Comment "+this.comment);
-        
+
+    public String createComment() {
+        Task myTask = taskEJB.find(task.getId());
+        System.out.println("===================== Task " + task + "   ============  New Task " + myTask + "  ==============  Comment " + this.comment);
+
         TaskComment myTaskComment = new TaskComment();
         myTaskComment.setComment(this.comment);
         myTaskComment.setTask(myTask);
@@ -194,8 +205,33 @@ public class TaskMB {
 
         this.task = myTask;
         return "/task/task-view";
-    }  
-    
+    }
+
+    public void sendTaskEmail(String actionString, String actionMessage) {
+        try {
+            this.emailMB.setEmailTo("ruzdibd@gmail.com");
+            this.emailMB.setEmailSubject("PM Team :: " + actionString + " :: " + task.getTitle());
+            this.emailMB.setEmailBody(
+                    "Dear AAA, <br /><br />"
+                    + actionString + "<br /><br />"
+                    + "Please take a look at this task detail : <br /><br />"
+                    + "<b>Title</b> :  " + task.getTitle() + "<br /><br />"
+                    + "<b>Category</b> :  " + task.getTaskCategory().getName() + "<br /><br />"
+                    + "<b>Start Date</b> :  " + task.getStartDate() + "<br /><br />"
+                    + "<b>End Date</b> :  " + task.getEndDate() + "<br /><br />"
+                    + "<b>Duration</b> :  " + task.getDuration() + "<br /><br />"
+                    + "<b>Priority</b> :  " + task.getPriority() + "<br /><br />"
+                    + "<b>Status</b> :  " + task.getStatus() + "<br /><br />"
+                    + "<b>Detail</b> :  " + task.getDetail() + "<br /><br />"
+                    + "Thanks<br /><br/>"
+                    + "Admin of Project Management Team"
+            );
+            this.emailMB.sendEmail();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 //    public String createComment(long id, String comment){
 //        Task myTask = taskEJB.find(id);        
 //        System.out.println("===================== Task "+ myTask+ "  ==============  Comment "+comment);
@@ -208,7 +244,6 @@ public class TaskMB {
 //        this.task = myTask;
 //        return "/task/task-view";
 //    }  
-    
 }
 
 
