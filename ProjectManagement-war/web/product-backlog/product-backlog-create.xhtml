@@ -29,11 +29,21 @@
                             </div>-->
                             <div class="form-group">
                                 <label for="addProjectName">Name</label>
-                                <h:inputText class="form-control" id="addProducBacklogName"  value="#{projectBacklogMB.productBacklog.title}" />
+                                <h:inputText class="form-control" id="addProducBacklogName"  value="#{projectBacklogMB.productBacklog.title}" 
+                                             required="true" requiredMessage="The field is empty" validatorMessage=
+                                             "String is not valid (only characters a-z A-Z and 0-9)">
+                                    <f:validateRegex pattern="[a-zA-Z0-9 ]+"/>
+                                </h:inputText>
+                                <h:message for="addProducBacklogName" errorStyle="color:red; display:block"/>
                             </div>
                             <div class="form-group">
                                 <label for="addProjectDetail">Detail</label>
-                                <h:inputTextarea class="form-control" id="addProuctBacklogDetail"  value="#{projectBacklogMB.productBacklog.details}" />
+                                <h:inputTextarea class="form-control" id="addProuctBacklogDetail"  value="#{projectBacklogMB.productBacklog.details}" 
+                                             required="true" requiredMessage="The field is empty" validatorMessage=
+                                             "String is not valid (only characters a-z A-Z 0-9)">
+                                    <f:validateRegex pattern="[a-zA-Z0-9 -_]+"/>
+                                </h:inputTextarea>
+                                <h:message for="addProuctBacklogDetail" errorStyle="color:red; display:block"/>
                             </div>
 
                             <h:commandButton action="#{projectBacklogMB.create()}" value="Add" class="btn btn-info"/>
