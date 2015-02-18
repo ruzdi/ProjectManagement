@@ -54,6 +54,10 @@ public class TaskMB {
     @ManagedProperty(value = "#{taskCategory}")
     private TaskCommentMB taskCommentMB;
     
+        
+    @ManagedProperty(value = "#{sessionMB}")
+    private SessionMB sessionMB;
+    
     public TaskMB() {
         task = new Task();
     }
@@ -77,6 +81,14 @@ public class TaskMB {
 
     public void setTaskCommentMB(TaskCommentMB taskCommentMB) {
         this.taskCommentMB = taskCommentMB;
+    }
+
+    public SessionMB getSessionMB() {
+        return sessionMB;
+    }
+
+    public void setSessionMB(SessionMB sessionMB) {
+        this.sessionMB = sessionMB;
     }
     
     public Task getTask() {
@@ -140,6 +152,7 @@ public class TaskMB {
     
     public String view(int id){
         this.task = taskEJB.find(new Long(id));
+        this.getSessionMB().setUserSelectedTask(task);
         return "/task/task-view";
     }
     
