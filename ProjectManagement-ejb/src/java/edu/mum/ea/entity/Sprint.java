@@ -45,8 +45,8 @@ public class Sprint implements Serializable {
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "task")
 //    private List<Task> tasks;
 //    
-//    @ManyToOne
-//    private ReleaseBacklog releaseBacklog;
+    @ManyToOne
+    private ReleaseBacklog releaseBacklog;
 //    
     public Long getId() {
         return id;
@@ -79,6 +79,16 @@ public class Sprint implements Serializable {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+    public ReleaseBacklog getReleaseBacklog() {
+        return releaseBacklog;
+    }
+
+    public void setReleaseBacklog(ReleaseBacklog releaseBacklog) {
+        this.releaseBacklog = releaseBacklog;
+    }
+    
+    
 
     @Override
     public int hashCode() {
