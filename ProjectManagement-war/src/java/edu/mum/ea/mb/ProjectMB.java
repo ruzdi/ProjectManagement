@@ -70,7 +70,7 @@ public class ProjectMB {
     }
     
      public String showProjectList() {
-        return "/project-backlog/project-list";
+        return "/project-backlog/project-list?faces-redirect=true";
     }
 
     public void setProjectList(List<Project> projectList) {
@@ -89,7 +89,7 @@ public class ProjectMB {
             return gotoLogin();
         }
        
-       return "project-list";
+       return "project-list?faces-redirect=true";
     }
     
     public String gotoUpdatePage(Long id){
@@ -112,9 +112,8 @@ public class ProjectMB {
         }
         projectEJB.delete(projectId);
         sessionMB.populateUserProjectList();
-        return "/project/project-list"; 
+        return "/project/project-list?faces-redirect=true"; 
     }
-    
    
     public String projectItem() {
        return "success";
@@ -122,7 +121,7 @@ public class ProjectMB {
     
     
     public String gotoLogin(){
-        return "/login";
+        return "/login?faces-redirect=true";
     }
 
 }

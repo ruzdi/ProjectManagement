@@ -78,28 +78,25 @@ public class EmployeeMB {
 //        user.addRole(employeeRole);
         ejb.save(employee);
 
-        return "employee-list";
+        return "employee-list?faces-redirect=true";
     }
 
     public String delete(int employeeId) {
         employee = ejb.find(employeeId);
         ejb.delete(employee);
 
-        return "employee-list";
+        return "employee-list?faces-redirect=true";
     }
 
     public String gotoUpdatePage(int id) {
         employee = ejb.find(id);
-//        System.out.println("ID>>>>>>>>>>>>>>>>>>" + employee.getId());
-        return "employee-update";
+        return "employee-update?faces-redirect=true";
     }
 
-//   
     public String update() {
-//        System.out.println("ID::::::::::::" + employee.getId());
         ejb.edit(employee);
 
-        return "employee-list";
+        return "employee-list?faces-redirect=true";
     }
 
     public List<Employee> getEmployeeList() {
@@ -118,7 +115,7 @@ public class EmployeeMB {
     public void handleUsernameValidation() {
 
         if (ejb.findByUName(employee.getUser().getUsername()) != null) {
-            setUsername("this name already exists");
+            setUsername("This name already exists");
         } else {
 
             setUsername("");

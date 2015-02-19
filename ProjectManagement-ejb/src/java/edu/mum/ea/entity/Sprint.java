@@ -5,7 +5,6 @@
  */
 package edu.mum.ea.entity;
 
-import edu.mum.ea.entity.Project;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -37,17 +38,14 @@ public class Sprint implements Serializable {
     
     @Temporal(TemporalType.DATE)
     private Date endDate;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="SPRINT_TASK", joinColumns=@JoinColumn(name="SPRINT_ID"), inverseJoinColumns=@JoinColumn(name="TASK_ID"))
+    private List<Task> tasks;
     
-    
-    
-//    private ProductBacklog productBacklog;
-//    
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "task")
-//    private List<Task> tasks;
-//    
     @ManyToOne
     private ReleaseBacklog releaseBacklog;
-//    
+    
     public Long getId() {
         return id;
     }
@@ -87,8 +85,14 @@ public class Sprint implements Serializable {
     public void setReleaseBacklog(ReleaseBacklog releaseBacklog) {
         this.releaseBacklog = releaseBacklog;
     }
-    
-    
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     @Override
     public int hashCode() {

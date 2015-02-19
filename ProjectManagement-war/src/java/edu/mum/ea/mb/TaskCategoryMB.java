@@ -63,34 +63,34 @@ public class TaskCategoryMB {
     
     public String create(){
         taskCategoryEJB.create(taskCategory);
-        return "/task-category/task-category-list";
+        return "/task-category/task-category-list?faces-redirect=true";
     }
     
     
     public String edit(int id){
         this.taskCategory = taskCategoryEJB.find(new Long(id));
-        return "/task-category/task-category-update";
+        return "/task-category/task-category-update?faces-redirect=true";
     }
     
     
     public String update(){
         taskCategoryEJB.update(this.taskCategory);
-        return "/task-category/task-category-list";
+        return "/task-category/task-category-list?faces-redirect=true";
     }
     
     
     public String delete(int id){
         taskCategoryEJB.delete(new Long(id));
-        return "/task-category/task-category-list";
+        return "/task-category/task-category-list?faces-redirect=true";
     }
     
     public String find(){    
-        return "/task-category/task-category/-list";
+        return "/task-category/task-category/-list?faces-redirect=true";
     }
     
     
     public String findAll(){    
-        return "/task-category/task-category/-list";
+        return "/task-category/task-category/-list?faces-redirect=true";
     }
     
     

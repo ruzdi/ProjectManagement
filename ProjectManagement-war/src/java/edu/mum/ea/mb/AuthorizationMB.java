@@ -34,7 +34,7 @@ public class AuthorizationMB {
             session.invalidate();
         }
 
-        return "index";
+        return "index?faces-redirect=true";
     }
 
     public boolean isLoggedIn() {
@@ -77,7 +77,7 @@ public class AuthorizationMB {
         if (session != null) {
             session.invalidate();
         }
-        return "login";
+        return "login?faces-redirect=true";
     }
 
 }
