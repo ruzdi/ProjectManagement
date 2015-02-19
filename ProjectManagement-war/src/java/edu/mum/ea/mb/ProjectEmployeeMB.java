@@ -16,6 +16,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 /**
@@ -38,6 +39,9 @@ public class ProjectEmployeeMB {
     
     @EJB
     private TaskEJB taskEJB;
+    
+    @ManagedProperty(value = "#{sessionMB}")
+    private SessionMB sessionMB;
     
     private List<Task> tasks = new ArrayList<Task>();
     /**
@@ -97,6 +101,14 @@ public class ProjectEmployeeMB {
     public void setSelectedEmp(List<String> selectedEmp) {
         this.selectedEmp = selectedEmp;
     }
+
+    public SessionMB getSessionMB() {
+        return sessionMB;
+    }
+
+    public void setSessionMB(SessionMB sessionMB) {
+        this.sessionMB = sessionMB;
+    }
     
     public void addEmployeeToProject() {
         Project prj = projectEJB.find(getProjectId());
@@ -111,6 +123,26 @@ public class ProjectEmployeeMB {
 //            eList.remove(e);
 //        }
         
+        for (String emplpyeeId : selectedEmp) {
+           if (!eList.contains(employeeEJB.find(Integer.parseInt(emplpyeeId)))) {
+                prj.getEmployeeList().add(employeeEJB.find(Integer.parseInt(emplpyeeId)));
+           }
+        }
+        
+        projectEJB.edit(prj);
+            
+    }
+    
+    public void addEmployeeToProject1() {
+        Project prj = projectEJB.find(sessionMB.getUserSelectedProject().getId());
+        List<Employee> eList = prj.getEmployeeList();
+        int size  = eList.size();
+        for (int i = 0; i < size; i++) {
+            eList.remove(eList.get(i));
+            size--;
+            --i;
+        }
+
         for (String emplpyeeId : selectedEmp) {
            if (!eList.contains(employeeEJB.find(Integer.parseInt(emplpyeeId)))) {
                 prj.getEmployeeList().add(employeeEJB.find(Integer.parseInt(emplpyeeId)));
