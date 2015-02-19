@@ -41,10 +41,8 @@ public class ReleaseBacklogEJB {
         return em.find(ReleaseBacklog.class, id);
     }
     
-    public void delete(Long releaseBckLgId){
-        ReleaseBacklog releaseBckLg = find(releaseBckLgId);
-        
-        em.remove(em.merge(releaseBckLg));        
+    public void delete(ReleaseBacklog releaseBckLg){
+        em.remove(releaseBckLg);        
     }
     
     public List<ReleaseBacklog> findAll() {

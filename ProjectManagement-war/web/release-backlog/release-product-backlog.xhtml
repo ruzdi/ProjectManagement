@@ -13,21 +13,20 @@
                 
                 <div class="row">
                     <div class="col-md-6">
-                        <br />
-                        <h2>Release Detail</h2>
+                        <h2>Release Backlog Detail</h2>
                         <h:form>
+                            <br />
                             <div class="form-group">
                                 <h:outputText value="#{releaseBacklogMB.releaseBacklog.releaseName}" />
                             </div>
-                            <br />
                             <div class="form-group">
-                                <h:selectManyCheckbox value="#{releaseBacklogMB.selectedPrdBacklog}">
-                                    <f:selectItems value="#{releaseBacklogMB.productBacklogList}"  var="prdBacklog" itemLabel="#{prdBacklog.title}" itemValue="#{prdBacklog.id}" />
+                                <h:selectManyCheckbox value="#{releaseBacklogMB.selectedPrdBacklog}" class="table table-hover table-striped">
+                                    <f:selectItems value="#{sessionMB.userSelectedProject.productBacklog}"  var="prdBacklog" itemLabel="#{prdBacklog.title}" itemValue="#{prdBacklog.id}" />
                                 </h:selectManyCheckbox>
                                 
                             </div>
                             <h:inputHidden value="#{releaseBacklogMB.releaseBacklog.id}" />
-                            <h:commandButton value="Add" action="#{releaseBacklogMB.addProductBacklog()}" />
+                            <h:commandButton class="btn btn-info" value="Save" action="#{releaseBacklogMB.addProductBacklog()}" />
                         </h:form>
                     </div>
                 </div>

@@ -14,49 +14,46 @@
         <ui:composition template="/layout/layout.xhtml">
             <ui:define name="content">   
                 <h2>Project (List)</h2>
+                <h:form>
+                    <h:commandLink class="btn btn-primary" action="/project/project-create?redirect=ture" value="Create Project" /><br /><br />
 
-                <h:dataTable value="#{projectMB.projectList}" var="project"
-                             styleClass="table table-hover table-striped table-bordered"
-                             headerClass=""
-                             rowClasses="">
-                    <h:column>    				
-                        <f:facet name="header">Name</f:facet>    				
-                            #{project.name}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Detail</f:facet>
-                            #{project.detail}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Start Date</f:facet>
-                        <h:outputText value="#{project.startDate}" >
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">End Date</f:facet>
-                        <h:outputText value="#{project.endDate}" >
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Action</f:facet>
-                        <h:form>
+                    <h:dataTable value="#{projectMB.projectList}" var="project"
+                                 styleClass="table table-hover table-striped table-bordered"
+                                 headerClass=""
+                                 rowClasses="">
+                        <h:column>    				
+                            <f:facet name="header">Name</f:facet>    				
+                                #{project.name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Detail</f:facet>
+                                #{project.detail}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Start Date</f:facet>
+                            <h:outputText value="#{project.startDate}" >
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">End Date</f:facet>
+                            <h:outputText value="#{project.endDate}" >
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Action</f:facet>
+
                             <div class="btn-group btn-group-xs">
                                 <h:commandButton class="btn btn-warning" action="#{projectMB.gotoUpdatePage(project.id)}" value="Edit" />
                                 <h:commandButton class="btn btn-danger" action="#{projectMB.deleteProject(project.id)}" value="Delete" />
                                 <h:commandButton class="btn btn-primary" action="#{projectBacklogMB.getBacklogList(project.id)}" value="Product Backlog List" />
                             </div>
-                        </h:form>
-                    </h:column>
-                </h:dataTable>
 
-                <!--                <h:form>
-                                    <p:growl id="growl" showDetail="true" />
-                                    <p:commandButton value="Select Car" class="btn btn-default" actionListener="# {dfView.chooseCar}" >
-                                                <p:ajax event="dialogReturn" listener="# {dfView.onCarChosen}" update="growl" />
-                                            </p:commandButton>
-                                </h:form>-->
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+                
             </ui:define>
         </ui:composition>
 

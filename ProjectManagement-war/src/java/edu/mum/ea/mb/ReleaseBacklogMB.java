@@ -5,7 +5,6 @@
  */
 package edu.mum.ea.mb;
 
-
 import edu.mum.ea.ejb.ProductBacklogEJB;
 import edu.mum.ea.ejb.ProjectEJB;
 import edu.mum.ea.ejb.ReleaseBacklogEJB;
@@ -24,8 +23,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-
-
 /**
  *
  * @author Syed
@@ -36,37 +33,45 @@ import javax.faces.context.FacesContext;
 public class ReleaseBacklogMB {
 
     private ReleaseBacklog releaseBckLg;
-    
-   
-    
+
     @EJB
     private ReleaseBacklogEJB releaseBckLgEJB;
-    
+
     private List<ReleaseBacklog> releaseBckLgList;
-    
+
     @EJB
     private ProjectEJB projectEJB;
-    
+
     @EJB
     private ProductBacklogEJB productBacklogEJB;
-    
-    @ManagedProperty(value = "#{project}")
+
+    @ManagedProperty(value = "#{sessionMB}")
+    private SessionMB sessionMB;
+
     private List<Project> projectList;
     private Long projectId;
     private List<ProductBacklog> productBacklogList = new ArrayList<ProductBacklog>();
     private List<String> selectedPrdBacklog = new ArrayList<String>();
+
     /**
      * Creates a new instance of ProjectMB
      */
     public ReleaseBacklogMB() {
-       releaseBckLg = new ReleaseBacklog();
-       releaseBckLgList = new ArrayList<ReleaseBacklog>();
+        releaseBckLg = new ReleaseBacklog();
+        releaseBckLgList = new ArrayList<ReleaseBacklog>();
     }
-    
+
     @PostConstruct
     public void init() {
-        Map<String, Object> sessionMap =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        productBacklogList = projectEJB.findProductBacklogList(Long.parseLong(sessionMap.get("pid").toString()));
+        //productBacklogList = sessionMB.getUserSelectedProject().getProductBacklog();
+    }
+
+    public SessionMB getSessionMB() {
+        return sessionMB;
+    }
+
+    public void setSessionMB(SessionMB sessionMB) {
+        this.sessionMB = sessionMB;
     }
 
     public ReleaseBacklog getReleaseBckLg() {
@@ -76,7 +81,7 @@ public class ReleaseBacklogMB {
     public void setReleaseBckLg(ReleaseBacklog releaseBckLg) {
         this.releaseBckLg = releaseBckLg;
     }
-    
+
     public ReleaseBacklog getReleaseBacklog() {
         return releaseBckLg;
     }
@@ -86,7 +91,7 @@ public class ReleaseBacklogMB {
     }
 
     public List<ReleaseBacklog> getReleaseBacklogList() {
-        releaseBckLgList = releaseBckLgEJB.findAll();
+        releaseBckLgList = sessionMB.getUserSelectedProject().getReleaseBacklogList();
         return releaseBckLgList;
     }
 
@@ -134,67 +139,61 @@ public class ReleaseBacklogMB {
     public void setSelectedPrdBacklog(List<String> selectedPrdBacklog) {
         this.selectedPrdBacklog = selectedPrdBacklog;
     }
-            
+
     public String createReleaseBacklog() {
-        this.releaseBckLg.setProject(projectEJB.find(this.projectId));
-        releaseBckLgEJB.save(releaseBckLg);     
+        this.releaseBckLg.setProject(this.sessionMB.getUserSelectedProject());
+        releaseBckLgEJB.save(releaseBckLg);
+        sessionMB.populateUserProjectList();
         return "release-backlog-list";
     }
-    
-    public String gotoUpdatePage(Long id){
+
+    public String gotoUpdatePage(Long id) {
         releaseBckLg = releaseBckLgEJB.find(id);
-        try {
-            setProjectId(releaseBckLg.getProject().getId());
-        } catch(Exception e) {
-        }
-        
         return "release-backlog-update";
     }
-    
-    public String updateReleaseBacklog(){
-        try {
-            Project project = projectEJB.find(getProjectId());
-            releaseBckLg.setProject(project);
-        } catch (Exception e) {
-            
-        }
+
+    public String updateReleaseBacklog() {
+        releaseBckLg.setProject(this.sessionMB.getUserSelectedProject());
         releaseBckLgEJB.edit(releaseBckLg);
+        sessionMB.populateUserProjectList();
         return "release-backlog-list";
     }
-    
-    public String deleteReleaseBacklog(Long releaseBckLgId){
-       releaseBckLgEJB.delete(releaseBckLgId);
-       return "release-backlog-list";
+
+    public String deleteReleaseBacklog(Long releaseBckLgId) {
+        ReleaseBacklog releaseBckLg = releaseBckLgEJB.find(releaseBckLgId);
+        releaseBckLgEJB.delete(releaseBckLg);
+        sessionMB.populateUserProjectList();
+        return "release-backlog-list";
     }
-    
+
     public String viewReleaseBacklog(Long releaseBckLgId) {
         releaseBckLg = releaseBckLgEJB.find(releaseBckLgId);
-        
+
         for (ProductBacklog pb : releaseBckLg.getProductBacklog()) {
             selectedPrdBacklog.add(pb.getId().toString());
         }
         return "release-product-backlog";
     }
-    
+
     public void addProductBacklog() {
-        
+
         releaseBckLg = releaseBckLgEJB.find(releaseBckLg.getId());
         List<ProductBacklog> productBacklogList = releaseBckLg.getProductBacklog();
-        
-        int size  = productBacklogList.size();
+
+        int size = productBacklogList.size();
         for (int i = 0; i < size; i++) {
             productBacklogList.remove(productBacklogList.get(i));
             size--;
             --i;
         }
-        
+
         for (String prdBacklogId : selectedPrdBacklog) {
             if (!productBacklogList.contains(productBacklogEJB.find(Long.parseLong(prdBacklogId)))) {
                 releaseBckLg.getProductBacklog().add(productBacklogEJB.find(Long.parseLong(prdBacklogId)));
             }
         }
         releaseBckLgEJB.edit(releaseBckLg);
-        
+
     }
-      
+
 }

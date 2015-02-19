@@ -23,10 +23,10 @@ import javax.faces.event.ValueChangeEvent;
  *
  * @author MdRuzdi
  */
-@ManagedBean(name="sessionMB")
+@ManagedBean(name = "sessionMB")
 @SessionScoped
 public class SessionMB {
-    
+
     private List<Project> userProjectList;
     private Long userSelectedProjectId;
     private Project userSelectedProject;
@@ -35,7 +35,7 @@ public class SessionMB {
     private ReleaseBacklog userSelectedReleaseBacklog;
     private Sprint userSelectedSprint;
     private Task userSelectedTask;
-    
+
     @EJB
     private ProjectEJB projectEJB;
 
@@ -44,12 +44,12 @@ public class SessionMB {
      */
     public SessionMB() {
         userProjectList = new ArrayList<>();
-        
+
     }
-    
+
     @PostConstruct
-    public void init(){
-        this.userProjectList =  projectEJB.findAll();
+    public void init() {
+        this.userProjectList = projectEJB.findAll();
     }
 
     public List<Project> getUserProjectList() {
@@ -59,26 +59,31 @@ public class SessionMB {
     public void setUserProjectList(List<Project> userProjectList) {
         this.userProjectList = userProjectList;
     }
-    
+
     public void populateUserProjectList() {
         this.userProjectList = projectEJB.findAll();
     }
 
-    public Project getUserSelectedProject() { 
+    public Project getUserSelectedProject() {
         return userSelectedProject;
     }
 
     public void setUserSelectedProject(Project userSelectedProject) {
         this.userSelectedProject = userSelectedProject;
-        this.setUserSelectedProjectId(this.userSelectedProject.getId());
-        System.out.println("======setUserSelectedProject  :: "+this.userSelectedProject);
+        if (userSelectedProject != null) {
+            this.setUserSelectedProjectId(this.userSelectedProject.getId());
+        }else{
+            this.setUserSelectedProjectId(null);
+        }
     }
-    
+
     public void setUserSelectedProjectOnChange(ValueChangeEvent e) {
-        System.out.println("======setUserSelectedProjec3333333333333tOnChange :: "+e);
-        this.userSelectedProjectId = (Long)e.getNewValue();
-        this.userSelectedProject = projectEJB.find(userSelectedProjectId);
-        System.out.println("======setUserSelectedProjectOnChange :: "+this.userSelectedProjectId+ "   ::::   "+this.userSelectedProject);
+        if (e.getNewValue() != null) {
+            this.userSelectedProjectId = (Long) e.getNewValue();
+            this.userSelectedProject = projectEJB.find(userSelectedProjectId);
+        } else {
+            this.setUserSelectedProject(null);
+        }
     }
 
     public Long getUserSelectedProjectId() {
@@ -88,7 +93,7 @@ public class SessionMB {
     public void setUserSelectedProjectId(Long userSelectedProjectId) {
         this.userSelectedProjectId = userSelectedProjectId;
     }
-    
+
     public ProductBacklog getUserSelectedProjectBacklog() {
         return userSelectedProjectBacklog;
     }
@@ -112,7 +117,7 @@ public class SessionMB {
     public void setUserSelectedProjectBacklogId(Long userSelectedProjectBacklogId) {
         this.userSelectedProjectBacklogId = userSelectedProjectBacklogId;
     }
-    
+
     public Sprint getUserSelectedSprint() {
         return userSelectedSprint;
     }
@@ -128,6 +133,5 @@ public class SessionMB {
     public void setUserSelectedTask(Task userSelectedTask) {
         this.userSelectedTask = userSelectedTask;
     }
-        
-    
+
 }

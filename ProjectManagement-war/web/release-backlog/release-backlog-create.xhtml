@@ -18,13 +18,6 @@
 
                         <h2>Release Backlog (Create)</h2>
                         <h:form>
-                            <div class="form-group">
-                                <h:selectOneMenu value="#{releaseBacklogMB.projectId}">
-                                    <f:selectItem itemLabel="Select One" itemValue="" />
-                                    <f:selectItems value="#{releaseBacklogMB.projectList}" var="project" itemLabel="#{project.name}" 
-                                                   itemValue="#{project.id}" />
-                                </h:selectOneMenu>
-                            </div>
 
                             <div class="form-group">
                                 <label for="addReleaseBacklogName">Release BackLog Name</label>
@@ -52,7 +45,7 @@
 
                                 <h:message for="addEndDate" errorStyle="color:red; display:block"/>
                             </div>
-                            <h:commandButton action="#{releaseBacklogMB.createReleaseBacklog()}" value="Add" class="btn btn-info"/>
+                            <h:commandButton action="#{releaseBacklogMB.createReleaseBacklog()}" value="Save" class="btn btn-info"/>
                         </h:form>
 
 

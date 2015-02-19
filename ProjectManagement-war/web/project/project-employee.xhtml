@@ -17,18 +17,18 @@
                         <h2>Employee assign to project</h2>
                         <h:form>
                             <div class="form-group">
-                                <h:selectOneMenu value="#{projectEmployeeMB.projectId}">
+                                <h:selectOneMenu value="#{projectEmployeeMB.projectId}" class="form-control">
                                     <f:selectItems value="#{projectEmployeeMB.projectList}" var="project" itemLabel="#{project.name}" itemValue="#{project.id}" />
                                 </h:selectOneMenu>
                             </div>
                             <br />
                             <div class="form-group">
-                                <h:selectManyCheckbox value="#{projectEmployeeMB.selectedEmp}">
+                                <h:selectManyCheckbox value="#{projectEmployeeMB.selectedEmp}"  class="table table-hover table-striped" >
                                     <f:selectItems value="#{projectEmployeeMB.employeeList}"  var="employee" itemLabel="#{employee.name}" itemValue="#{employee.id}" />
                                 </h:selectManyCheckbox>
                                 
                             </div>
-                            <h:commandButton value="Add" action="#{projectEmployeeMB.addEmployeeToProject()}" />
+                            <h:commandButton class="btn btn-primary" value="Save" action="#{projectEmployeeMB.addEmployeeToProject()}" />
                         </h:form>
                     </div>
                 </div>

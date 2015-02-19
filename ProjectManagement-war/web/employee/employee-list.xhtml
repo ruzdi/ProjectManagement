@@ -11,61 +11,63 @@
 
         <ui:composition template="/layout/layout.xhtml">
             <ui:define name="content">
-
+                
                 <h2>Employee (List)</h2>
+                
+                <h:form>
+                    <h:commandLink class="btn btn-primary" action="/employee/employee-create?redirect=ture" value="Create Employee" /><br /><br />
 
+                    <h:dataTable value="#{employeeMB.employeeList}" var="employee"
+                                 styleClass="table table-hover table-striped table-bordered"
+                                 headerClass=""
+                                 rowClasses="">
+                        <h:column>    				
+                            <f:facet name="header">Employee Id</f:facet>    				
+                                #{employee.id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Name</f:facet>
+                                #{employee.name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Email</f:facet>
+                                #{employee.email}
 
-                <h:dataTable value="#{employeeMB.employeeList}" var="employee"
-                             styleClass="table table-hover table-striped table-bordered"
-                             headerClass=""
-                             rowClasses="">
-                    <h:column>    				
-                        <f:facet name="header">Employee Id</f:facet>    				
-                            #{employee.id}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Name</f:facet>
-                            #{employee.name}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Email</f:facet>
-                            #{employee.email}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Designation</f:facet>
+                                #{employee.designation}
 
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Designation</f:facet>
-                            #{employee.designation}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Street</f:facet>
+                                #{employee.address.street}
 
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Street</f:facet>
-                            #{employee.address.street}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">City</f:facet>
+                                #{employee.address.city}
 
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">City</f:facet>
-                            #{employee.address.city}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">State</f:facet>
+                                #{employee.address.stateName}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Zip</f:facet>
+                                #{employee.address.zip}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Action</f:facet>
 
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">State</f:facet>
-                            #{employee.address.stateName}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Zip</f:facet>
-                            #{employee.address.zip}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Action</f:facet>
-                        <h:form>
                             <div class="btn-group btn-group-xs">
                                 <h:commandButton class="btn btn-warning" action="#{employeeMB.gotoUpdatePage(employee.id)}" value="Edit" />
                                 <h:commandButton class="btn btn-danger" action="#{employeeMB.delete(employee.id)}" value="Delete" />
                             </div>
-                        </h:form>
-                    </h:column>
-                </h:dataTable>
 
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
 
             </ui:define>
         </ui:composition>
