@@ -28,6 +28,7 @@ public class ProjectBacklogMB {
     private ProductBacklog productBacklog;
     private Project project;
     private List<ProductBacklog> pbList;
+    private int numberOfProductBacklog;
     
     @EJB
     private ProjectEJB projectEJB;
@@ -73,6 +74,19 @@ public class ProjectBacklogMB {
             System.out.println("Error :: "+e.getMessage());
         }
         return pbList;
+    }
+
+    public int getNumberOfProductBacklog() {
+        numberOfProductBacklog = productBacklogEJB.findAll().size();
+        return numberOfProductBacklog;
+    }
+
+    public void setNumberOfProductBacklog(int numberOfProductBacklog) {
+        this.numberOfProductBacklog = numberOfProductBacklog;
+    }
+    
+    public int getAllProductBacklogs() {
+        return productBacklogEJB.findAll().size();
     }
 
     public void setPbList(List<ProductBacklog> pbList) {

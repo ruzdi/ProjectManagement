@@ -2,32 +2,60 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Facelet Title</title>
         <link href="resources/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
-        
-        Select where you want to go:
-            <br />
-            <h:link outcome="admin/index" value="To the admin section" /><br />
-            <h:link outcome="users/index" value="To the user section" />
 
         <ui:composition template="/layout/layout.xhtml">
             <ui:define name="content">
                 <h2>DashBoard</h2><br /><br />
-                <h:form>
-                    <p>Dashboard Content</p>
-                </h:form>
-                Select where you want to go:
-            <br />
-            
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-hover table-striped">
+                            <tr>
+                                <th>Number of Projects</th>
+                                <td>#{projectMB.projectList.size()}</td>
+                            </tr>
+                            <tr>
+                                <th>Number of Product Backlogs</th>
+                                <td>#{projectBacklogMB.numberOfProductBacklog}</td>
+                            </tr>                            
+                        </table>
+
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Project Name</th>
+                                    <th>Number of Product Backlogs</th>
+                                    <th>Number of Release Backlogs</th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                <c:forEach var="project" items="#{projectMB.projectList}">
+                                    <tr>
+                                        <th>#{project.name}</th>
+                                        <td>#{project.productBacklog.size()}</td>
+                                        <td>#{project.releaseBacklogList.size()}</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>                 
+                        </table>
+
+                    </div>
+
+                </div>
+
             </ui:define>
-            
+
         </ui:composition>
-            
-            
+
+
 
         <br />
         <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />

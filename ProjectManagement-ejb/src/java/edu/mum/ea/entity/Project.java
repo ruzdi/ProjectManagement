@@ -29,19 +29,19 @@ import javax.validation.constraints.Pattern;
  */
 @Entity
 public class Project implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Pattern(regexp="[A-Za-z0-9 _]+")
+    @Pattern(regexp = "[A-Za-z0-9 _]+")
     private String name;
     private String detail;
-    
+
     @Temporal(TemporalType.DATE)
     private Date startDate;
     @Temporal(TemporalType.DATE)
     private Date endDate;
-    
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<ProductBacklog> productBacklog;
@@ -51,9 +51,9 @@ public class Project implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "employee_id"))
     private List<Employee> employeeList = new ArrayList<Employee>();
     //Fetch Type eager will be changed it is for temporary work
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true,  mappedBy = "project", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "project", fetch = FetchType.EAGER)
     private List<ReleaseBacklog> releaseBacklogList;
-    
+
     public Long getId() {
         return id;
     }
@@ -61,7 +61,7 @@ public class Project implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -93,15 +93,15 @@ public class Project implements Serializable {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-    
-     public List<ProductBacklog> getProductBacklog(){
+
+    public List<ProductBacklog> getProductBacklog() {
         return productBacklog;
     }
 
-    public void setProductBacklog(List<ProductBacklog> productBacklog) {    
+    public void setProductBacklog(List<ProductBacklog> productBacklog) {
         this.productBacklog = productBacklog;
     }
-    
+
     public List<ReleaseBacklog> getReleaseBacklogList() {
         return releaseBacklogList;
     }
@@ -117,16 +117,13 @@ public class Project implements Serializable {
     public void setEmployeeList(List<Employee> employeeList) {
         this.employeeList = employeeList;
     }
-    
 
     public void addBacklog(ProductBacklog productBacklog) {
-        if(!this.productBacklog.contains(productBacklog)){
+        if (!this.productBacklog.contains(productBacklog)) {
             this.productBacklog.add(productBacklog);
             productBacklog.setProject(this);
         }
     }
-    
-    
 
     @Override
     public int hashCode() {
@@ -152,5 +149,5 @@ public class Project implements Serializable {
     public String toString() {
         return "java.edu.mum.ea.entity.Project[ id=" + id + " ]";
     }
-    
+
 }

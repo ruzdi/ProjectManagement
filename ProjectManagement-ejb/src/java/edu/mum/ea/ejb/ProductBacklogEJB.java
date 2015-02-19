@@ -72,4 +72,10 @@ public class ProductBacklogEJB {
         
     }
     
+    
+    public List<ProductBacklog> findAll() {
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(ProductBacklog.class));
+        return (List<ProductBacklog>) em.createQuery(cq).getResultList();
+    }
 }
