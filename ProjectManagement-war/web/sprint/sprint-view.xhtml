@@ -17,6 +17,7 @@
                         <br />
                         <h2>Sprint Detail</h2>
                         <h:form>
+                            <h:inputHidden value="#{sprintMB.sprint.id}"/>
                             <div class="form-group">
                                 <h:outputText value="#{sprintMB.sprint.sprintName}" /><br />
                                 <h:outputText value="#{sprintMB.sprint.releaseBacklog.releaseName}" /><br />
@@ -25,7 +26,7 @@
                             <br />
                             <div class="form-group">
                                 <h:selectManyCheckbox value="#{sprintMB.selectedTasks}">
-                                    <f:selectItems value="#{sprintMB.taskList}"  var="task" itemLabel="#{task.title}" itemValue="#{task.id}" />
+                                    <f:selectItems value="#{projectEmployeeMB.tasks}"  var="task" itemLabel="#{task.title}" itemValue="#{task.id}" />
                                 </h:selectManyCheckbox>
                                 
                             </div>
