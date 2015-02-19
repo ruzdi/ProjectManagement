@@ -5,16 +5,13 @@
  */
 package edu.mum.ea.ejb;
 
-import edu.mum.ea.entity.Project;
 import edu.mum.ea.entity.Sprint;
 import java.util.List;
-import javax.annotation.Resource;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
-import javax.ejb.SessionContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
 /**
@@ -50,6 +47,12 @@ public class SprintEJB {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Sprint.class));
         return (List<Sprint>)em.createQuery(cq).getResultList();
+    }
+    
+     public List<Sprint> findAllSprintByProject(long projectId) {
+        TypedQuery<Sprint> query = em.createQuery("select s from Sprint s WHERE s.releaseBacklog.project.id = :projectId", Sprint.class);
+        query.setParameter("projectId", projectId);
+        return query.getResultList();
     }
     
     

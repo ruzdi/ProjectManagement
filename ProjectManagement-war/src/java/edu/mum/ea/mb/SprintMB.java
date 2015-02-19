@@ -69,8 +69,8 @@ public class SprintMB {
     @PostConstruct
     public void init() {
         //Map<String, Object> sessionMap =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        Project project = projectEJB.find(sessionMB.getUserSelectedProject().getId());
-        releaseBacklogList = project.getReleaseBacklogList();   
+        //Project project = projectEJB.find(sessionMB.getUserSelectedProject().getId());
+        releaseBacklogList = releaseBacklogEJB.findAllRelBakByProject(sessionMB.getUserSelectedProject().getId());//project.getReleaseBacklogList();   
     }
 
     public SessionMB getSessionMB() {
@@ -90,7 +90,7 @@ public class SprintMB {
     }
 
     public List<Sprint> getSprintList() {
-        sprintList = sprintEJB.findAll();
+        sprintList = sprintEJB.findAllSprintByProject(sessionMB.getUserSelectedProject().getId());//sprintEJB.findAll();
         return sprintList;
     }
 
