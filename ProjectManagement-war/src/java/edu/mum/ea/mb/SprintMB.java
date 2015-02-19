@@ -9,9 +9,11 @@ package edu.mum.ea.mb;
 import edu.mum.ea.ejb.ProjectEJB;
 import edu.mum.ea.ejb.ReleaseBacklogEJB;
 import edu.mum.ea.ejb.SprintEJB;
+import edu.mum.ea.ejb.TaskEJB;
 import edu.mum.ea.entity.Project;
 import edu.mum.ea.entity.ReleaseBacklog;
 import edu.mum.ea.entity.Sprint;
+import edu.mum.ea.entity.Task;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -43,8 +45,14 @@ public class SprintMB {
     @EJB
     private ReleaseBacklogEJB releaseBacklogEJB;
     
+    @EJB
+    private TaskEJB taskEJB;
+    
+    private List<Task> taskList = new ArrayList<Task>();
+    
     private List<ReleaseBacklog> releaseBacklogList = new ArrayList<ReleaseBacklog>();
-    private long relBacklogId; 
+    private long relBacklogId;
+    private List<String> selectedTasks = new ArrayList<String>();
     
     private List<Sprint> sprintList;
     /**
@@ -53,7 +61,6 @@ public class SprintMB {
     public SprintMB() {
         sprint = new Sprint();
         sprintList = new ArrayList<Sprint>();
-        
     }
     @PostConstruct
     public void init() {
@@ -94,6 +101,22 @@ public class SprintMB {
     public void setRelBacklogId(long relBacklogId) {
         this.relBacklogId = relBacklogId;
     }
+
+    public List<Task> getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
+
+    public List<String> getSelectedTasks() {
+        return selectedTasks;
+    }
+
+    public void setSelectedTasks(List<String> selectedTasks) {
+        this.selectedTasks = selectedTasks;
+    }
     
     
     public String createSprint() {  
@@ -124,9 +147,22 @@ public class SprintMB {
         return "sprint-list";
     }
     
-    public String deleteProject(Long sprintId){
+    public String deleteSprint(Long sprintId){
         sprintEJB.delete(sprintId);
         return "sprint-list";
     }
+    
+    public String sprintDetail(Long id) {
+        sprint = sprintEJB.find(id);
+        taskList = taskEJB.findAll();
+        return "sprint-view";
+    }
+    
+    public String addTaskToSprint() {
+        for (String s : selectedTasks)
+            System.out.println("task:::" + s);
+        return "/sprint/sprint-list";
+    }
+    
       
 }

@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -60,7 +61,9 @@ public class Task implements Serializable {
     private List<TaskComment> taskComments;
 //    @OneToOne
 //    private Resource resource;
-
+    @ManyToOne
+    @JoinTable(name="SPRINT_TASK", joinColumns=@JoinColumn(name="TASK_ID"), inverseJoinColumns=@JoinColumn(name="SPRINT_ID"))
+    private Sprint sprint;
     public Task() {
         taskComments = new ArrayList<TaskComment>();
     }
@@ -136,13 +139,13 @@ public class Task implements Serializable {
         this.status = status;
     }
 
-//    public Sprint getSprint() {
-//        return sprint;
-//    }
-//
-//    public void setSprint(Sprint sprint) {
-//        this.sprint = sprint;
-//    }
+    public Sprint getSprint() {
+        return sprint;
+    }
+
+    public void setSprint(Sprint sprint) {
+        this.sprint = sprint;
+    }
 
     public TaskCategory getTaskCategory() {
         return taskCategory;
