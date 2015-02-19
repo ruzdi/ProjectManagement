@@ -68,7 +68,7 @@ public class ProjectBacklogMB {
 
     public List<ProductBacklog> getPbList() {
         Map<String, Object> sessionMap =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        pbList = projectEJB.findProductBacklogList(Long.parseLong(sessionMap.get("pid").toString()));
+        pbList = projectEJB.findProductBacklogList(sessionMB.getUserSelectedProject().getId());
         return pbList;
     }
 
@@ -78,7 +78,7 @@ public class ProjectBacklogMB {
 
     public String create() {
         Map<String, Object> sessionMap =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        project = projectEJB.find(Long.parseLong(sessionMap.get("pid").toString()));
+        project = projectEJB.find(sessionMB.getUserSelectedProject().getId());//projectEJB.find(Long.parseLong(sessionMap.get("pid").toString()));
         productBacklog.setReleaseBacklogStatus(Boolean.FALSE);
         productBacklog.setPriority(2);
         project.addBacklog(productBacklog);    
@@ -91,15 +91,15 @@ public class ProjectBacklogMB {
         sessionMap.put("pid", projectId);
         project = projectEJB.find(projectId);
         this.sessionMB.setUserSelectedProject(project);
-        System.out.println("User Selected Project :1:: "+this.getSessionMB().getUserSelectedProject());
-        System.out.println("User Selected Project :2:: "+project);
+        //System.out.println("User Selected Project :1:: "+this.getSessionMB().getUserSelectedProject());
+        //System.out.println("User Selected Project :2:: "+project);
         return "/product-backlog/product-backlog-list";
     }
     
   
     public String updatePrductBacklog(){
-        Map<String, Object> sessionMap =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        project = projectEJB.find(Long.parseLong(sessionMap.get("pid").toString())); 
+        //Map<String, Object> sessionMap =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+        project = projectEJB.find(sessionMB.getUserSelectedProject().getId()); 
         productBacklog.setProject(project);
         productBacklog.setReleaseBacklogStatus(Boolean.FALSE);
         productBacklog.setPriority(2);

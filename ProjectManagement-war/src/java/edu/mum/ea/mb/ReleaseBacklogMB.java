@@ -91,7 +91,8 @@ public class ReleaseBacklogMB {
     }
 
     public List<ReleaseBacklog> getReleaseBacklogList() {
-        releaseBckLgList = projectEJB.find(this.sessionMB.getUserSelectedProject().getId()).getReleaseBacklogList();
+        long pid = this.sessionMB.getUserSelectedProject().getId();
+        releaseBckLgList = releaseBckLgEJB.findAllRelBakByProject(pid);//projectEJB.find(pid).getReleaseBacklogList();
         return releaseBckLgList;
     }
 

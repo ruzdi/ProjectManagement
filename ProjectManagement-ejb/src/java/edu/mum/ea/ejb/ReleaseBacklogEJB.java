@@ -16,6 +16,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.SessionContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
 /**
@@ -50,6 +51,12 @@ public class ReleaseBacklogEJB {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(ReleaseBacklog.class));
         return (List<ReleaseBacklog>)em.createQuery(cq).getResultList();
+    }
+    
+    public List<ReleaseBacklog> findAllRelBakByProject(long projectId) {
+        TypedQuery<ReleaseBacklog> query = em.createQuery("select r from ReleaseBacklog r WHERE r.project.id = :projectId", ReleaseBacklog.class);
+        query.setParameter("projectId", projectId);
+        return query.getResultList();
     }
     
     
