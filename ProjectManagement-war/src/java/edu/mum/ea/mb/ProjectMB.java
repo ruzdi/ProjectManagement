@@ -82,10 +82,11 @@ public class ProjectMB {
 
         try {
             projectEJB.save(project);     
+            this.getSessionMB().setUserSelectedProject(project);   
             sessionMB.populateUserProjectList();
         } catch (Exception e) {
-            gotoLogin();
-            return null;
+            //gotoLogin();
+            return gotoLogin();
         }
        
        return "project-list";
@@ -99,11 +100,16 @@ public class ProjectMB {
     public String updateProject(){
         
         projectEJB.edit(project);
+        this.getSessionMB().setUserSelectedProject(project);
         sessionMB.populateUserProjectList();
         return "/project/project-list";
     }
     
     public String deleteProject(Long projectId){
+        project = projectEJB.find(projectId);      
+        if(project.equals(this.getSessionMB().getUserSelectedProject())){
+            this.getSessionMB().setUserSelectedProject(null);   
+        }
         projectEJB.delete(projectId);
         sessionMB.populateUserProjectList();
         return "/project/project-list"; 
@@ -116,7 +122,6 @@ public class ProjectMB {
     
     
     public String gotoLogin(){
-//        System.out.println("Go to Login");
         return "/login";
     }
 

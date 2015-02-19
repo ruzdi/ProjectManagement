@@ -5,9 +5,15 @@
  */
 package edu.mum.ea.mb;
 
+import edu.mum.ea.ejb.EmployeeEJB;
+import edu.mum.ea.ejb.ProductBacklogEJB;
+import edu.mum.ea.ejb.ProjectEJB;
 import edu.mum.ea.ejb.TaskCategoryEJB;
 import edu.mum.ea.ejb.TaskCommentEJB;
 import edu.mum.ea.ejb.TaskEJB;
+import edu.mum.ea.entity.Employee;
+import edu.mum.ea.entity.ProductBacklog;
+import edu.mum.ea.entity.Resource;
 import edu.mum.ea.entity.Task;
 import edu.mum.ea.entity.TaskCategory;
 import edu.mum.ea.entity.TaskComment;
@@ -37,11 +43,24 @@ public class TaskMB {
 
     @EJB
     private TaskCommentEJB taskCommentEJB;
+    
+    @EJB
+    private ProductBacklogEJB productBacklogEJB;
+    
+    @EJB
+    private EmployeeEJB employeeEJB;
 
+    
     private Task task;
     private List<Task> taskList;
     private List<TaskCategory> taskCategoryList;
     private int taskCategoryId;
+    
+    private Long productBacklogId;
+    private List<ProductBacklog> productBacklogList;
+//    private List<Resource> resourceList;
+    private int employeeId;
+    private List<Employee> projectEmployeeList;
 
     private TaskComment taskComment;
 
@@ -65,7 +84,7 @@ public class TaskMB {
 
     @PostConstruct
     private void init() {
-
+        productBacklogList = productBacklogEJB.getProductBacklogListByProjectId(sessionMB.getUserSelectedProject().getId());
     }
 
     public TaskCategoryMB getTaskCategoryMB() {
@@ -119,10 +138,44 @@ public class TaskMB {
         this.taskCategoryList = taskCategoryList;
     }
 
+    public Long getProductBacklogId() {
+        return productBacklogId;
+    }
+
+    public void setProductBacklogId(Long productBacklogId) {
+        this.productBacklogId = productBacklogId;
+    }
+    
+    public List<ProductBacklog> getProductBacklogList() {
+        productBacklogList = productBacklogEJB.getProductBacklogListByProjectId(sessionMB.getUserSelectedProject().getId());
+        return productBacklogList;
+    }
+    
+    public void setProductBacklogList(List<ProductBacklog> productBacklogList) {
+        this.productBacklogList = productBacklogList;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+    
+    public List<Employee> getProjectEmployeeList() {
+        projectEmployeeList = sessionMB.getUserSelectedProject().getEmployeeList();
+        return projectEmployeeList;
+    }
+
+    public void setProjectEmployeeList(List<Employee> projectEmployeeList) {
+        this.projectEmployeeList = projectEmployeeList;
+    }
+    
     public TaskComment getTaskComment() {
         return taskComment;
     }
-
+    
     public void setTaskComment(TaskComment TaskComment) {
         this.taskComment = taskComment;
     }
@@ -152,6 +205,9 @@ public class TaskMB {
     }
 
     public String create() {
+        System.out.println("");
+        this.task.setEmployee(employeeEJB.find(employeeId));
+        this.task.setProductBacklog(productBacklogEJB.find(productBacklogId));
         this.task.setTaskCategory(taskCategoryEJB.find(new Long(this.taskCategoryId)));
         taskEJB.create(task);
         this.sendTaskEmail("Task Created", "A new task is <b>created</b>.");
@@ -163,14 +219,22 @@ public class TaskMB {
         this.getSessionMB().setUserSelectedTask(task);
         return "/task/task-view";
     }
-
+    
     public String edit(int id) {
         this.task = taskEJB.find(new Long(id));
-        this.setTaskCategoryId(Integer.parseInt(this.task.getTaskCategory().getId() + ""));
+        this.setTaskCategoryId(Integer.parseInt(this.task.getTaskCategory().getId().toString()));
+        if(this.task.getProductBacklog() != null){
+            this.setProductBacklogId(this.task.getProductBacklog().getId());
+        }
+        if(task.getEmployee() != null){
+            this.setEmployeeId(this.task.getEmployee().getId());
+        }
         return "/task/task-update";
     }
 
     public String update() {
+        this.task.setEmployee(employeeEJB.find(this.employeeId));
+        this.task.setProductBacklog(productBacklogEJB.find(this.productBacklogId));
         this.task.setTaskCategory(taskCategoryEJB.find(new Long(this.taskCategoryId)));
         taskEJB.update(this.task);
         this.sendTaskEmail("Task Updated", "A task information is <b>updated</b>.");

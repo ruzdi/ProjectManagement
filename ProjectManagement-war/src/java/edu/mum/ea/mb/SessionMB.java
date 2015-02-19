@@ -31,6 +31,7 @@ public class SessionMB {
     private Long userSelectedProjectId;
     private Project userSelectedProject;
     private ProductBacklog userSelectedProjectBacklog;
+    private Long userSelectedProjectBacklogId;
     private ReleaseBacklog userSelectedReleaseBacklog;
     private Sprint userSelectedSprint;
     private Task userSelectedTask;
@@ -69,6 +70,8 @@ public class SessionMB {
 
     public void setUserSelectedProject(Project userSelectedProject) {
         this.userSelectedProject = userSelectedProject;
+        this.setUserSelectedProjectId(this.userSelectedProject.getId());
+        System.out.println("======setUserSelectedProject  :: "+this.userSelectedProject);
     }
     
     public void setUserSelectedProjectOnChange(ValueChangeEvent e) {
@@ -102,6 +105,14 @@ public class SessionMB {
         this.userSelectedReleaseBacklog = userSelectedReleaseBacklog;
     }
 
+    public Long getUserSelectedProjectBacklogId() {
+        return userSelectedProjectBacklogId;
+    }
+
+    public void setUserSelectedProjectBacklogId(Long userSelectedProjectBacklogId) {
+        this.userSelectedProjectBacklogId = userSelectedProjectBacklogId;
+    }
+    
     public Sprint getUserSelectedSprint() {
         return userSelectedSprint;
     }

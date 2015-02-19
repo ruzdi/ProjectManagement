@@ -16,27 +16,40 @@
 
 
                 <div class="row">
-                    <div class="col-md-6">
 
-                        <h2>Task (Create)</h2>
+                    <h:form>
 
-                        <h:form>
-                            
+                        <div class="col-md-6">
+
+                            <h2>Task (Create)</h2>
+
+
+
                             <h:inputHidden value="#{taskMB.task.id}" />
+
+                            <div class="form-group">
+                                <label for="addTaskCategory">Product Backlog</label>
+
+                                <h:selectOneMenu class="form-control" value="#{taskMB.productBacklogId}">
+                                    <!--<f:selectItem itemLabel="Select One" itemValue="" />-->
+                                    <f:selectItems value="#{taskMB.productBacklogList}" var="productBacklog" itemLabel="#{productBacklog.title}" itemValue="#{productBacklog.id}" />
+                                </h:selectOneMenu>
+
+                            </div>
 
                             <div class="form-group">
                                 <label for="addTaskCategory">Task Category</label>
 
                                 <h:selectOneMenu class="form-control" value="#{taskMB.taskCategoryId}">
-                                    <f:selectItem itemLabel="Select One" itemValue="" />
+                                    <!--<f:selectItem itemLabel="Select One" itemValue="" />-->
                                     <f:selectItems value="#{taskMB.taskCategoryList}" var="taskCategory" itemLabel="#{taskCategory.name}" itemValue="#{taskCategory.id}" />
                                 </h:selectOneMenu>
-                                
+
                             </div>
 
                             <div class="form-group">
                                 <label for="addTaskTitle">Title</label>
-                                
+
                                 <h:inputText class="form-control" id="addTaskTitle"  value="#{taskMB.task.title}" 
                                              required="true" requiredMessage="The field is empty" validatorMessage=
                                              "String is not valid (only characters a-z A-Z and 0-9)">
@@ -48,10 +61,10 @@
 
                             <div class="form-group">
                                 <label for="addTaskDetail">Detail</label>
-                               
+
                                 <h:inputTextarea class="form-control" id="addTaskDetail"  value="#{taskMB.task.detail}" 
-                                             required="true" requiredMessage="The field is empty" validatorMessage=
-                                             "String is not valid (only characters a-z A-Z and 0-9 and +-_@)">
+                                                 required="true" requiredMessage="The field is empty" validatorMessage=
+                                                 "String is not valid (only characters a-z A-Z and 0-9 and +-_@)">
                                     <f:validateRegex pattern="[a-zA-Z0-9 -_]+"/>
                                 </h:inputTextarea>
 
@@ -62,19 +75,19 @@
                                 <label for="addTaskStartDate">Start Date</label>
                                 <p:calendar class="form-control2" id="addTaskStartDate"  value="#{taskMB.task.startDate}" required="true"
                                             requiredMessage="First select a date"/>
-                                 <h:message for="addTaskStartDate" errorStyle="color:red; display:block"/>
+                                <h:message for="addTaskStartDate" errorStyle="color:red; display:block"/>
                             </div>
 
                             <div class="form-group">
                                 <label for="addTaskEndDate">End Date</label>
                                 <p:calendar class="form-control2" id="addTaskEndDate"  value="#{taskMB.task.endDate}" required="true"
                                             requiredMessage="First select a date"/>
-                                 <h:message for="addTaskEndDate" errorStyle="color:red; display:block"/>
+                                <h:message for="addTaskEndDate" errorStyle="color:red; display:block"/>
                             </div>
 
                             <div class="form-group">
                                 <label for="addTaskDuration">Duration</label>
-                                                               
+
                                 <h:inputText class="form-control" id="addTaskDuration"  value="#{taskMB.task.duration}" 
                                              required="true" requiredMessage="The field is empty" >
                                     <!--<f:validateRegex pattern="[0-9]+"/>-->
@@ -85,19 +98,19 @@
 
                             <div class="form-group">
                                 <label for="addTaskPriority">priority</label>
-                                                               
+
                                 <h:inputText class="form-control" id="addTaskPriority"  value="#{taskMB.task.priority}" 
                                              required="true" requiredMessage="The field is empty">
                                     <!--<f:validateRegex pattern="[1-3]+"/>-->
                                 </h:inputText>
 
                                 <h:message for="addTaskPriority" errorStyle="color:red; display:block"/>
-                                
+
                             </div>
 
                             <div class="form-group">
                                 <label for="addTaskStatus">status</label>
-                                                               
+
                                 <h:inputText class="form-control" id="addTaskStatus"  value="#{taskMB.task.status}" 
                                              required="true" requiredMessage="The field is empty" >
                                     <!--<f:validateRegex pattern="[1-3]+"/>-->
@@ -108,9 +121,25 @@
 
                             <h:commandButton action="#{taskMB.create()}" value="Save" class="btn btn-info"/>
 
-                        </h:form>
 
-                    </div>
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label for="addTaskCategory">Task Resource</label>
+
+                                <h:selectOneMenu class="form-control" value="#{taskMB.employeeId}">
+                                    <!--<f:selectItem itemLabel="Select One" itemValue="" />-->
+                                    <f:selectItems value="#{taskMB.projectEmployeeList}" var="employee" itemLabel="#{employee.name}" itemValue="#{employee.id}" />
+                                </h:selectOneMenu>
+
+                            </div>
+
+                        </div>
+                    </h:form>
+
+
                 </div>
             </ui:define>
         </ui:composition>

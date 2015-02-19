@@ -54,13 +54,14 @@ public class Task implements Serializable {
     @JoinColumn(nullable = true)
     @ManyToOne(optional = true)
     private TaskCategory taskCategory;
-//    @ManyToOne
-//    private ProductBacklog productBacklog;
+    @ManyToOne
+    private ProductBacklog productBacklog;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "task")
-    private List<TaskComment> taskComments;
-//    @OneToOne
-//    private Resource resource;
-
+    private List<TaskComment> taskComments;    
+    @JoinColumn(nullable = true)
+    @ManyToOne(optional = true)
+    private Employee employee;
+    
     public Task() {
         taskComments = new ArrayList<TaskComment>();
     }
@@ -151,15 +152,15 @@ public class Task implements Serializable {
     public void setTaskCategory(TaskCategory taskCategory) {
         this.taskCategory = taskCategory;
     }
-//
-//    public ProductBacklog getProductBacklog() {
-//        return productBacklog;
-//    }
-//
-//    public void setProductBacklog(ProductBacklog productBacklog) {
-//        this.productBacklog = productBacklog;
-//    }
-//
+
+    public ProductBacklog getProductBacklog() {
+        return productBacklog;
+    }
+
+    public void setProductBacklog(ProductBacklog productBacklog) {
+        this.productBacklog = productBacklog;
+    }
+
 
     public List<TaskComment> getTaskComments() {
         return taskComments;
@@ -174,7 +175,15 @@ public class Task implements Serializable {
             this.taskComments.add(taskComment);
         }
     }
-    
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

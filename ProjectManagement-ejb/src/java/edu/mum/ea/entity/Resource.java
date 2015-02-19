@@ -8,11 +8,13 @@ package edu.mum.ea.entity;
 import edu.mum.ea.entity.Employee;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -35,6 +37,9 @@ public class Resource implements Serializable {
 //    @OneToOne
 //    private Employee employee;
 //    
+    
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true,  mappedBy = "resource")
+//    private List<Task> tasks;
     
     public Long getId() {
         return id;
@@ -76,6 +81,26 @@ public class Resource implements Serializable {
 //
 //    public void setEmployee(Employee employee) {
 //        this.employee = employee;
+//    }
+
+//    public List<Task> getTasks() {
+//        return tasks;
+//    }
+//
+//    public void setTasks(List<Task> tasks) {
+//        this.tasks = tasks;
+//    }
+//    
+//    public void addTasks(Task task) {
+//        if(!this.tasks.contains(task)){
+//            this.tasks.add(task);
+//        }
+//    }
+//    
+//    public void removeTasks(Task task) {
+//        if(this.tasks.contains(task)){
+//            this.tasks.remove(task);
+//        }
 //    }
     
     @Override

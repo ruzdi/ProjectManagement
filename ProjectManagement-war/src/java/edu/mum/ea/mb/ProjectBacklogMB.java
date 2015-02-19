@@ -35,6 +35,9 @@ public class ProjectBacklogMB {
     private ProjectEJB projectEJB;
     @EJB
     private ProductBacklogEJB productBacklogEJB;
+    
+    @ManagedProperty(value = "#{sessionMB}")
+    private SessionMB sessionMB;
   
     public ProjectBacklogMB() {
         productBacklog = new ProductBacklog();
@@ -46,6 +49,15 @@ public class ProjectBacklogMB {
 
     public void setProductBacklog(ProductBacklog productBacklog) {
         this.productBacklog = productBacklog;
+    }
+    
+    
+    public SessionMB getSessionMB() {
+        return sessionMB;
+    }
+
+    public void setSessionMB(SessionMB sessionMB) {
+        this.sessionMB = sessionMB;
     }
 
     public Project getProject() {
@@ -91,11 +103,14 @@ public class ProjectBacklogMB {
         Map<String, Object> sessionMap =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
         sessionMap.put("pid", projectId);
         project = projectEJB.find(projectId);
+        this.sessionMB.setUserSelectedProject(project);
+        System.out.println("User Selected Project :1:: "+this.getSessionMB().getUserSelectedProject());
+        System.out.println("User Selected Project :2:: "+project);
         return "/product-backlog/product-backlog-list";
     }
     
   
-     public String updatePrductBacklog(){
+    public String updatePrductBacklog(){
         Map<String, Object> sessionMap =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
         project = projectEJB.find(Long.parseLong(sessionMap.get("pid").toString())); 
         productBacklog.setProject(project);
