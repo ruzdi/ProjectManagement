@@ -21,9 +21,7 @@
     <welcome-file-list>
         <welcome-file>login.jsf</welcome-file>
     </welcome-file-list>
-    
-    
-    
+       
     <!--    Securit Constraints    -->
     <security-constraint>
         <display-name>Admin Pages</display-name>
@@ -32,6 +30,7 @@
             <description></description>
             <url-pattern>/admin/*</url-pattern>
             <!--<url-pattern>/employee/employee-create.jsf</url-pattern>-->
+            <url-pattern>/*</url-pattern>
             <url-pattern>/project/project-create.jsf</url-pattern>
             <url-pattern>/sprint/sprint-create.jsf</url-pattern>
             <url-pattern>/project/project-list.jsf</url-pattern>

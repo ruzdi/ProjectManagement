@@ -34,7 +34,7 @@ public class AuthorizationMB {
             session.invalidate();
         }
 
-        return "index?faces-redirect=true";
+        return "login?faces-redirect=true";
     }
 
     public boolean isLoggedIn() {

@@ -32,7 +32,7 @@ public class LoginPageFilter implements Filter{
        HttpServletResponse response = (HttpServletResponse) servletResponse;
 
        if(request.getUserPrincipal() != null){ //If user is already authenticated
-           response.sendRedirect("/index.jsf");// or, forward using RequestDispatcher
+           response.sendRedirect("/ProjectManagement-war/index.jsf");// or, forward using RequestDispatcher
        } else{
            filterChain.doFilter(servletRequest, servletResponse);
        }
