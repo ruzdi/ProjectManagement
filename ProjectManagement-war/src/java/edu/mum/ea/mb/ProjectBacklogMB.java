@@ -67,8 +67,11 @@ public class ProjectBacklogMB {
     }
 
     public List<ProductBacklog> getPbList() {
-        Map<String, Object> sessionMap =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        pbList = projectEJB.findProductBacklogList(sessionMB.getUserSelectedProject().getId());
+        try{
+            pbList = projectEJB.findProductBacklogList(sessionMB.getUserSelectedProject().getId());
+        }catch(Exception e){
+            System.out.println("Error :: "+e.getMessage());
+        }
         return pbList;
     }
 
