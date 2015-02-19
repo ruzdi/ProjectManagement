@@ -47,10 +47,11 @@ public class Task implements Serializable {
     private Date endDate;
     @Max(value = 3, message = "Maximum can be 3")
     private Integer duration;
-    @Max(value = 3, message = "Maximum can be 3")
-    private Integer priority;
-    @Max(value = 3, message = "Maximum can be 3")
-    private Integer status;
+//    @Max(value = 3, message = "Maximum can be 3")
+    
+    private String priority;
+//    @Max(value = 3, message = "Maximum can be 3")
+    private String status;
     @JoinColumn(nullable = true)
     @ManyToOne(optional = true)
     private TaskCategory taskCategory;
@@ -123,19 +124,19 @@ public class Task implements Serializable {
         this.duration = duration;
     }
 
-    public Integer getPriority() {
+    public String getPriority() {
         return priority;
     }
 
-    public void setPriority(Integer priority) {
+    public void setPriority(String priority) {
         this.priority = priority;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

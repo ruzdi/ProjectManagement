@@ -14,5 +14,17 @@ public class EnumClass {
         Female, 
         Other
     }
+    
+    public enum PriorityEnum{
+        Low,
+        Medium,
+        High
+    }
+    
+    public enum StatusEnum{
+        Inprogress,
+        Completed,
+        Closed
+    }
  
 }

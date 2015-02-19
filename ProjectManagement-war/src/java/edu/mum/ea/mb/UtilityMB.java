@@ -5,7 +5,10 @@
  */
 package edu.mum.ea.mb;
 
+import edu.mum.ea.entity.EnumClass;
 import edu.mum.ea.entity.EnumClass.GenderEnum;
+import edu.mum.ea.entity.EnumClass.PriorityEnum;
+import edu.mum.ea.entity.EnumClass.StatusEnum;
 import edu.mum.ea.entity.EnumClass.UserRoleEnum;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -38,4 +41,13 @@ public class UtilityMB {
         return GenderEnum.values();
     }
     
+    public PriorityEnum[] getPriority(){
+    
+        return PriorityEnum.values();
+    }
+    
+    public StatusEnum[] getStatuses(){
+    
+        return StatusEnum.values();
+    }
 }

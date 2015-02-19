@@ -73,11 +73,21 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="addEmployeeDesignation">Designation</label>
+                                <label for="addEmployeeDesignation">Designation(Per Hour)</label>
                                 <h:inputText class="form-control" id="addEmployeeDesignation"  value="#{employeeMB.employee.designation}" 
-                                             required="true" requiredMessage="Filled can not be empty"/>
+                                             required="true" requiredMessage="Filled can not be empty" 
+                                             validatorMessage="Only Alpha numeric characters are allowed"/>
                                 <h:message for="addEmployeeDesignation" errorStyle="color:red; display:block"/>
                             </div>
+                            
+                            <div class="form-group">
+                                <label for="addEmployeePhone">Phone Number</label>
+                                <h:inputText class="form-control" id="addEmployeePhone"  value="#{employeeMB.employee.phoneNumber}" 
+                                             required="true" requiredMessage="Filled can not be empty"
+                                             validatorMessage="number formate is (111)111-1111"/>
+                                <h:message for="addEmployeePhone" errorStyle="color:red; display:block"/>
+                            </div>
+                            
                             <div class="form-group">
                                 <label for="addEmployeeStreet">Street</label>
                                 <h:inputText class="form-control" id="addEmployeeStreet"  value="#{employeeMB.employee.address.street}" 
