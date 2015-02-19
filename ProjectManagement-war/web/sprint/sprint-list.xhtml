@@ -9,43 +9,45 @@
         <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
-         <ui:composition template="/layout/layout.xhtml">
+        <ui:composition template="/layout/layout.xhtml">
             <ui:define name="content">   
                 <h2>Sprint (List)</h2>
 
-                <h:dataTable value="#{sprintMB.sprintList}" var="sprint"
-                             styleClass="table table-hover table-striped table-bordered"
-                             headerClass=""
-                             rowClasses="">
-                    <h:column>    				
-                        <f:facet name="header">Sprint Name</f:facet>    				
-                            #{sprint.sprintName}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Start Date</f:facet>
-                        <h:outputText value="#{sprint.startDate}" >
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">End Date</f:facet>
-                        <h:outputText value="#{sprint.endDate}" >
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Action</f:facet>
-                        <h:form>
+                <h:form>
+                    <h:commandLink class="btn btn-primary" action="/sprint/sprint-create" value="Create Sprint" /><br /><br />
+
+                    <h:dataTable value="#{sprintMB.sprintList}" var="sprint"
+                                 styleClass="table table-hover table-striped table-bordered"
+                                 headerClass=""
+                                 rowClasses="">
+                        <h:column>    				
+                            <f:facet name="header">Sprint Name</f:facet>    				
+                                #{sprint.sprintName}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Start Date</f:facet>
+                            <h:outputText value="#{sprint.startDate}" >
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">End Date</f:facet>
+                            <h:outputText value="#{sprint.endDate}" >
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Action</f:facet>
+
                             <div class="btn-group btn-group-xs">
+                                <h:commandButton class="btn btn-info" action="#{sprintMB.sprintDetail(sprint.id)}" value="View" />
                                 <h:commandButton class="btn btn-warning" action="#{sprintMB.gotoUpdatePage(sprint.id)}" value="Edit" />
                                 <h:commandButton class="btn btn-danger" action="#{sprintMB.deleteSprint(sprint.id)}" value="Delete" />
-                                <h:commandButton class="btn btn-warning" action="#{sprintMB.sprintDetail(sprint.id)}" value="View" />
-                              
                             </div>
-                        </h:form>
-                    </h:column>
-                </h:dataTable>
 
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
             </ui:define>
         </ui:composition>
     </h:body>
