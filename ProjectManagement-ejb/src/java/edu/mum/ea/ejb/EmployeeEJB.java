@@ -84,4 +84,10 @@ public class EmployeeEJB {
 //            logger.exiting(ic.getTarget().toString(), ic.getMethod().getName());
 //        }
 //    }
+    
+//    public List<Employee> getEmployeeListByProjectId(Long projectId) {
+//        TypedQuery<Employee> query = em.createQuery("select e from Employee e  WHERE pb.project.id = :projectId", Employee.class);
+//        query.setParameter("projectId", projectId);
+//        return query.getResultList();
+//    }
 }

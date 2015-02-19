@@ -122,45 +122,61 @@ public class SprintMB {
     public String createSprint() {  
         sprint.setReleaseBacklog(releaseBacklogEJB.find(getRelBacklogId()));
         sprintEJB.save(sprint);     
-        return "sprint-list?faces-redirect=true";
+        return "sprint-list";
     }
     
     public String gotoUpdatePage(Long id){
         sprint = sprintEJB.find(id);
-        //System.out.println(">>>>>>>>>>:::" + sprint.getReleaseBacklog().getId());
         try {
             setRelBacklogId(sprint.getReleaseBacklog().getId());
         } catch(Exception e) {
             //System.out.println("-----" +  e.getMessage());
         }
-        return "sprint-update?faces-redirect=true";
+        return "sprint-update";
     }
     
     public String updateSprint(){
         try {
-            //System.out.println("ReL:::" + getRelBacklogId());
             sprint.setReleaseBacklog(releaseBacklogEJB.find(getRelBacklogId()));
         } catch (Exception e) {
             //System.out.println("-----" + e.getMessage());
         }
         sprintEJB.edit(sprint);
-        return "sprint-list?faces-redirect=true";
+        return "sprint-list";
     }
     
     public String deleteSprint(Long sprintId){
         sprintEJB.delete(sprintId);
-        return "sprint-list?faces-redirect=true";
+        return "sprint-list";
     }
     
     public String sprintDetail(Long id) {
         sprint = sprintEJB.find(id);
         taskList = taskEJB.findAll();
+        for (Task t : sprint.getTasks()) {
+            selectedTasks.add(t.getId().toString());
+        }
         return "sprint-view";
     }
     
     public String addTaskToSprint() {
-        for (String s : selectedTasks)
-            System.out.println("task:::" + s);
+        long sprintId = sprint.getId();
+        
+        sprint = sprintEJB.find(sprintId);
+        taskList = sprint.getTasks();
+        int size  = taskList.size();
+        for (int i = 0; i < size; i++) {
+            taskList.remove(taskList.get(i));
+            size--;
+            --i;
+        }
+        
+        for (String taskId : selectedTasks) {
+            if (!taskList.contains(taskEJB.find(Long.parseLong(taskId)))) {
+                sprint.getTasks().add(taskEJB.find(Long.parseLong(taskId)));
+            }
+        }
+        sprintEJB.edit(sprint);
         return "/sprint/sprint-list";
     }
     

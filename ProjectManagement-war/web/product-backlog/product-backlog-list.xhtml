@@ -11,7 +11,8 @@
 
         <ui:composition template="/layout/layout.xhtml">
             <ui:define name="content">   
-                <h2>Product Backlog List for (#{projectBacklogMB.project.name})</h2>
+<!--                <h2>Product Backlog List for (# {projectBacklogMB.project.name})</h2>-->
+                    <h2>Product Backlog List for (#{sessionMB.userSelectedProject.name})</h2>
                  <h:form>
                     <h:dataTable value="#{projectBacklogMB.pbList}" var="productBacklog"
                              styleClass="table table-hover table-striped table-bordered"

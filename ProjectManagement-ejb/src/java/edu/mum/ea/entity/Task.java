@@ -31,17 +31,18 @@ import javax.validation.constraints.Min;
  */
 @Entity
 public class Task implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String title;
     private String detail;
-    @Column(nullable=true)
+    @Column(nullable = true)
     @Temporal(TemporalType.DATE)
     private Date startDate;
-    @Column(nullable=true)
+    @Column(nullable = true)
     @Temporal(TemporalType.DATE)
     private Date endDate;
     @Max(value = 3, message = "Maximum can be 3")
@@ -50,31 +51,30 @@ public class Task implements Serializable {
     private Integer priority;
     @Max(value = 3, message = "Maximum can be 3")
     private Integer status;
-//    @ManyToOne
-//    private Sprint sprint;
     @JoinColumn(nullable = true)
     @ManyToOne(optional = true)
     private TaskCategory taskCategory;
-//    @ManyToOne
-//    private ProductBacklog productBacklog;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "task")
-    private List<TaskComment> taskComments;
-//    @OneToOne
-//    private Resource resource;
     @ManyToOne
-    @JoinTable(name="SPRINT_TASK", joinColumns=@JoinColumn(name="TASK_ID"), inverseJoinColumns=@JoinColumn(name="SPRINT_ID"))
+    private ProductBacklog productBacklog;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "task")
+    private List<TaskComment> taskComments;
+    @JoinColumn(nullable = true)
+    @ManyToOne(optional = true)
+    private Employee employee;
+    @ManyToOne
+    @JoinTable(name = "SPRINT_TASK", joinColumns = @JoinColumn(name = "TASK_ID"), inverseJoinColumns = @JoinColumn(name = "SPRINT_ID"))
     private Sprint sprint;
+
     public Task() {
         taskComments = new ArrayList<TaskComment>();
     }
-    
+
     public Task(String title, TaskCategory taskCategory) {
         this.title = title;
         this.taskCategory = taskCategory;
         this.taskCategory.addTask(this);
     }
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -154,15 +154,14 @@ public class Task implements Serializable {
     public void setTaskCategory(TaskCategory taskCategory) {
         this.taskCategory = taskCategory;
     }
-//
-//    public ProductBacklog getProductBacklog() {
-//        return productBacklog;
-//    }
-//
-//    public void setProductBacklog(ProductBacklog productBacklog) {
-//        this.productBacklog = productBacklog;
-//    }
-//
+
+    public ProductBacklog getProductBacklog() {
+        return productBacklog;
+    }
+
+    public void setProductBacklog(ProductBacklog productBacklog) {
+        this.productBacklog = productBacklog;
+    }
 
     public List<TaskComment> getTaskComments() {
         return taskComments;
@@ -171,13 +170,21 @@ public class Task implements Serializable {
     public void setTaskComments(List<TaskComment> taskComments) {
         this.taskComments = taskComments;
     }
-    
+
     public void addTaskComment(TaskComment taskComment) {
-        if(!this.taskComments.contains(taskComment)){
+        if (!this.taskComments.contains(taskComment)) {
             this.taskComments.add(taskComment);
         }
     }
-    
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -202,5 +209,5 @@ public class Task implements Serializable {
     public String toString() {
         return "edu.mum.ea.entity.Task[ id=" + id + " ]";
     }
-    
+
 }

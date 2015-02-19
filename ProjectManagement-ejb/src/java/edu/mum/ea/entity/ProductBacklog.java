@@ -33,14 +33,13 @@ public class ProductBacklog implements Serializable {
     private String details;
     private Boolean releaseBacklogStatus;
     private Integer priority;
-//    
+    
     @ManyToOne
     private Project project;
-//    
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productBacklog")
-//    private List<Task> tasks;
-//    
-//    
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productBacklog")
+    private List<Task> tasks;
+    
 //    @ManyToOne
 //    @JoinTable(name="ReleaseBacklog_ProductBacklog", joinColumns=@JoinColumn(name="REL_BAK_ID"), inverseJoinColumns=@JoinColumn(name="PRD_BAK_ID"))
 //    private ReleaseBacklog releaseBacklog;
@@ -101,17 +100,22 @@ public class ProductBacklog implements Serializable {
 //        this.releaseBacklog = releaseBacklog;
 //    }
     
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void addTask(Task task) {
+        if(!this.tasks.contains(task)){
+            this.tasks.add(task);
+        }
+    }
     
-//
-//    public List<Task> getTasks() {
-//        return tasks;
-//    }
-//
-//    public void setTask(Task task) {
-//        if(!this.tasks.contains(task)){
-//            this.tasks.add(task);
-//        }
-//    }
+    public void removeTask(Task task) {
+        if(this.tasks.contains(task)){
+            this.tasks.remove(task);
+        }
+    }
+    
 //    
 //    public ReleaseBacklog getReleaseBacklog() {
 //        return releaseBacklog;

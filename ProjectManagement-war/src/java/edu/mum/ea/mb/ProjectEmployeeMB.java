@@ -7,8 +7,10 @@ package edu.mum.ea.mb;
 
 import edu.mum.ea.ejb.EmployeeEJB;
 import edu.mum.ea.ejb.ProjectEJB;
+import edu.mum.ea.ejb.TaskEJB;
 import edu.mum.ea.entity.Employee;
 import edu.mum.ea.entity.Project;
+import edu.mum.ea.entity.Task;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -33,6 +35,11 @@ public class ProjectEmployeeMB {
     private ProjectEJB projectEJB;
     @EJB
     private EmployeeEJB employeeEJB;
+    
+    @EJB
+    private TaskEJB taskEJB;
+    
+    private List<Task> tasks = new ArrayList<Task>();
     /**
      * Creates a new instance of ProjectEmployeeMB
      */
@@ -77,6 +84,16 @@ public class ProjectEmployeeMB {
         return selectedEmp;
     }
 
+    public List<Task> getTasks() {
+        tasks = taskEJB.findAll();
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+    
+    
     public void setSelectedEmp(List<String> selectedEmp) {
         this.selectedEmp = selectedEmp;
     }
