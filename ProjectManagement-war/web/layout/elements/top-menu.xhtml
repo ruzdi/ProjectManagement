@@ -36,6 +36,7 @@
                         </a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
                             <h:form>                    
                                 <li><h:link outcome="login" value="Login" rendered="#{authorizationMB.loggedOut}"/></li>
                                 <li><h:commandButton class="btn btn-danger" action="#{authorizationMB.logout()}" rendered="#{authorizationMB.loggedIn}" value="logout" /></li>
