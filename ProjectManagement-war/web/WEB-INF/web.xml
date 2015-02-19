@@ -19,11 +19,9 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>index.jsf</welcome-file>
+        <welcome-file>login.jsf</welcome-file>
     </welcome-file-list>
-    
-    
-    
+       
     <!--    Securit Constraints    -->
     <security-constraint>
         <display-name>Admin Pages</display-name>
@@ -32,6 +30,7 @@
             <description></description>
             <url-pattern>/admin/*</url-pattern>
             <!--<url-pattern>/employee/employee-create.jsf</url-pattern>-->
+            <url-pattern>/index.jsf</url-pattern>
             <url-pattern>/project/project-create.jsf</url-pattern>
             <url-pattern>/sprint/sprint-create.jsf</url-pattern>
             <url-pattern>/project/project-list.jsf</url-pattern>
@@ -42,7 +41,7 @@
             <url-pattern>/task-category/task-category-list.jsf</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
-<!--            <http-method>HEAD</http-method>
+            <!--            <http-method>HEAD</http-method>
             <http-method>PUT</http-method>
             <http-method>OPTIONS</http-method>
             <http-method>TRACE</http-method>
@@ -52,7 +51,7 @@
             <description/>
             <role-name>admin</role-name>
         </auth-constraint>
-<!--        <user-data-constraint>
+        <!--        <user-data-constraint>
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>-->
     </security-constraint>
@@ -64,6 +63,7 @@
             <description/>
             <url-pattern>/users/*</url-pattern>
             <url-pattern>/project/project-list.jsf</url-pattern>
+            <url-pattern>/index.jsf</url-pattern>
             <url-pattern>/sprint/sprint-create.jsf</url-pattern>
             <url-pattern>/project/project-list.jsf</url-pattern>
             <url-pattern>/employee/employee-list.jsf</url-pattern>
@@ -73,7 +73,7 @@
             <url-pattern>/task-category/task-category-list.jsf</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
-<!--            <http-method>HEAD</http-method>
+            <!--            <http-method>HEAD</http-method>
             <http-method>PUT</http-method>
             <http-method>OPTIONS</http-method>
             <http-method>TRACE</http-method>
@@ -83,7 +83,7 @@
             <description/>
             <role-name>developer</role-name>
         </auth-constraint>
-<!--        <user-data-constraint>
+        <!--        <user-data-constraint>
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>-->
     </security-constraint>
@@ -96,18 +96,34 @@
             <form-error-page>/loginerror.xhtml</form-error-page>
         </form-login-config>
     </login-config>
-     <security-role>
+    <security-role>
         <role-name>developer</role-name>
     </security-role>
     
     <security-role>
         <role-name>admin</role-name>
       
-<!--         <role-name>developer</role-name>-->
+        <!--         <role-name>developer</role-name>-->
     </security-role>
    
-<!--    <error-page>
+    <!--    <error-page>
         <error-code>403</error-code>
         <location>/faces/403.xhtml</location>
     </error-page>-->
+    
+    <filter>
+        <filter-name>LoginPageFilter</filter-name>
+        <filter-class>
+            edu.mum.ea.mb.LoginPageFilter
+        </filter-class>
+        <init-param>
+            <param-name>test-param</param-name>
+            <param-value>This parameter is for testing.</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>LoginPageFilter</filter-name>
+        <url-pattern>/login.jsf</url-pattern>
+    </filter-mapping>
 </web-app>

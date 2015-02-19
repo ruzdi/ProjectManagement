@@ -34,7 +34,7 @@ public class AuthorizationMB {
             session.invalidate();
         }
 
-        return "index?faces-redirect=true";
+        return "login?faces-redirect=true";
     }
 
     public boolean isLoggedIn() {
@@ -78,6 +78,15 @@ public class AuthorizationMB {
             session.invalidate();
         }
         return "login?faces-redirect=true";
+    }
+    
+    public String redirectOnLogin(){
+        System.out.println("==============================Hit Listener");
+        if(isLoggedIn()){
+            return "/index?faces-redirect=true";
+        }else{
+            return "";
+        }
     }
 
 }
