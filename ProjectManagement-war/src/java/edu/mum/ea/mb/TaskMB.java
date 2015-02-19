@@ -273,10 +273,10 @@ public class TaskMB {
 
     public void sendTaskEmail(String actionString, String actionMessage) {
         try {
-            this.emailMB.setEmailTo("ruzdibd@gmail.com");
+            this.emailMB.setEmailTo(task.getEmployee().getEmail());
             this.emailMB.setEmailSubject("PM Team :: " + actionString + " :: " + task.getTitle());
             this.emailMB.setEmailBody(
-                    "Dear AAA, <br /><br />"
+                    "Dear "+task.getEmployee().getName()+", <br /><br />"
                     + actionString + "<br /><br />"
                     + "Please take a look at this task detail : <br /><br />"
                     + "<b>Title</b> :  " + task.getTitle() + "<br /><br />"
