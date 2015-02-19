@@ -56,7 +56,7 @@ public class ProjectMB {
     }
     
      public String showProjectList() {
-        return "/project-backlog/project-list";
+        return "/project-backlog/project-list?faces-redirect=true";
     }
 
     public void setProjectList(List<Project> projectList) {
@@ -73,23 +73,23 @@ public class ProjectMB {
             return null;
         }
        
-       return "project-list";
+       return "project-list?faces-redirect=true";
     }
     
     public String gotoUpdatePage(Long id){
         project = projectEJB.find(id);           
-        return "/project/project-update";
+        return "/project/project-update?faces-redirect=true";
     }
     
     public String updateProject(){
         
         projectEJB.edit(project);
-        return "/project/project-list";
+        return "/project/project-list?faces-redirect=true";
     }
     
     public String deleteProject(Long projectId){
         projectEJB.delete(projectId);
-        return "/project/project-list"; 
+        return "/project/project-list?faces-redirect=true"; 
     }
     
    

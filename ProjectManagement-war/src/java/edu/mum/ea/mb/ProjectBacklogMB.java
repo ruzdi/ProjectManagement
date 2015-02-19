@@ -84,14 +84,14 @@ public class ProjectBacklogMB {
         productBacklog.setPriority(2);
         project.addBacklog(productBacklog);    
         projectEJB.edit(project);
-        return "/product-backlog/product-backlog-list";
+        return "/product-backlog/product-backlog-list?faces-redirect=true";
     }
     
     public String getBacklogList(Long projectId) {
         Map<String, Object> sessionMap =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
         sessionMap.put("pid", projectId);
         project = projectEJB.find(projectId);
-        return "/product-backlog/product-backlog-list";
+        return "/product-backlog/product-backlog-list?faces-redirect=true";
     }
     
   
@@ -102,19 +102,19 @@ public class ProjectBacklogMB {
         productBacklog.setReleaseBacklogStatus(Boolean.FALSE);
         productBacklog.setPriority(2);
         productBacklogEJB.edit(productBacklog);
-        return "/product-backlog/product-backlog-list";
+        return "/product-backlog/product-backlog-list?faces-redirect=true";
     }
      
     public String gotoUpdateBacklogPage(Long id){
         productBacklog = productBacklogEJB.find(id);
-        return "/product-backlog/product-backlog-update";
+        return "/product-backlog/product-backlog-update?faces-redirect=true";
     }
     
      public String deletePrductBacklog(Long prductBacklogId){
         productBacklog =  productBacklogEJB.find(prductBacklogId);
         project = productBacklog.getProject();
         productBacklogEJB.delete(productBacklog);
-        return "/product-backlog/product-backlog-list";
+        return "/product-backlog/product-backlog-list?faces-redirect=true";
     }   
     
 }

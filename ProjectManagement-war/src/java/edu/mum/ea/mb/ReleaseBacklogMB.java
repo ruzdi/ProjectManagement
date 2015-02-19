@@ -138,7 +138,7 @@ public class ReleaseBacklogMB {
     public String createReleaseBacklog() {
         this.releaseBckLg.setProject(projectEJB.find(this.projectId));
         releaseBckLgEJB.save(releaseBckLg);     
-        return "release-backlog-list";
+        return "release-backlog-list?faces-redirect=true";
     }
     
     public String gotoUpdatePage(Long id){
@@ -148,7 +148,7 @@ public class ReleaseBacklogMB {
         } catch(Exception e) {
         }
         
-        return "release-backlog-update";
+        return "release-backlog-update?faces-redirect=true";
     }
     
     public String updateReleaseBacklog(){
@@ -159,12 +159,12 @@ public class ReleaseBacklogMB {
             
         }
         releaseBckLgEJB.edit(releaseBckLg);
-        return "release-backlog-list";
+        return "release-backlog-list?faces-redirect=true";
     }
     
     public String deleteReleaseBacklog(Long releaseBckLgId){
        releaseBckLgEJB.delete(releaseBckLgId);
-       return "release-backlog-list";
+       return "release-backlog-list?faces-redirect=true";
     }
     
     public String viewReleaseBacklog(Long releaseBckLgId) {
@@ -173,7 +173,7 @@ public class ReleaseBacklogMB {
         for (ProductBacklog pb : releaseBckLg.getProductBacklog()) {
             selectedPrdBacklog.add(pb.getId().toString());
         }
-        return "release-product-backlog";
+        return "release-product-backlog?faces-redirect=true";
     }
     
     public void addProductBacklog() {

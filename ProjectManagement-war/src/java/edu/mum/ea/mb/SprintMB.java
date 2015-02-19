@@ -122,7 +122,7 @@ public class SprintMB {
     public String createSprint() {  
         sprint.setReleaseBacklog(releaseBacklogEJB.find(getRelBacklogId()));
         sprintEJB.save(sprint);     
-        return "sprint-list";
+        return "sprint-list?faces-redirect=true";
     }
     
     public String gotoUpdatePage(Long id){
@@ -133,7 +133,7 @@ public class SprintMB {
         } catch(Exception e) {
             //System.out.println("-----" +  e.getMessage());
         }
-        return "sprint-update";
+        return "sprint-update?faces-redirect=true";
     }
     
     public String updateSprint(){
@@ -144,12 +144,12 @@ public class SprintMB {
             //System.out.println("-----" + e.getMessage());
         }
         sprintEJB.edit(sprint);
-        return "sprint-list";
+        return "sprint-list?faces-redirect=true";
     }
     
     public String deleteSprint(Long sprintId){
         sprintEJB.delete(sprintId);
-        return "sprint-list";
+        return "sprint-list?faces-redirect=true";
     }
     
     public String sprintDetail(Long id) {
