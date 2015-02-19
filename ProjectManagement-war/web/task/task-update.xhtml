@@ -82,7 +82,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="addTaskDuration">Duration</label>
+                                <label for="addTaskDuration">Duration (Per Hour)</label>
 
                                 <h:inputText class="form-control" id="addTaskDuration"  value="#{taskMB.task.duration}" 
                                              required="true" requiredMessage="The field is empty" validatorMessage=
@@ -93,28 +93,21 @@
                                 <h:message for="addTaskDuration" errorStyle="color:red; display:block"/>
                             </div>
 
+                            
                             <div class="form-group">
-                                <label for="addTaskPriority">priority</label>
-
-                                <h:inputText class="form-control" id="addTaskPriority"  value="#{taskMB.task.priority}" 
-                                             required="true" requiredMessage="The field is empty" validatorMessage=
-                                             "String is not valid (only number 1-3)">
-                                    <!--<f:validateRegex pattern="[1-3]+"/>-->
-                                </h:inputText>
-
+                                <label for="addTaskPriority">Priority</label>&nbsp;
+                                <p:selectOneMenu id="addTaskPriority" value="#{taskMB.task.priority}" required="true" requiredMessage="field is empty">
+                                    <f:selectItems value="#{utilityMB.priority}" />
+                                </p:selectOneMenu>
                                 <h:message for="addTaskPriority" errorStyle="color:red; display:block"/>
-
                             </div>
 
+
                             <div class="form-group">
-                                <label for="addTaskStatus">status</label>
-
-                                <h:inputText class="form-control" id="addTaskStatus"  value="#{taskMB.task.status}" 
-                                             required="true" requiredMessage="The field is empty" validatorMessage=
-                                             "String is not valid (only number 1-3)">
-                                    <!--<f:validateRegex pattern="[1-3]+"/>-->
-                                </h:inputText>
-
+                                <label for="addTaskStatus">Status</label>&nbsp;
+                                <p:selectOneMenu id="addTaskStatus" value="#{taskMB.task.status}" required="true" requiredMessage="field is empty">
+                                    <f:selectItems value="#{utilityMB.statuses}" />
+                                </p:selectOneMenu>
                                 <h:message for="addTaskStatus" errorStyle="color:red; display:block"/>
                             </div>
 
