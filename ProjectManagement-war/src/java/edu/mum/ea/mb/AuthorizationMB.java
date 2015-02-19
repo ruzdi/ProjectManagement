@@ -79,5 +79,14 @@ public class AuthorizationMB {
         }
         return "login?faces-redirect=true";
     }
+    
+    public String redirectOnLogin(){
+        System.out.println("==============================Hit Listener");
+        if(isLoggedIn()){
+            return "/index?faces-redirect=true";
+        }else{
+            return "";
+        }
+    }
 
 }
