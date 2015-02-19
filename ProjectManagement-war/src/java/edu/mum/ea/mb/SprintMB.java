@@ -20,6 +20,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
@@ -48,6 +49,9 @@ public class SprintMB {
     @EJB
     private TaskEJB taskEJB;
     
+    @ManagedProperty(value = "#{sessionMB}")
+    private SessionMB sessionMB;
+    
     private List<Task> taskList = new ArrayList<Task>();
     
     private List<ReleaseBacklog> releaseBacklogList = new ArrayList<ReleaseBacklog>();
@@ -64,11 +68,19 @@ public class SprintMB {
     }
     @PostConstruct
     public void init() {
-        Map<String, Object> sessionMap =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        Project project = projectEJB.find(Long.parseLong(sessionMap.get("pid").toString()));
+        //Map<String, Object> sessionMap =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+        Project project = projectEJB.find(sessionMB.getUserSelectedProject().getId());
         releaseBacklogList = project.getReleaseBacklogList();   
     }
 
+    public SessionMB getSessionMB() {
+        return sessionMB;
+    }
+
+    public void setSessionMB(SessionMB sessionMB) {
+        this.sessionMB = sessionMB;
+    }
+    
     public Sprint getSprint() {
         return sprint;
     }

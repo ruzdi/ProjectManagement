@@ -19,11 +19,12 @@
                         <h2>Sprint (Create)</h2>
                         <h:form>
                             <div class="form-group">
-                                <h:selectOneMenu value="#{sprintMB.relBacklogId}">
+                                <label for="addSprintName">Release Backlog</label>
+                                <br />
+                                <p:selectOneMenu value="#{sprintMB.relBacklogId}"  >
                                     <f:selectItem itemLabel="Select One" itemValue="" />
-                                    <f:selectItems value="#{sprintMB.releaseBacklogList}" var="release" itemLabel="#{release.releaseName}" 
-                                                   itemValue="#{release.id}" />
-                                </h:selectOneMenu>
+                                    <f:selectItems value="#{sprintMB.releaseBacklogList}" var="release" itemLabel="#{release.releaseName}" itemValue="#{release.id}" />
+                                </p:selectOneMenu>
                             </div>
                             <div class="form-group">
                                 <label for="addSprintName">Sprint Name</label>
