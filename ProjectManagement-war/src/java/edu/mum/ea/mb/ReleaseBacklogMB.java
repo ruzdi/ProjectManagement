@@ -91,7 +91,7 @@ public class ReleaseBacklogMB {
     }
 
     public List<ReleaseBacklog> getReleaseBacklogList() {
-        releaseBckLgList = sessionMB.getUserSelectedProject().getReleaseBacklogList();
+        releaseBckLgList = projectEJB.find(this.sessionMB.getUserSelectedProject().getId()).getReleaseBacklogList();
         return releaseBckLgList;
     }
 
@@ -160,8 +160,7 @@ public class ReleaseBacklogMB {
     }
 
     public String deleteReleaseBacklog(Long releaseBckLgId) {
-        ReleaseBacklog releaseBckLg = releaseBckLgEJB.find(releaseBckLgId);
-        releaseBckLgEJB.delete(releaseBckLg);
+        releaseBckLgEJB.delete(releaseBckLgId);
         sessionMB.populateUserProjectList();
         return "release-backlog-list";
     }
