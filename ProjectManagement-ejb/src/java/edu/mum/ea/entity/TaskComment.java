@@ -32,6 +32,9 @@ public class TaskComment implements Serializable {
     @JoinColumn(nullable = true)
     @ManyToOne(optional = true)
     private Task task;
+    @JoinColumn(nullable = true)
+    @ManyToOne(optional = true)
+    private Employee employee;
     
 //    @ManyToOne
 //    private Resource resource;
@@ -83,6 +86,14 @@ public class TaskComment implements Serializable {
 
     public void setTask(Task task) {
         this.task = task;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
     
     @Override

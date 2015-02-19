@@ -12,6 +12,7 @@ import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 
@@ -29,6 +30,9 @@ public class ProjectMB {
     @EJB
     private ProjectEJB projectEJB;
     
+    @ManagedProperty(value="#{sessionMB}")
+    private SessionMB sessionMB;
+    
     private List<Project> projectList;
     /**
      * Creates a new instance of ProjectMB
@@ -36,6 +40,16 @@ public class ProjectMB {
     public ProjectMB() {
         project = new Project();
     }
+
+    public SessionMB getSessionMB() {
+        return sessionMB;
+    }
+
+    public void setSessionMB(SessionMB sessionMB) { 
+        this.sessionMB = sessionMB;
+    }
+    
+    
 
     public Project getProject() {
         return project;
@@ -68,9 +82,11 @@ public class ProjectMB {
 
         try {
             projectEJB.save(project);     
+            this.getSessionMB().setUserSelectedProject(project);   
+            sessionMB.populateUserProjectList();
         } catch (Exception e) {
-            gotoLogin();
-            return null;
+            //gotoLogin();
+            return gotoLogin();
         }
        
        return "project-list?faces-redirect=true";
@@ -78,20 +94,26 @@ public class ProjectMB {
     
     public String gotoUpdatePage(Long id){
         project = projectEJB.find(id);           
-        return "/project/project-update?faces-redirect=true";
+        return "/project/project-update";
     }
     
     public String updateProject(){
         
         projectEJB.edit(project);
-        return "/project/project-list?faces-redirect=true";
+        this.getSessionMB().setUserSelectedProject(project);
+        sessionMB.populateUserProjectList();
+        return "/project/project-list";
     }
     
     public String deleteProject(Long projectId){
+        project = projectEJB.find(projectId);      
+        if(project.equals(this.getSessionMB().getUserSelectedProject())){
+            this.getSessionMB().setUserSelectedProject(null);   
+        }
         projectEJB.delete(projectId);
+        sessionMB.populateUserProjectList();
         return "/project/project-list?faces-redirect=true"; 
     }
-    
    
     public String projectItem() {
        return "success";
@@ -99,8 +121,7 @@ public class ProjectMB {
     
     
     public String gotoLogin(){
-//        System.out.println("Go to Login");
-        return "/login";
+        return "/login?faces-redirect=true";
     }
 
 }

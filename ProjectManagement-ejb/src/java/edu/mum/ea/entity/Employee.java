@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -41,6 +42,10 @@ public class Employee implements Serializable {
     
     @ManyToMany(mappedBy = "employeeList")
     private List<Project> projectList = new ArrayList<Project>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true,  mappedBy = "employee")
+    private List<Task> tasks;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true,  mappedBy = "employee")
+    private List<TaskComment> taskComments;
 
     public void employee(){
 //        address = new Address();
@@ -78,7 +83,49 @@ public class Employee implements Serializable {
     public void setAddress(Address address) {
         this.address = address;
     }
+    
+     public List<Task> getTasks() {
+        return tasks;
+    }
 
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+    
+    public void addTasks(Task task) {
+        if(!this.tasks.contains(task)){
+            this.tasks.add(task);
+        }
+    }
+    
+    public void removeTasks(Task task) {
+        if(this.tasks.contains(task)){
+            this.tasks.remove(task);
+        }
+    }
+
+    public List<TaskComment> getTaskComments() {
+        return taskComments;
+    }
+
+    public void setTaskComments(List<TaskComment> taskComments) {
+        this.taskComments = taskComments;
+    }
+    
+    public void addTaskComment(TaskComment taskComment) {
+        if(!this.taskComments.contains(taskComment)){
+            this.taskComments.add(taskComment);
+        }
+        
+    }
+    
+    public void removeTaskComment(TaskComment taskComment) {
+        if(this.taskComments.contains(taskComment)){
+            this.taskComments.add(taskComment);
+        }
+    }
+
+    
     
 //    @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee")
 //    private Resource resource;
