@@ -7,9 +7,9 @@ package edu.mum.ea.mb;
 
 
 import edu.mum.ea.ejb.ProjectEJB;
+import edu.mum.ea.entity.Employee;
 import edu.mum.ea.entity.Project;
 import java.util.List;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -32,6 +32,9 @@ public class ProjectMB {
     
     @ManagedProperty(value="#{sessionMB}")
     private SessionMB sessionMB;
+    
+    @ManagedProperty(value="#{projectEmployeeMB}")
+    private ProjectEmployeeMB projectEmployeeMB;
     
     private List<Project> projectList;
     /**
@@ -59,6 +62,15 @@ public class ProjectMB {
         this.project = project;
     }
 
+    public ProjectEmployeeMB getProjectEmployeeMB() {
+        return projectEmployeeMB;
+    }
+
+    public void setProjectEmployeeMB(ProjectEmployeeMB projectEmployeeMB) {
+        this.projectEmployeeMB = projectEmployeeMB;
+    }
+    
+    
     public List<Project> getProjectList() {
         try {
              projectList = projectEJB.findAll();
@@ -118,7 +130,14 @@ public class ProjectMB {
     public String projectItem() {
        return "success";
     }
-    
+        
+    public String getProjectDetail(long projectId) {
+        project = projectEJB.find(projectId);
+        for (Employee e : project.getEmployeeList()) {
+            projectEmployeeMB.getSelectedEmp().add(e.getId() + "");            
+        }
+        return "project-detail";
+    }
     
     public String gotoLogin(){
         return "/login?faces-redirect=true";

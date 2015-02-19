@@ -45,6 +45,7 @@
                             <f:facet name="header">Action</f:facet>
 
                             <div class="btn-group btn-group-xs">
+                                <h:commandButton class="btn btn-primary" action="#{projectMB.getProjectDetail(project.id)}" value="View" />
                                 <h:commandButton class="btn btn-warning" action="#{projectMB.gotoUpdatePage(project.id)}" value="Edit" />
                                 <h:commandButton class="btn btn-danger" action="#{projectMB.deleteProject(project.id)}" value="Delete" />
                                 <h:commandButton class="btn btn-primary" action="#{projectBacklogMB.getBacklogList(project.id)}" value="Product Backlog List" />
