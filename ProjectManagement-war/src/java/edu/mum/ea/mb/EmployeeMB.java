@@ -36,6 +36,8 @@ public class EmployeeMB {
      */
     @EJB
     EmployeeEJB ejb;
+    @EJB
+    EmailMB emailMB;
 
     Employee employee;
     Address address;
@@ -77,6 +79,7 @@ public class EmployeeMB {
 //        user.setPassword(username);
 //        user.addRole(employeeRole);
         ejb.save(employee);
+        sendEmail();
 
         return "employee-list?faces-redirect=true";
     }
@@ -120,5 +123,23 @@ public class EmployeeMB {
 
             setUsername("");
         }
+    }
+    
+    public void sendEmail() {
+        try {
+            this.emailMB.setEmailTo(employee.getEmail());
+            this.emailMB.setEmailSubject("Registration Confirmation ");
+            this.emailMB.setEmailBody(
+                    "Dear "+employee.getName()+", <br /><br />"
+                    + "This is computer generized mail. Don't reply : <br /><br />"
+                    + "Thanks for registration."
+                    + "Congrats to join in <font color='blue'><b>EA Vongchong Team</b></font> <br/> <br/>"
+                    + "Jaatra shuvo hok"
+            );
+            this.emailMB.sendEmail();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }
 }
