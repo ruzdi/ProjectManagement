@@ -29,8 +29,6 @@ public class ProjectBacklogMB {
     private Project project;
     private List<ProductBacklog> pbList;
     
-    @ManagedProperty(value="#{projectI}")
-    private ProjectI projectI;
     @EJB
     private ProjectEJB projectEJB;
     @EJB
@@ -78,14 +76,6 @@ public class ProjectBacklogMB {
         this.pbList = pbList;
     }
 
-    public ProjectI getProjectI() {
-        return projectI;
-    }
-
-    public void setProjectI(ProjectI projectI) {
-        this.projectI = projectI;
-    }
-    
     public String create() {
         Map<String, Object> sessionMap =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
         project = projectEJB.find(Long.parseLong(sessionMap.get("pid").toString()));
@@ -93,7 +83,7 @@ public class ProjectBacklogMB {
         productBacklog.setPriority(2);
         project.addBacklog(productBacklog);    
         projectEJB.edit(project);
-        return "/product-backlog/product-backlog-list?faces-redirect=true";
+        return "/product-backlog/product-backlog-list";
     }
     
     public String getBacklogList(Long projectId) {
@@ -103,7 +93,7 @@ public class ProjectBacklogMB {
         this.sessionMB.setUserSelectedProject(project);
         System.out.println("User Selected Project :1:: "+this.getSessionMB().getUserSelectedProject());
         System.out.println("User Selected Project :2:: "+project);
-        return "/product-backlog/product-backlog-list?faces-redirect=true";
+        return "/product-backlog/product-backlog-list";
     }
     
   
@@ -114,19 +104,19 @@ public class ProjectBacklogMB {
         productBacklog.setReleaseBacklogStatus(Boolean.FALSE);
         productBacklog.setPriority(2);
         productBacklogEJB.edit(productBacklog);
-        return "/product-backlog/product-backlog-list?faces-redirect=true";
+        return "/product-backlog/product-backlog-list";
     }
      
     public String gotoUpdateBacklogPage(Long id){
         productBacklog = productBacklogEJB.find(id);
-        return "/product-backlog/product-backlog-update?faces-redirect=true";
+        return "/product-backlog/product-backlog-update";
     }
     
      public String deletePrductBacklog(Long prductBacklogId){
         productBacklog =  productBacklogEJB.find(prductBacklogId);
         project = productBacklog.getProject();
         productBacklogEJB.delete(productBacklog);
-        return "/product-backlog/product-backlog-list?faces-redirect=true";
+        return "/product-backlog/product-backlog-list";
     }   
     
 }
