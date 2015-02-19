@@ -30,7 +30,7 @@
             <description></description>
             <url-pattern>/admin/*</url-pattern>
             <!--<url-pattern>/employee/employee-create.jsf</url-pattern>-->
-            <url-pattern>/*</url-pattern>
+            <url-pattern>/index.jsf</url-pattern>
             <url-pattern>/project/project-create.jsf</url-pattern>
             <url-pattern>/sprint/sprint-create.jsf</url-pattern>
             <url-pattern>/project/project-list.jsf</url-pattern>
@@ -63,6 +63,7 @@
             <description/>
             <url-pattern>/users/*</url-pattern>
             <url-pattern>/project/project-list.jsf</url-pattern>
+            <url-pattern>/index.jsf</url-pattern>
             <url-pattern>/sprint/sprint-create.jsf</url-pattern>
             <url-pattern>/project/project-list.jsf</url-pattern>
             <url-pattern>/employee/employee-list.jsf</url-pattern>
