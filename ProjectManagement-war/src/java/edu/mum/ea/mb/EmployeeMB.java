@@ -90,13 +90,13 @@ public class EmployeeMB {
 
     public String gotoUpdatePage(int id) {
         employee = ejb.find(id);
-        return "employee-update?faces-redirect=true";
+        return "employee-update";
     }
 
     public String update() {
         ejb.edit(employee);
 
-        return "employee-list?faces-redirect=true";
+        return "employee-list";
     }
 
     public List<Employee> getEmployeeList() {

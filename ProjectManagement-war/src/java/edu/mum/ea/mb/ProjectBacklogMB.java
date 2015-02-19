@@ -114,12 +114,12 @@ public class ProjectBacklogMB {
         productBacklog.setReleaseBacklogStatus(Boolean.FALSE);
         productBacklog.setPriority(2);
         productBacklogEJB.edit(productBacklog);
-        return "/product-backlog/product-backlog-list?faces-redirect=true";
+        return "/product-backlog/product-backlog-list";
     }
      
     public String gotoUpdateBacklogPage(Long id){
         productBacklog = productBacklogEJB.find(id);
-        return "/product-backlog/product-backlog-update?faces-redirect=true";
+        return "/product-backlog/product-backlog-update";
     }
     
      public String deletePrductBacklog(Long prductBacklogId){

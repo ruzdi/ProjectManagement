@@ -148,7 +148,7 @@ public class ReleaseBacklogMB {
         } catch(Exception e) {
         }
         
-        return "release-backlog-update?faces-redirect=true";
+        return "release-backlog-update";
     }
     
     public String updateReleaseBacklog(){
@@ -159,7 +159,7 @@ public class ReleaseBacklogMB {
             
         }
         releaseBckLgEJB.edit(releaseBckLg);
-        return "release-backlog-list?faces-redirect=true";
+        return "release-backlog-list";
     }
     
     public String deleteReleaseBacklog(Long releaseBckLgId){

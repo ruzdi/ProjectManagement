@@ -69,13 +69,13 @@ public class TaskCategoryMB {
     
     public String edit(int id){
         this.taskCategory = taskCategoryEJB.find(new Long(id));
-        return "/task-category/task-category-update?faces-redirect=true";
+        return "/task-category/task-category-update";
     }
     
     
     public String update(){
         taskCategoryEJB.update(this.taskCategory);
-        return "/task-category/task-category-list?faces-redirect=true";
+        return "/task-category/task-category-list";
     }
     
     
