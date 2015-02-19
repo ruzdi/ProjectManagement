@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -30,9 +31,12 @@ public class Employee implements Serializable {
     private int id;
     
     private String name;
+    @Pattern(regexp="[A-Za-z0-9]+")
     private String designation; 
     private String email;
     private String gender;
+    @Pattern(regexp="\\(\\d{3}\\)\\d{3}-\\d{4}")
+    private String phoneNumber;
     
     @OneToOne(cascade = CascadeType.ALL)
     private Users user;
@@ -74,6 +78,14 @@ public class Employee implements Serializable {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
        
     public Address getAddress() {

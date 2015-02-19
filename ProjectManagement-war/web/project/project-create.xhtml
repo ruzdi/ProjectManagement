@@ -27,8 +27,8 @@
                                 
                                 <h:inputText class="form-control" id="addProjectName"  value="#{projectMB.project.name}" 
                                              required="true" requiredMessage="The field is empty" validatorMessage=
-                                             "String is not valid (only characters a-z A-Z and 0-9)">
-                                    <f:validateRegex pattern="[a-zA-Z0-9 ]+"/>
+                                             "String is not valid (only characters a-z A-Z and 0-9 and _)">
+                                    <!--<f:validateRegex pattern="[a-zA-Z0-9 ]+"/>-->
                                 </h:inputText>
                                 <h:message for="addProjectName" errorStyle="color:red; display:block"/>
                             </div>
